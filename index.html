@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberWish Studio - VIP Surprise Engine</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+  <style>
+    :root {
+      --primary: #00f2fe;
+      --secondary: #ff007f;
+      --bg: #05060c;
+      --card: rgba(14, 18, 36, 0.88);
+      --border: rgba(0, 242, 254, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body { background: var(--bg); color: #fff; min-height: 100vh; padding-bottom: 90px; overflow-x: hidden; }
+
+    .glow-blob-1 { position: fixed; width: 350px; height: 350px; background: var(--primary); filter: blur(160px); border-radius: 50%; top: -50px; left: -50px; opacity: 0.2; pointer-events: none; z-index: 0; }
+    .glow-blob-2 { position: fixed; width: 350px; height: 350px; background: var(--secondary); filter: blur(160px); border-radius: 50%; bottom: -50px; right: -50px; opacity: 0.2; pointer-events: none; z-index: 0; }
+
+    header { padding: 18px 20px; text-align: center; background: rgba(8, 10, 20, 0.95); border-bottom: 2px solid transparent; border-image: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent) 1; backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 25px rgba(0,0,0,0.6); }
+    .brand-badge { display: inline-flex; align-items: center; gap: 8px; padding: 4px 14px; border-radius: 50px; background: rgba(0, 242, 254, 0.08); border: 1px solid rgba(0, 242, 254, 0.3); margin-bottom: 6px; }
+    .brand-badge span { font-size: 10px; font-weight: 800; letter-spacing: 2px; color: var(--primary); text-transform: uppercase; }
+    header h1 { font-size: 21px; letter-spacing: 2px; text-transform: uppercase; background: linear-gradient(90deg, #00f2fe, #fff, #ff007f); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; text-shadow: 0 0 25px rgba(0, 242, 254, 0.4); }
+
+    .container { max-width: 540px; margin: 0 auto; padding: 15px; position: relative; z-index: 10; }
+
+    #auth-screen { background: var(--card); border: 1.5px solid var(--border); border-radius: 20px; padding: 24px; box-shadow: 0 0 30px rgba(0,242,254,0.15); margin-top: 25px; backdrop-filter: blur(15px); }
+    .auth-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+    .auth-tab { flex: 1; padding: 10px; text-align: center; background: #0b0f20; border: 1px solid #1a2344; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 600; color: #8fa0c9; }
+    .auth-tab.active { background: rgba(0, 242, 254, 0.15); border-color: var(--primary); color: var(--primary); box-shadow: 0 0 15px rgba(0, 242, 254, 0.3); }
+
+    .card { background: var(--card); border: 1.5px solid var(--border); border-radius: 20px; padding: 20px; margin-bottom: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); backdrop-filter: blur(15px); }
+    .section-title { font-size: 13px; font-weight: 700; color: var(--primary); margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; text-transform: uppercase; letter-spacing: 1px; }
+
+    .category-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .cat-btn { background: #0b0f20; border: 1px solid #1b2447; padding: 12px 10px; border-radius: 12px; color: #cbd5e1; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.2s; }
+    .cat-btn.active { border-color: var(--secondary); background: rgba(255, 0, 127, 0.15); color: #fff; box-shadow: 0 0 15px rgba(255, 0, 127, 0.4); }
+
+    .input-box { width: 100%; background: #080b17; border: 1.5px solid #1c264a; border-radius: 12px; padding: 12px 14px; color: #fff; font-size: 14px; margin-bottom: 12px; outline: none; transition: 0.2s; }
+    .input-box:focus { border-color: var(--primary); box-shadow: 0 0 12px rgba(0, 242, 254, 0.3); }
+    textarea.input-box { height: 95px; resize: none; }
+
+    .theme-scroll { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; }
+    .theme-chip { padding: 8px 14px; border-radius: 30px; background: #0b0f20; border: 1px solid #1d274c; font-size: 12px; cursor: pointer; white-space: nowrap; color: #a1b0d8; }
+    .theme-chip.active { background: linear-gradient(90deg, var(--primary), #4facfe); color: #000; font-weight: 700; border-color: transparent; box-shadow: 0 0 15px rgba(0, 242, 254, 0.5); }
+
+    .btn-submit { width: 100%; padding: 14px; border-radius: 12px; border: none; background: linear-gradient(90deg, var(--secondary), #7928ca); color: #fff; font-size: 15px; font-weight: 700; cursor: pointer; letter-spacing: 1px; box-shadow: 0 0 20px rgba(255, 0, 127, 0.4); transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; text-transform: uppercase; }
+    .btn-submit:active { transform: scale(0.98); }
+
+    .helper-link { font-size: 11px; color: var(--secondary); cursor: pointer; font-weight: 600; text-decoration: underline; }
+
+    #loading-modal { display: none; position: fixed; inset: 0; background: rgba(3, 4, 10, 0.92); z-index: 2000; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(10px); }
+    .terminal-box { width: 100%; max-width: 440px; background: #090c18; border: 1.5px solid var(--primary); border-radius: 16px; padding: 20px; box-shadow: 0 0 40px rgba(0, 242, 254, 0.3); font-family: monospace; }
+    .terminal-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #1a2346; padding-bottom: 8px; margin-bottom: 15px; font-size: 12px; color: var(--primary); }
+    .term-line { font-size: 12px; margin-bottom: 8px; color: #7f93c3; }
+    .term-line.done { color: #00f2fe; }
+    .term-line.active { color: var(--secondary); font-weight: bold; }
+
+    #result-view { display: none; background: rgba(0, 242, 254, 0.05); border: 1.5px dashed var(--primary); border-radius: 16px; padding: 16px; text-align: center; margin-top: 15px; }
+    .history-item { background: #080b18; border: 1px solid #1b2342; border-radius: 10px; padding: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+
+    .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(8, 10, 20, 0.95); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 10px 0; backdrop-filter: blur(15px); z-index: 100; }
+    .nav-tab { display: flex; flex-direction: column; align-items: center; gap: 4px; color: #5f709c; text-decoration: none; font-size: 11px; cursor: pointer; }
+    .nav-tab.active { color: var(--primary); text-shadow: 0 0 8px var(--primary); }
+    .nav-tab i { font-size: 17px; }
+
+    .insta-float { position: fixed; bottom: 75px; right: 15px; background: rgba(12, 16, 32, 0.9); border: 1.5px solid var(--secondary); border-radius: 50px; padding: 7px 14px; display: flex; align-items: center; gap: 6px; text-decoration: none; color: #fff; font-size: 12px; font-weight: 700; box-shadow: 0 0 16px rgba(255, 0, 127, 0.5); z-index: 99; animation: holoAnim 3s infinite ease-in-out alternate; }
+    @keyframes holoAnim { 0% { transform: translateY(0); } 100% { transform: translateY(-5px); } }
+  </style>
+</head>
+<body>
+
+  <div class="glow-blob-1"></div>
+  <div class="glow-blob-2"></div>
+
+  <header>
+    <div class="brand-badge"><i class="fa-solid fa-bolt" style="color:var(--primary); font-size:10px;"></i><span>VIP Engine Active</span></div>
+    <h1>CYBERWISH VIP STUDIO</h1>
+  </header>
+
+  <div class="container">
+
+    <!-- Auth Screen -->
+    <div id="auth-screen">
+      <div class="auth-tabs">
+        <div class="auth-tab active" id="tab-login-btn" onclick="setAuthMode('login')">Sign In</div>
+        <div class="auth-tab" id="tab-signup-btn" onclick="setAuthMode('signup')">Sign Up</div>
+      </div>
+      <input type="text" id="auth-user" class="input-box" placeholder="Enter username">
+      <input type="password" id="auth-pass" class="input-box" placeholder="Enter secret password">
+      <button class="btn-submit" id="auth-submit-btn" onclick="handleAuth()"><i class="fa-solid fa-lock"></i> Log In</button>
+    </div>
+
+    <!-- Main Workspace -->
+    <div id="main-workspace" style="display: none;">
+
+      <!-- Tab: Create -->
+      <div id="tab-create">
+        <div class="card">
+          <div class="section-title">
+            <span>1. Mood & Category</span>
+            <span class="helper-link" onclick="triggerCustomCat()">+ Custom Category</span>
+          </div>
+          <div class="category-grid" id="cat-container">
+            <button class="cat-btn active" onclick="setCategory(this, 'Make Up & Apology 🥺')"><i class="fa-solid fa-face-pleading"></i> Sorry / Patch-up</button>
+            <button class="cat-btn" onclick="setCategory(this, 'Happy Birthday 🎂')"><i class="fa-solid fa-cake-candles"></i> Birthday Wish</button>
+            <button class="cat-btn" onclick="setCategory(this, 'Love & Proposal ❤️')"><i class="fa-solid fa-heart"></i> Proposal Special</button>
+            <button class="cat-btn" onclick="setCategory(this, 'Best Friends Forever 🤝')"><i class="fa-solid fa-user-group"></i> Friendship</button>
+            <button class="cat-btn" onclick="setCategory(this, 'Happy Anniversary 💍')"><i class="fa-solid fa-ring"></i> Anniversary</button>
+            <button class="cat-btn" onclick="setCategory(this, 'Missing You Deeply 🥺')"><i class="fa-solid fa-cloud-moon"></i> Miss You</button>
+          </div>
+          <input type="text" id="custom-cat-val" class="input-box" placeholder="Type your custom category..." style="display:none; margin-top: 10px;">
+        </div>
+
+        <div class="card">
+          <div class="section-title">
+            <span>2. Personalize Message</span>
+            <span class="helper-link" onclick="suggestShayari()"><i class="fa-solid fa-dice"></i> Auto-Suggest Lines</span>
+          </div>
+          <input type="text" id="target-name" class="input-box" placeholder="Who is this for? (Name / Nickname)">
+          <textarea id="target-msg" class="input-box" placeholder="Write your heartfelt message or poetry here..."></textarea>
+          
+          <input type="text" id="target-photo" class="input-box" placeholder="Direct photo URL (Optional)">
+          <input type="password" id="target-pin" class="input-box" maxlength="4" placeholder="4-Digit secret passcode lock (Optional)">
+          
+          <div class="section-title" style="margin-top: 5px;"><span>3. Visual Theme:</span></div>
+          <div class="theme-scroll">
+            <div class="theme-chip active" onclick="setTheme(this, 'love')">❤️ Crimson Love</div>
+            <div class="theme-chip" onclick="setTheme(this, 'galaxy')">🌌 Deep Galaxy</div>
+            <div class="theme-chip" onclick="setTheme(this, 'cyber')">⚡ Cyberpunk</div>
+            <div class="theme-chip" onclick="setTheme(this, 'gold')">✨ Obsidian Gold</div>
+          </div>
+
+          <div class="section-title" style="margin-top: 10px;"><span>4. Background Floating FX:</span></div>
+          <div class="theme-scroll">
+            <div class="theme-chip active" onclick="setAnim(this, 'hearts')">💖 3D Floating Hearts</div>
+            <div class="theme-chip" onclick="setAnim(this, 'stars')">✨ Shooting Stars</div>
+            <div class="theme-chip" onclick="setAnim(this, 'sparks')">⚡ Neon Sparks</div>
+            <div class="theme-chip" onclick="setAnim(this, 'petals')">🌸 Rose Petals</div>
+          </div>
+
+          <button class="btn-submit" style="margin-top: 18px;" onclick="startBuildProcess()">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Surprise Link
+          </button>
+
+          <div id="result-view">
+            <p style="font-size:12px; color:var(--primary); margin-bottom:8px;">✔ Secret link generated successfully!</p>
+            <input type="text" id="final-url-box" class="input-box" readonly style="text-align:center; font-size:12px; font-weight:bold; color:#00f2fe;">
+            <div style="display:flex; gap:8px;">
+              <button class="btn-submit" style="flex:1; background:#25D366; font-size:12px;" onclick="shareWhatsApp()">
+                <i class="fa-brands fa-whatsapp"></i> Share on WhatsApp
+              </button>
+              <button class="btn-submit" style="flex:1; background:#11172f; border:1px solid var(--primary); font-size:12px;" onclick="copyLink()">
+                <i class="fa-regular fa-copy"></i> Copy Link
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: History -->
+      <div id="tab-history" style="display: none;">
+        <div class="card">
+          <div class="section-title"><span>📜 History</span></div>
+          <div id="history-list"><p style="font-size:12px; color:#6b7ba4;">Fetching records...</p></div>
+        </div>
+      </div>
+
+      <!-- Tab: Connect with Developer -->
+      <div id="tab-profile" style="display: none;">
+        <div class="card">
+          <div class="section-title"><span>💬 Connect with Developer</span></div>
+          <p style="font-size:12px; color:#8ea0cb; margin-bottom:10px;">Have an idea or need custom features? Send a direct message to developer:</p>
+          <textarea id="suggest-text" class="input-box" placeholder="Write your message or idea here..."></textarea>
+          <button class="btn-submit" onclick="submitSuggestion()"><i class="fa-solid fa-paper-plane"></i> Send Message to Developer</button>
+        </div>
+        <div class="card" style="text-align: center;">
+          <div class="section-title"><span>👤 Your Account</span></div>
+          <p style="font-size:14px; color:#00f2fe; font-weight: bold;" id="profile-display-name"></p>
+          <button class="btn-submit" style="background:#220914; border:1px solid #ff0055; margin-top:14px;" onclick="logout()">Log Out</button>
+        </div>
+      </div>
+
+      <div style="text-align:center; font-size:11px; color:#5c6e97; margin-top: 15px;">
+        Designed & Developed with ❤️ by <strong>@madxninja_</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- Terminal Loading Modal -->
+  <div id="loading-modal">
+    <div class="terminal-box">
+      <div class="terminal-header">
+        <span>[EXEC] REALTIME_DATABASE_PIPELINE</span>
+        <i class="fa-solid fa-terminal"></i>
+      </div>
+      <div class="term-line" id="term-1">> [1/4] Connecting to Firebase Cloud...</div>
+      <div class="term-line" id="term-2">> [2/4] Compiling visual shaders & floating FX...</div>
+      <div class="term-line" id="term-3">> [3/4] Locking security passcode & interactive triggers...</div>
+      <div class="term-line" id="term-4">> [4/4] Finalizing clean URL & publishing live...</div>
+    </div>
+  </div>
+
+  <!-- Bottom Nav -->
+  <div class="nav-bar" id="bottom-nav" style="display:none;">
+    <div class="nav-tab active" onclick="switchTab('create')"><i class="fa-solid fa-wand-magic-sparkles"></i> Create</div>
+    <div class="nav-tab" onclick="switchTab('history')"><i class="fa-solid fa-clock-rotate-left"></i> History</div>
+    <div class="nav-tab" onclick="switchTab('profile')"><i class="fa-solid fa-user-astronaut"></i> Me</div>
+  </div>
+
+  <!-- Instagram Hologram -->
+  <a href="https://instagram.com/madxninja_" target="_blank" class="insta-float">
+    <i class="fa-brands fa-instagram" style="color:var(--secondary);"></i>
+    <span>Follow @madxninja_</span>
+  </a>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBlYdZljqsNcZvlky107-spvhIH7235UTk",
+      databaseURL: "https://cyberwish-521fd-default-rtdb.firebaseio.com",
+      projectId: "cyberwish-521fd",
+      appId: "1:158188886863:web:c04bac173f7a141732933a"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    let authMode = 'login';
+    let currentUser = localStorage.getItem('cw_user') || null;
+    let activeCat = 'Make Up & Apology 🥺';
+    let activeTheme = 'love';
+    let activeAnim = 'hearts';
+
+    const shayariVault = {
+      'Make Up & Apology 🥺': [
+        "Words fell short and I made a mistake, but my heart beats only for you. Forgive me please? ❤️",
+        "Your silence hurts more than any anger. I am truly sorry, please come back into my arms!",
+        "Every second without your smile feels like an eternity. I promise to make it right!"
+      ],
+      'Happy Birthday 🎂': [
+        "Wishing you a day filled with endless joy, magic, and sweet memories. Happy Birthday! 🎂🎉",
+        "May the universe gift you everything your heart whispers for. Have the most wonderful year ahead!"
+      ],
+      'Love & Proposal ❤️': [
+        "You are my favorite thought, my endless dream, and the love of my life. Will you stay forever? ❤️",
+        "In a world full of temporary things, you are my permanent home. I love you endlessly!"
+      ]
+    };
+
+    window.onload = () => {
+      if(currentUser) setupWorkspace();
+    };
+
+    function setAuthMode(mode) {
+      authMode = mode;
+      document.getElementById('tab-login-btn').className = 'auth-tab ' + (mode === 'login' ? 'active' : '');
+      document.getElementById('tab-signup-btn').className = 'auth-tab ' + (mode === 'signup' ? 'active' : '');
+      document.getElementById('auth-submit-btn').innerHTML = mode === 'login' ? '<i class="fa-solid fa-lock"></i> Log In' : '<i class="fa-solid fa-user-plus"></i> Create Account';
+    }
+
+    function handleAuth() {
+      const u = document.getElementById('auth-user').value.trim().toLowerCase();
+      const p = document.getElementById('auth-pass').value.trim();
+      if(!u || !p) return alert("Please enter both username and password!");
+
+      const userRef = db.ref('users/' + u);
+
+      if (authMode === 'signup') {
+        userRef.get().then(snapshot => {
+          if (snapshot.exists()) {
+            alert("This username already exists! Please choose another one or log in.");
+          } else {
+            userRef.set({ password: p, createdAt: Date.now() }).then(() => {
+              alert("Account created successfully!");
+              currentUser = u;
+              localStorage.setItem('cw_user', u);
+              setupWorkspace();
+            });
+          }
+        });
+      } else {
+        userRef.get().then(snapshot => {
+          if (snapshot.exists() && snapshot.val().password === p) {
+            currentUser = u;
+            localStorage.setItem('cw_user', u);
+            setupWorkspace();
+          } else {
+            alert("Invalid username or password!");
+          }
+        });
+      }
+    }
+
+    function setupWorkspace() {
+      document.getElementById('auth-screen').style.display = 'none';
+      document.getElementById('main-workspace').style.display = 'block';
+      document.getElementById('bottom-nav').style.display = 'flex';
+      document.getElementById('profile-display-name').innerText = "@" + currentUser;
+      syncCloudHistory();
+    }
+
+    function logout() {
+      localStorage.removeItem('cw_user');
+      location.reload();
+    }
+
+    function setCategory(el, cat) {
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+      activeCat = cat;
+      document.getElementById('custom-cat-val').style.display = 'none';
+    }
+
+    function triggerCustomCat() {
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      const c = document.getElementById('custom-cat-val');
+      c.style.display = 'block';
+      c.focus();
+      activeCat = 'custom';
+    }
+
+    function setTheme(el, th) {
+      document.querySelectorAll('.theme-scroll .theme-chip').forEach(c => {
+        if(c.getAttribute('onclick').includes('setTheme')) c.classList.remove('active');
+      });
+      el.classList.add('active');
+      activeTheme = th;
+    }
+
+    function setAnim(el, anim) {
+      document.querySelectorAll('.theme-scroll .theme-chip').forEach(c => {
+        if(c.getAttribute('onclick').includes('setAnim')) c.classList.remove('active');
+      });
+      el.classList.add('active');
+      activeAnim = anim;
+    }
+
+    function suggestShayari() {
+      const list = shayariVault[activeCat] || shayariVault['Love & Proposal ❤️'];
+      const pick = list[Math.floor(Math.random() * list.length)];
+      document.getElementById('target-msg').value = pick;
+    }
+
+    function startBuildProcess() {
+      const name = document.getElementById('target-name').value.trim() || 'My Special One';
+      const customCat = document.getElementById('custom-cat-val').value.trim();
+      const finalCat = (activeCat === 'custom' && customCat) ? customCat : activeCat;
+      const msg = document.getElementById('target-msg').value.trim() || 'You mean the absolute world to me. Keep shining and smiling always!';
+      const photo = document.getElementById('target-photo').value.trim();
+      const pin = document.getElementById('target-pin').value.trim();
+
+      const modal = document.getElementById('loading-modal');
+      modal.style.display = 'flex';
+
+      const steps = [
+        document.getElementById('term-1'),
+        document.getElementById('term-2'),
+        document.getElementById('term-3'),
+        document.getElementById('term-4')
+      ];
+
+      steps.forEach(s => s.className = 'term-line');
+
+      setTimeout(() => { steps[0].className = 'term-line done'; steps[1].className = 'term-line active'; }, 350);
+      setTimeout(() => { steps[1].className = 'term-line done'; steps[2].className = 'term-line active'; }, 700);
+      setTimeout(() => { steps[2].className = 'term-line done'; steps[3].className = 'term-line active'; }, 1100);
+      setTimeout(() => {
+        steps[3].className = 'term-line done';
+        
+        const newSurpriseRef = db.ref('surprises').push();
+        const surpriseId = newSurpriseRef.key;
+
+        const surpriseData = {
+          name: name,
+          category: finalCat,
+          message: msg,
+          photo: photo,
+          pin: pin,
+          theme: activeTheme,
+          anim: activeAnim,
+          createdBy: currentUser,
+          createdAt: Date.now()
+        };
+
+        newSurpriseRef.set(surpriseData).then(() => {
+          modal.style.display = 'none';
+          
+          const fullUrl = new URL('view.html?id=' + surpriseId, window.location.href).href;
+
+          document.getElementById('final-url-box').value = fullUrl;
+          document.getElementById('result-view').style.display = 'block';
+          document.getElementById('result-view').scrollIntoView({ behavior: 'smooth' });
+
+          db.ref('history/' + currentUser).push({
+            id: surpriseId,
+            name: name,
+            cat: finalCat,
+            url: fullUrl,
+            timestamp: Date.now()
+          });
+          syncCloudHistory();
+        }).catch(err => {
+          modal.style.display = 'none';
+          alert("Database Error: " + err.message);
+        });
+
+      }, 1500);
+    }
+
+    function syncCloudHistory() {
+      const box = document.getElementById('history-list');
+      db.ref('history/' + currentUser).on('value', snapshot => {
+        if (!snapshot.exists()) {
+          box.innerHTML = '<p style="font-size:12px; color:#6b7ba4;">No surprises found in history.</p>';
+          return;
+        }
+        const data = snapshot.val();
+        const items = Object.values(data).reverse();
+        box.innerHTML = items.map(h => `
+          <div class="history-item">
+            <div>
+              <strong>${h.name}</strong> (${h.cat})<br>
+              <span style="color:#5f709c; font-size:10px;">${new Date(h.timestamp).toLocaleDateString()}</span>
+            </div>
+            <button style="padding:6px 12px; background:#1b2346; color:#00f2fe; border:none; border-radius:6px; cursor:pointer;" onclick="navigator.clipboard.writeText('${h.url}'); alert('Link copied to clipboard!');">Copy</button>
+          </div>
+        `).join('');
+      });
+    }
+
+    function shareWhatsApp() {
+      const url = document.getElementById('final-url-box').value;
+      const text = encodeURIComponent("🎁 A secret surprise is waiting for you! Tap to open:\n" + url);
+      window.open('https://api.whatsapp.com/send?text=' + text, '_blank');
+    }
+
+    function copyLink() {
+      const box = document.getElementById('final-url-box');
+      box.select();
+      navigator.clipboard.writeText(box.value);
+      alert("Surprise URL copied to clipboard!");
+    }
+
+    function submitSuggestion() {
+      const txt = document.getElementById('suggest-text').value.trim();
+      if(!txt) return alert("Please enter your message!");
+
+      db.ref('suggestions').push({
+        user: currentUser,
+        message: txt,
+        timestamp: Date.now()
+      }).then(() => {
+        alert("Thank you! Your message has been directly forwarded to the developer.");
+        document.getElementById('suggest-text').value = '';
+      });
+    }
+
+    function switchTab(tab) {
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      document.getElementById('tab-create').style.display = (tab === 'create') ? 'block' : 'none';
+      document.getElementById('tab-history').style.display = (tab === 'history') ? 'block' : 'none';
+      document.getElementById('tab-profile').style.display = (tab === 'profile') ? 'block' : 'none';
+    }
+  </script>
+</body>
+</html>
