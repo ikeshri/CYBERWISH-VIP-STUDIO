@@ -42,22 +42,47 @@
 
     .container { max-width: 540px; margin: 0 auto; padding: 15px; position: relative; z-index: 10; }
 
+    /* Upgraded Showcase Banner */
     .showcase-banner {
-      background: radial-gradient(circle at top, rgba(255, 0, 127, 0.15), rgba(12, 16, 35, 0.95));
-      border: 1.5px solid rgba(255, 0, 127, 0.4);
+      background: radial-gradient(circle at top, rgba(255, 0, 127, 0.18), rgba(12, 16, 35, 0.96));
+      border: 1.5px solid rgba(255, 0, 127, 0.45);
       border-radius: 20px;
-      padding: 20px 18px;
+      padding: 22px 18px;
       margin-bottom: 20px;
-      box-shadow: 0 0 35px rgba(255, 0, 127, 0.25);
+      box-shadow: 0 0 35px rgba(255, 0, 127, 0.3);
       backdrop-filter: blur(15px);
     }
     .showcase-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
     .badge-official { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 20px; background: rgba(0, 242, 254, 0.12); border: 1px solid var(--primary); font-size: 11px; font-weight: 800; color: #00f2fe; text-transform: uppercase; letter-spacing: 1px; }
-    .showcase-title { font-size: 16px; font-weight: 900; color: #fff; margin-bottom: 8px; line-height: 1.4; }
-    .showcase-desc { font-size: 12px; color: #cbd5e1; line-height: 1.6; margin-bottom: 15px; }
+    .showcase-title { font-size: 17px; font-weight: 900; color: #fff; margin-bottom: 10px; line-height: 1.4; text-shadow: 0 0 12px rgba(255, 255, 255, 0.25); }
+    .showcase-desc { font-size: 12.5px; color: #cbd5e1; line-height: 1.65; margin-bottom: 14px; }
+    
+    /* Price Comparison Alert Box */
+    .price-compare-box {
+      background: rgba(8, 12, 26, 0.85);
+      border: 1px dashed #00f2fe;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      font-size: 11.5px;
+      line-height: 1.6;
+      color: #94a3b8;
+    }
+    .price-compare-box strong { color: #ff85be; }
+    .free-pill {
+      display: inline-block;
+      background: #25D366;
+      color: #000;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 900;
+      font-size: 10px;
+      text-transform: uppercase;
+      margin-left: 4px;
+    }
 
     .feature-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .f-tag { font-size: 10px; font-weight: 700; padding: 5px 10px; border-radius: 8px; background: rgba(10, 15, 30, 0.8); border: 1px solid #1f2b54; color: #a1b0d8; display: flex; align-items: center; gap: 5px; }
+    .f-tag { font-size: 10px; font-weight: 700; padding: 5px 10px; border-radius: 8px; background: rgba(10, 15, 30, 0.85); border: 1px solid #1f2b54; color: #a1b0d8; display: flex; align-items: center; gap: 5px; }
     .f-tag i { color: #00f2fe; }
 
     #auth-screen { background: var(--card); border: 1.5px solid var(--border); border-radius: 20px; padding: 24px; box-shadow: 0 0 30px rgba(0,242,254,0.15); backdrop-filter: blur(15px); }
@@ -107,7 +132,7 @@
     .theme-scroll::-webkit-scrollbar { display: none; }
 
     .theme-chip { padding: 9px 15px; border-radius: 30px; background: #0b0f20; border: 1px solid #1d274c; font-size: 12px; cursor: pointer; white-space: nowrap; color: #a1b0d8; font-weight: 600; user-select: none; transition: all 0.2s; }
-    .theme-chip.active { background: linear-gradient(90deg, var(--primary), #4facfe); color: #000; font-weight: 800; border-color: transparent; box-shadow: 0 0 14px rgba(0, 242, 254, 0.5); }
+    .theme-chip.active { background: linear-gradient(90deg, var(--primary), #4facfe); color: #00f2fe; font-weight: 800; border-color: transparent; box-shadow: 0 0 14px rgba(0, 242, 254, 0.5); }
 
     .btn-submit { width: 100%; padding: 14px; border-radius: 12px; border: none; background: linear-gradient(90deg, var(--secondary), #7928ca); color: #fff; font-size: 15px; font-weight: 700; cursor: pointer; letter-spacing: 1px; box-shadow: 0 0 20px rgba(255, 0, 127, 0.4); transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; text-transform: uppercase; }
     .btn-submit:active { transform: scale(0.98); }
@@ -148,28 +173,37 @@
 
   <div class="container">
 
+    <!-- About & Pricing Transparency Showcase -->
     <div class="showcase-banner" id="showcase-box">
       <div class="showcase-header">
         <div class="badge-official"><i class="fa-solid fa-gem"></i> <span id="sc-tag">Official Notice</span></div>
-        <span style="font-size: 10px; color: #8fa0c9;"><i class="fa-solid fa-shield-halved"></i> 100% Private Cloud</span>
+        <span style="font-size: 10px; color: #25D366; font-weight: bold;"><i class="fa-solid fa-circle-check"></i> 100% Free VIP Tier</span>
       </div>
 
       <div class="showcase-title" id="sc-title">
-        Multi-Slide Storytelling & VIP Surprise Engine for Special Ones
+        The Ultimate 3D Interactive Story & Surprise Web Platform
       </div>
 
       <div class="showcase-desc" id="sc-desc">
-        Create multi-page story surprises with custom slide counts, category-matched auto poetry, viral runaway No buttons, 6-direction particle physics, and YouTube background audio sync.
+        CyberWish VIP lets you create deeply personal, unforgettable digital surprises for your girlfriend, crush, partner, or best friend. From multi-slide emotional poetry to viral runaway 'No' buttons and custom YouTube background music—your loved ones get a cinematic experience straight in their browser with no app download needed.
+      </div>
+
+      <!-- Price Comparison Note -->
+      <div class="price-compare-box" id="sc-compare">
+        💡 <strong>Did You Know?</strong> Commercial gift portals like <em>GiftASurprise</em>, <em>SurpriseGram</em>, or custom agency creators typically charge <strong>₹499 to ₹1,499</strong> for personalized digital greeting links with music and interactions.<br>
+        🎉 <strong>CyberWish VIP</strong> gives you all these elite features, secure cloud hosting, and instant Instagram reply sync for <span class="free-pill">100% FREE</span>!
       </div>
 
       <div class="feature-tags">
         <div class="f-tag"><i class="fa-solid fa-layer-group"></i> Multi-Slide Story Mode</div>
+        <div class="f-tag"><i class="fa-solid fa-wand-magic-sparkles"></i> Topic-Matched Auto-Poetry</div>
         <div class="f-tag"><i class="fa-brands fa-youtube" style="color:#ff0000;"></i> YouTube Audio Sync</div>
+        <div class="f-tag"><i class="fa-solid fa-person-running"></i> Runaway 'No' Engine</div>
         <div class="f-tag"><i class="fa-solid fa-lock"></i> 4-Digit Passcode Lock</div>
-        <div class="f-tag"><i class="fa-brands fa-instagram"></i> Instagram DM Sync</div>
       </div>
     </div>
 
+    <!-- Auth View -->
     <div id="auth-screen">
       <div class="auth-tabs">
         <div class="auth-tab active" id="tab-login-btn" onclick="setAuthMode('login')">Sign In</div>
@@ -180,6 +214,7 @@
       <button class="btn-submit" id="auth-submit-btn" onclick="handleAuth()"><i class="fa-solid fa-lock"></i> Log In</button>
     </div>
 
+    <!-- Main Workspace -->
     <div id="main-workspace" style="display: none;">
 
       <div id="tab-create">
@@ -289,21 +324,20 @@
             <div class="theme-chip" onclick="toggleBGM(this, 'none')">🔇 Mute</div>
           </div>
           
-          <!-- Direct YouTube Song Link Input -->
           <div style="margin-top: 10px;">
-            <input type="text" id="youtube-url" class="input-box" placeholder="Paste YouTube song link (e.g. https://youtu.be/... or watch?v=...)">
+            <input type="text" id="youtube-url" class="input-box" placeholder="Paste YouTube song link (Optional)">
             <p style="font-size: 11px; color: #ff85be; margin-top: -6px; margin-bottom: 12px;">
-              <i class="fa-brands fa-youtube"></i> YouTube video will be completely hidden, only its romantic song will play smoothly in background!
+              <i class="fa-brands fa-youtube"></i> YouTube video will be completely hidden, only romantic audio will play!
             </p>
           </div>
 
           <button class="btn-submit" style="margin-top: 15px;" onclick="startBuildProcess()">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Surprise Link
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Ultra-Short Link
           </button>
 
           <div id="result-view">
-            <p style="font-size:12px; color:var(--primary); margin-bottom:8px;">✔ Secret multi-slide link generated successfully!</p>
-            <input type="text" id="final-url-box" class="input-box" readonly style="text-align:center; font-size:12px; font-weight:bold; color:#00f2fe;">
+            <p style="font-size:12px; color:var(--primary); margin-bottom:8px;">✔ Ultra-Short Secret Link Ready!</p>
+            <input type="text" id="final-url-box" class="input-box" readonly style="text-align:center; font-size:13px; font-weight:bold; color:#00f2fe;">
             <div style="display:flex; gap:8px;">
               <button class="btn-submit" style="flex:1; background:linear-gradient(90deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); font-size:12px;" onclick="shareDirectLink()">
                 <i class="fa-brands fa-instagram"></i> Share on Instagram
@@ -347,13 +381,13 @@
   <div id="loading-modal">
     <div class="terminal-box">
       <div class="terminal-header">
-        <span>[EXEC] MULTI_SLIDE_STORY_PIPELINE</span>
+        <span>[EXEC] SHORT_URL_PIPELINE</span>
         <i class="fa-solid fa-terminal"></i>
       </div>
-      <div class="term-line" id="term-1">> [1/4] Packing story slides into Firebase Cloud...</div>
-      <div class="term-line" id="term-2">> [2/4] Linking YouTube background audio player...</div>
-      <div class="term-line" id="term-3">> [3/4] Locking security passcode & interactive triggers...</div>
-      <div class="term-line" id="term-4">> [4/4] Finalizing clean URL & publishing live...</div>
+      <div class="term-line" id="term-1">> [1/4] Generating 6-character clean VIP key...</div>
+      <div class="term-line" id="term-2">> [2/4] Saving secret story slides into cloud...</div>
+      <div class="term-line" id="term-3">> [3/4] Requesting instant clean URL shortening...</div>
+      <div class="term-line" id="term-4">> [4/4] Short surprise link published live!</div>
     </div>
   </div>
 
@@ -383,14 +417,16 @@
       en: {
         indicator: 'हिन्दी',
         tag: 'Official Notice',
-        title: 'Multi-Slide Storytelling & VIP Surprise Engine for Special Ones',
-        desc: 'Create multi-page story surprises with custom slide counts, category-matched auto poetry, viral runaway No buttons, 6-direction particle physics, and YouTube background audio sync.'
+        title: 'The Ultimate 3D Interactive Story & Surprise Web Platform',
+        desc: 'CyberWish VIP lets you create deeply personal, unforgettable digital surprises for your girlfriend, crush, partner, or best friend. From multi-slide emotional poetry to viral runaway No buttons and custom YouTube background music—your loved ones get a cinematic experience straight in their browser with no app download needed.',
+        compare: '💡 <strong>Did You Know?</strong> Commercial gift portals like <em>GiftASurprise</em>, <em>SurpriseGram</em>, or custom agency creators typically charge <strong>₹499 to ₹1,499</strong> for personalized digital greeting links with music and interactions.<br>🎉 <strong>CyberWish VIP</strong> gives you all these elite features, secure cloud hosting, and instant Instagram reply sync for <span class="free-pill">100% FREE</span>!'
       },
       hi: {
         indicator: 'English',
-        tag: 'महत्वपूर्ण सूचना (About)',
-        title: 'मल्टी-स्लाइड स्टोरीटेलिंग और वीआईपी सरप्राइज इंजन',
-        desc: 'अब अपनी पसंद के अनुसार 1 से 7 स्लाइड्स में दिल की बात लिखें! ऊपर चुनी गई कैटेगरी के अनुसार ऑटो-शायरी, 6-दिशाओं में उड़ते पार्टिकल्स, भागने वाला No बटन और यूट्यूब बैकग्राउंड ऑडियो की सुविधा हमेशा एक्टिव रहेगी।'
+        tag: 'महत्वपूर्ण सूचना (About & Pricing)',
+        title: 'अपनी गर्लफ्रेंड, पार्टनर या दोस्तों के लिए 3D डिजिटल सरप्राइज प्लेटफॉर्म',
+        desc: 'CyberWish VIP एक ऐसा आधुनिक प्लेटफॉर्म है, जहाँ आप अपने खास इंसान (गर्लफ्रेंड, क्रश, बेस्ट फ्रेंड) के लिए प्यार भरे मल्टी-स्लाइड सरप्राइज और प्रपोज़ल बना सकते हैं। इसमें मनपसंद शायरी, बैकग्राउंड में बजने वाला आपका पसंदीदा यू-ट्यूब गाना, और मना करने पर स्क्रीन पर भागने वाला फनी "No" बटन सब कुछ एक क्लिक में तैयार होता है।',
+        compare: '💡 <strong>क्या आप जानते हैं?</strong> दूसरी कमर्शियल वेबसाइट्स जैसे <em>GiftASurprise</em>, <em>SurpriseGram</em> आदि ऐसे कस्टमाइज़्ड डिजिटल ग्रीटिंग पेजों के <strong>₹499 से ₹1,499</strong> तक चार्ज करती हैं!<br>🎉 <strong>CyberWish VIP</strong> यह पूरा प्रीमियम अनुभव, सुरक्षित क्लाउड लिंक और इंस्टाग्राम रिप्लाई की सुविधा आपके लिए <span class="free-pill">बिल्कुल मुफ़्त (100% FREE)</span> लाया है!'
       }
     };
 
@@ -401,6 +437,7 @@
       document.getElementById('sc-tag').innerText = c.tag;
       document.getElementById('sc-title').innerText = c.title;
       document.getElementById('sc-desc').innerText = c.desc;
+      document.getElementById('sc-compare').innerHTML = c.compare;
     }
 
     let authMode = 'login';
@@ -471,6 +508,15 @@
         "I miss you more than words can ever explain; please come back soon! ❤️"
       ]
     };
+
+    function generateShortKey() {
+      const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+      let res = "";
+      for (let i = 0; i < 6; i++) {
+        res += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return res;
+    }
 
     window.onload = () => {
       suggestStoryLines();
@@ -641,7 +687,6 @@
       selectedBGM = bgmName;
     }
 
-    // YouTube Video ID Extractor
     function extractYouTubeID(url) {
       if (!url) return null;
       const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
@@ -673,14 +718,14 @@
 
       steps.forEach(s => s.className = 'term-line');
 
-      setTimeout(() => { steps[0].className = 'term-line done'; steps[1].className = 'term-line active'; }, 350);
-      setTimeout(() => { steps[1].className = 'term-line done'; steps[2].className = 'term-line active'; }, 700);
-      setTimeout(() => { steps[2].className = 'term-line done'; steps[3].className = 'term-line active'; }, 1100);
-      setTimeout(() => {
+      setTimeout(() => { steps[0].className = 'term-line done'; steps[1].className = 'term-line active'; }, 300);
+      setTimeout(() => { steps[1].className = 'term-line done'; steps[2].className = 'term-line active'; }, 650);
+      setTimeout(() => { steps[2].className = 'term-line done'; steps[3].className = 'term-line active'; }, 1000);
+      setTimeout(async () => {
         steps[3].className = 'term-line done';
         
-        const newSurpriseRef = db.ref('surprises').push();
-        const surpriseId = newSurpriseRef.key;
+        const shortKey = generateShortKey();
+        const surpriseRef = db.ref('surprises/' + shortKey);
 
         const surpriseData = {
           name: name,
@@ -698,29 +743,30 @@
           createdAt: Date.now()
         };
 
-        newSurpriseRef.set(surpriseData).then(() => {
+        try {
+          await surpriseRef.set(surpriseData);
           modal.style.display = 'none';
           
-          const fullUrl = new URL('view.html?id=' + surpriseId, window.location.href).href;
+          const cleanLocalUrl = new URL('view.html?id=' + shortKey, window.location.href).href;
 
-          document.getElementById('final-url-box').value = fullUrl;
+          document.getElementById('final-url-box').value = cleanLocalUrl;
           document.getElementById('result-view').style.display = 'block';
           document.getElementById('result-view').scrollIntoView({ behavior: 'smooth' });
 
           db.ref('history/' + currentUser).push({
-            id: surpriseId,
+            id: shortKey,
             name: name,
             cat: finalCat,
-            url: fullUrl,
+            url: cleanLocalUrl,
             timestamp: Date.now()
           });
           syncCloudHistory();
-        }).catch(err => {
+        } catch(err) {
           modal.style.display = 'none';
           alert("Database Error: " + err.message);
-        });
+        }
 
-      }, 1500);
+      }, 1400);
     }
 
     function syncCloudHistory() {
@@ -747,7 +793,7 @@
     function shareDirectLink() {
       const url = document.getElementById('final-url-box').value;
       navigator.clipboard.writeText(url);
-      alert("Surprise link copied! Redirecting to Instagram...");
+      alert("Short surprise link copied! Redirecting to Instagram...");
       window.open('https://instagram.com/direct/inbox/', '_blank');
     }
 
@@ -755,7 +801,7 @@
       const box = document.getElementById('final-url-box');
       box.select();
       navigator.clipboard.writeText(box.value);
-      alert("Surprise URL copied to clipboard!");
+      alert("Short surprise link copied to clipboard!");
     }
 
     function submitSuggestion() {
