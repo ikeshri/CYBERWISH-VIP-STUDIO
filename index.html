@@ -30,135 +30,192 @@
       background: var(--bg); 
       color: #fff; 
       min-height: 100vh; 
-      padding-bottom: 75px; 
+      padding-bottom: 90px; 
       overflow-x: hidden; 
-      display: flex;
-      flex-direction: column;
     }
 
-    .glow-blob-1 { position: fixed; width: 280px; height: 280px; background: var(--primary); filter: blur(140px); border-radius: 50%; top: -40px; left: -40px; opacity: 0.2; pointer-events: none; z-index: 0; }
-    .glow-blob-2 { position: fixed; width: 280px; height: 280px; background: var(--secondary); filter: blur(140px); border-radius: 50%; bottom: -40px; right: -40px; opacity: 0.2; pointer-events: none; z-index: 0; }
+    .glow-blob-1 { position: fixed; width: 350px; height: 350px; background: var(--primary); filter: blur(160px); border-radius: 50%; top: -50px; left: -50px; opacity: 0.2; pointer-events: none; z-index: 0; }
+    .glow-blob-2 { position: fixed; width: 350px; height: 350px; background: var(--secondary); filter: blur(160px); border-radius: 50%; bottom: -50px; right: -50px; opacity: 0.2; pointer-events: none; z-index: 0; }
 
-    header { padding: 10px 14px; text-align: center; background: rgba(8, 10, 20, 0.95); border-bottom: 2px solid transparent; border-image: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent) 1; backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: space-between; }
+    header { 
+      padding: 14px 18px; 
+      text-align: center; 
+      background: rgba(8, 10, 20, 0.95); 
+      border-bottom: 2px solid transparent; 
+      border-image: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent) 1; 
+      backdrop-filter: blur(15px); 
+      position: sticky; 
+      top: 0; 
+      z-index: 100; 
+      box-shadow: 0 4px 25px rgba(0,0,0,0.6); 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+    }
     .header-left { display: flex; flex-direction: column; align-items: flex-start; }
-    .brand-badge { display: inline-flex; align-items: center; gap: 5px; padding: 2px 7px; border-radius: 50px; background: rgba(0, 242, 254, 0.08); border: 1px solid rgba(0, 242, 254, 0.3); margin-bottom: 2px; }
-    .brand-badge span { font-size: 8px; font-weight: 800; letter-spacing: 1px; color: var(--primary); text-transform: uppercase; }
-    header h1 { font-size: 15px; letter-spacing: 1px; text-transform: uppercase; background: linear-gradient(90deg, #00f2fe, #fff, #ff007f); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; }
+    .brand-badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 50px; background: rgba(0, 242, 254, 0.08); border: 1px solid rgba(0, 242, 254, 0.3); margin-bottom: 3px; }
+    .brand-badge span { font-size: 9px; font-weight: 800; letter-spacing: 1.5px; color: var(--primary); text-transform: uppercase; }
+    header h1 { font-size: 17px; letter-spacing: 1.5px; text-transform: uppercase; background: linear-gradient(90deg, #00f2fe, #fff, #ff007f); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; }
     
-    .lang-btn { display: inline-flex; align-items: center; gap: 4px; padding: 4px 9px; border-radius: 18px; background: rgba(255, 0, 127, 0.12); border: 1.2px solid var(--secondary); color: #fff; font-size: 10px; font-weight: 800; cursor: pointer; transition: 0.2s ease; }
+    .lang-btn { display: inline-flex; align-items: center; gap: 5px; padding: 5px 11px; border-radius: 20px; background: rgba(255, 0, 127, 0.12); border: 1.5px solid var(--secondary); color: #fff; font-size: 11px; font-weight: 800; cursor: pointer; transition: 0.2s ease; }
     .lang-btn:active { transform: scale(0.95); background: var(--secondary); }
 
-    .container { max-width: 480px; width: 100%; margin: 0 auto; padding: 12px; position: relative; z-index: 10; flex: 1; }
+    .container { 
+      max-width: 520px; 
+      margin: 0 auto; 
+      padding: 16px; 
+      position: relative; 
+      z-index: 10; 
+    }
 
-    /* Ultra-Slim Sleek Glass Ticker Banner */
+    /* Clean Compact Notice Banner */
     .showcase-banner {
-      background: rgba(14, 18, 38, 0.7);
-      border: 1px solid rgba(255, 0, 127, 0.3);
-      border-radius: 12px;
-      padding: 8px 12px;
-      margin-bottom: 12px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(10px);
-      font-size: 11px;
-      line-height: 1.4;
+      background: radial-gradient(circle at top, rgba(255, 0, 127, 0.15), rgba(12, 16, 35, 0.95));
+      border: 1.5px solid rgba(255, 0, 127, 0.38);
+      border-radius: 18px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 0 25px rgba(255, 0, 127, 0.2);
+      backdrop-filter: blur(15px);
+    }
+    .showcase-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .badge-official { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 20px; background: rgba(0, 242, 254, 0.1); border: 1px solid var(--primary); font-size: 10px; font-weight: 800; color: #00f2fe; text-transform: uppercase; letter-spacing: 1px; }
+    .free-pill { background: #25D366; color: #000; padding: 2px 7px; border-radius: 5px; font-weight: 900; font-size: 9.5px; text-transform: uppercase; }
+
+    .quick-bullet-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 11.5px;
+      line-height: 1.5;
       color: #cbd5e1;
     }
-    .showcase-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; font-size: 9.5px; font-weight: 800; }
-    .badge-official { color: #00f2fe; text-transform: uppercase; display: flex; align-items: center; gap: 4px; }
-    .free-pill { background: #25D366; color: #000; padding: 1px 5px; border-radius: 4px; font-weight: 900; font-size: 8.5px; text-transform: uppercase; }
+    .q-item { display: flex; align-items: flex-start; gap: 7px; }
+    .q-item i { margin-top: 3px; font-size: 10px; flex-shrink: 0; }
 
-    /* Sleek Auth Screen */
-    #auth-screen { background: var(--card); border: 1.5px solid var(--border); border-radius: 16px; padding: 18px 16px; box-shadow: 0 0 25px rgba(0,242,254,0.15); backdrop-filter: blur(15px); margin-top: 4px; }
-    .auth-tabs { display: flex; gap: 8px; margin-bottom: 14px; }
-    .auth-tab { flex: 1; padding: 8px; text-align: center; background: #0b0f20; border: 1px solid #1a2344; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 700; color: #8fa0c9; }
-    .auth-tab.active { background: rgba(0, 242, 254, 0.15); border-color: var(--primary); color: var(--primary); box-shadow: 0 0 12px rgba(0, 242, 254, 0.3); }
+    /* Original Solid Auth Card */
+    #auth-screen { 
+      background: var(--card); 
+      border: 1.5px solid var(--border); 
+      border-radius: 20px; 
+      padding: 22px 18px; 
+      box-shadow: 0 0 30px rgba(0,242,254,0.15); 
+      backdrop-filter: blur(15px); 
+    }
+    .auth-tabs { display: flex; gap: 10px; margin-bottom: 18px; }
+    .auth-tab { flex: 1; padding: 10px; text-align: center; background: #0b0f20; border: 1px solid #1a2344; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 700; color: #8fa0c9; }
+    .auth-tab.active { background: rgba(0, 242, 254, 0.15); border-color: var(--primary); color: var(--primary); box-shadow: 0 0 15px rgba(0, 242, 254, 0.3); }
 
-    .card { background: var(--card); border: 1.5px solid var(--border); border-radius: 16px; padding: 16px; margin-bottom: 14px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); backdrop-filter: blur(15px); }
-    .section-title { font-size: 12px; font-weight: 800; color: var(--primary); margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; text-transform: uppercase; letter-spacing: 0.8px; }
+    .card { 
+      background: var(--card); 
+      border: 1.5px solid var(--border); 
+      border-radius: 20px; 
+      padding: 20px 18px; 
+      margin-bottom: 16px; 
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+      backdrop-filter: blur(15px); 
+    }
+    .section-title { font-size: 13px; font-weight: 800; color: var(--primary); margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; text-transform: uppercase; letter-spacing: 1px; }
 
-    .btn-pill-action { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 20px; background: rgba(255, 0, 127, 0.12); border: 1px solid var(--secondary); color: #ff85be; font-size: 10px; font-weight: 700; text-transform: uppercase; cursor: pointer; }
+    .btn-pill-action { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 30px; background: rgba(255, 0, 127, 0.12); border: 1px solid var(--secondary); color: #ff85be; font-size: 11px; font-weight: 700; text-transform: uppercase; cursor: pointer; }
     
-    .category-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-    .cat-btn { background: #0b0f20; border: 1px solid #1b2447; padding: 10px 8px; border-radius: 10px; color: #cbd5e1; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: 0.2s; user-select: none; }
-    .cat-btn.active { border-color: var(--secondary); background: rgba(255, 0, 127, 0.15); color: #fff; box-shadow: 0 0 12px rgba(255, 0, 127, 0.4); }
+    .category-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; }
+    .cat-btn { background: #0b0f20; border: 1px solid #1b2447; padding: 12px 10px; border-radius: 12px; color: #cbd5e1; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.2s; user-select: none; }
+    .cat-btn.active { border-color: var(--secondary); background: rgba(255, 0, 127, 0.15); color: #fff; box-shadow: 0 0 15px rgba(255, 0, 127, 0.4); }
 
-    .input-box { width: 100%; background: #080b17; border: 1.2px solid #1c264a; border-radius: 10px; padding: 10px 12px; color: #fff; font-size: 13px; margin-bottom: 10px; outline: none; transition: 0.2s; }
-    .input-box:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(0, 242, 254, 0.3); }
+    .input-box { width: 100%; background: #080b17; border: 1.5px solid #1c264a; border-radius: 12px; padding: 12px 14px; color: #fff; font-size: 14px; margin-bottom: 12px; outline: none; transition: 0.2s; }
+    .input-box:focus { border-color: var(--primary); box-shadow: 0 0 12px rgba(0, 242, 254, 0.3); }
 
-    .count-selector { display: flex; gap: 6px; margin-bottom: 12px; overflow-x: auto; scrollbar-width: none; }
+    .count-selector { display: flex; gap: 6px; margin-bottom: 14px; overflow-x: auto; scrollbar-width: none; }
     .count-selector::-webkit-scrollbar { display: none; }
-    .count-pill { flex: 1; min-width: 48px; padding: 6px 3px; text-align: center; border-radius: 8px; background: #080d1e; border: 1px solid #1c274e; color: #94a3b8; font-size: 11px; font-weight: 800; cursor: pointer; transition: 0.2s; white-space: nowrap; }
-    .count-pill.active { background: rgba(255, 0, 127, 0.2); border-color: var(--secondary); color: #fff; box-shadow: 0 0 12px rgba(255, 0, 127, 0.4); }
+    .count-pill { flex: 1; min-width: 55px; padding: 8px 4px; text-align: center; border-radius: 10px; background: #080d1e; border: 1px solid #1c274e; color: #94a3b8; font-size: 12px; font-weight: 800; cursor: pointer; transition: 0.2s; white-space: nowrap; }
+    .count-pill.active { background: rgba(255, 0, 127, 0.2); border-color: var(--secondary); color: #fff; box-shadow: 0 0 14px rgba(255, 0, 127, 0.4); }
 
-    .slide-carousel-container { position: relative; width: 100%; overflow: hidden; border-radius: 12px; margin-bottom: 10px; }
+    .slide-carousel-container { position: relative; width: 100%; overflow: hidden; border-radius: 14px; margin-bottom: 12px; }
     .slide-track { display: flex; transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1); width: 100%; }
-    .slide-item { min-width: 100%; box-sizing: border-box; padding: 1px; }
-    .slide-box { background: #070a18; border: 1.2px solid #ff007f; border-radius: 12px; padding: 10px; box-shadow: 0 0 15px rgba(255, 0, 127, 0.2); }
-    .slide-box-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; font-size: 10px; font-weight: 800; color: #ff85be; text-transform: uppercase; }
-    .slide-textarea { width: 100%; height: 80px; background: transparent; border: none; color: #fff; font-size: 13px; resize: none; outline: none; font-family: inherit; }
+    .slide-item { min-width: 100%; box-sizing: border-box; padding: 2px; }
+    .slide-box { background: #070a18; border: 1.5px solid #ff007f; border-radius: 14px; padding: 12px; box-shadow: 0 0 18px rgba(255, 0, 127, 0.2); }
+    .slide-box-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; font-size: 11px; font-weight: 800; color: #ff85be; text-transform: uppercase; }
+    .slide-textarea { width: 100%; height: 88px; background: transparent; border: none; color: #fff; font-size: 13.5px; resize: none; outline: none; font-family: inherit; }
 
-    .slide-nav-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-    .slide-nav-btn { background: #0b112c; border: 1px solid #1f2b57; color: #00f2fe; padding: 5px 10px; border-radius: 15px; font-size: 10px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 4px; }
+    .slide-nav-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .slide-nav-btn { background: #0b112c; border: 1px solid #1f2b57; color: #00f2fe; padding: 6px 12px; border-radius: 18px; font-size: 11px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 5px; }
     .slide-nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-    .slide-dots { display: flex; gap: 4px; }
-    .dot { width: 6px; height: 6px; border-radius: 50%; background: #1e2a52; transition: 0.2s; }
-    .dot.active { background: #00f2fe; box-shadow: 0 0 6px #00f2fe; width: 14px; border-radius: 6px; }
+    .slide-dots { display: flex; gap: 5px; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: #1e2a52; transition: 0.2s; }
+    .dot.active { background: #00f2fe; box-shadow: 0 0 8px #00f2fe; width: 16px; border-radius: 8px; }
 
-    .style-card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 8px; }
-    .style-card { background: #080d1e; border: 1.2px solid #1a254c; border-radius: 10px; padding: 10px 8px; cursor: pointer; text-align: left; transition: all 0.2s ease; }
-    .style-card.active { border-color: var(--primary); box-shadow: 0 0 12px rgba(0, 242, 254, 0.3); background: rgba(0, 242, 254, 0.08); }
-    .style-card h4 { font-size: 11.5px; font-weight: 800; margin-bottom: 2px; display: flex; align-items: center; gap: 4px; }
-    .style-card p { font-size: 9.5px; color: #7f91b8; line-height: 1.3; }
+    .style-card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 10px; }
+    .style-card { background: #080d1e; border: 1.5px solid #1a254c; border-radius: 12px; padding: 12px 10px; cursor: pointer; text-align: left; transition: all 0.2s ease; }
+    .style-card.active { border-color: var(--primary); box-shadow: 0 0 14px rgba(0, 242, 254, 0.35); background: rgba(0, 242, 254, 0.08); }
+    .style-card h4 { font-size: 12.5px; font-weight: 800; margin-bottom: 3px; display: flex; align-items: center; gap: 5px; }
+    .style-card p { font-size: 10.5px; color: #7f91b8; line-height: 1.35; }
 
-    .theme-scroll { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+    .theme-scroll { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; }
     .theme-scroll::-webkit-scrollbar { display: none; }
 
-    .theme-chip { padding: 7px 11px; border-radius: 20px; background: #0b0f20; border: 1px solid #1d274c; font-size: 10.5px; cursor: pointer; white-space: nowrap; color: #a1b0d8; font-weight: 600; user-select: none; transition: all 0.2s; }
-    .theme-chip.active { background: linear-gradient(90deg, var(--primary), #4facfe); color: #000; font-weight: 800; border-color: transparent; box-shadow: 0 0 10px rgba(0, 242, 254, 0.4); }
+    .theme-chip { padding: 8px 14px; border-radius: 25px; background: #0b0f20; border: 1px solid #1d274c; font-size: 11.5px; cursor: pointer; white-space: nowrap; color: #a1b0d8; font-weight: 600; user-select: none; transition: all 0.2s; }
+    .theme-chip.active { background: linear-gradient(90deg, var(--primary), #4facfe); color: #000; font-weight: 800; border-color: transparent; box-shadow: 0 0 12px rgba(0, 242, 254, 0.5); }
 
-    .btn-submit { width: 100%; padding: 11px; border-radius: 8px; border: none; background: linear-gradient(90deg, var(--secondary), #7928ca); color: #fff; font-size: 13px; font-weight: 800; cursor: pointer; letter-spacing: 0.6px; box-shadow: 0 0 16px rgba(255, 0, 127, 0.4); transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px; text-transform: uppercase; }
+    .btn-submit { width: 100%; padding: 13px; border-radius: 12px; border: none; background: linear-gradient(90deg, var(--secondary), #7928ca); color: #fff; font-size: 14px; font-weight: 800; cursor: pointer; letter-spacing: 0.8px; box-shadow: 0 0 18px rgba(255, 0, 127, 0.4); transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 7px; text-transform: uppercase; }
     .btn-submit:active { transform: scale(0.98); }
 
     #loading-modal { display: none; position: fixed; inset: 0; background: rgba(3, 4, 10, 0.92); z-index: 2000; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(10px); }
-    .terminal-box { width: 100%; max-width: 420px; background: #090c18; border: 1.5px solid var(--primary); border-radius: 14px; padding: 16px; box-shadow: 0 0 35px rgba(0, 242, 254, 0.3); font-family: monospace; }
-    .terminal-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #1a2346; padding-bottom: 6px; margin-bottom: 12px; font-size: 11px; color: var(--primary); }
-    .term-line { font-size: 11px; margin-bottom: 6px; color: #7f93c3; }
+    .terminal-box { width: 100%; max-width: 440px; background: #090c18; border: 1.5px solid var(--primary); border-radius: 16px; padding: 20px; box-shadow: 0 0 40px rgba(0, 242, 254, 0.3); font-family: monospace; }
+    .terminal-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #1a2346; padding-bottom: 8px; margin-bottom: 15px; font-size: 12px; color: var(--primary); }
+    .term-line { font-size: 12px; margin-bottom: 8px; color: #7f93c3; }
     .term-line.done { color: #00f2fe; }
     .term-line.active { color: var(--secondary); font-weight: bold; }
 
-    #result-view { display: none; background: rgba(0, 242, 254, 0.05); border: 1.5px dashed var(--primary); border-radius: 12px; padding: 12px; text-align: center; margin-top: 12px; }
-    .history-item { background: #080b18; border: 1px solid #1b2342; border-radius: 8px; padding: 10px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; font-size: 11px; }
+    #result-view { display: none; background: rgba(0, 242, 254, 0.05); border: 1.5px dashed var(--primary); border-radius: 16px; padding: 14px; text-align: center; margin-top: 14px; }
+    .history-item { background: #080b18; border: 1px solid #1b2342; border-radius: 10px; padding: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
 
-    /* App-Like Centered Bottom Branding */
-    .brand-footer-wrap {
-      margin-top: 16px;
-      margin-bottom: 8px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-    .insta-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      border-radius: 30px;
-      background: rgba(14, 18, 38, 0.9);
-      border: 1.2px solid var(--secondary);
-      color: #fff;
+    .bottom-credit {
+      text-align: center;
       font-size: 11px;
-      font-weight: 700;
-      text-decoration: none;
-      box-shadow: 0 0 14px rgba(255, 0, 127, 0.4);
-      transition: 0.2s;
+      color: #5c6e97;
+      margin-top: 18px;
     }
-    .insta-pill:active { transform: scale(0.96); }
 
-    .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(8, 10, 20, 0.96); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 8px 0; backdrop-filter: blur(15px); z-index: 100; height: 55px; }
-    .nav-tab { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5f709c; text-decoration: none; font-size: 10px; cursor: pointer; flex: 1; }
+    /* Original Floating Instagram Pill */
+    .insta-float { 
+      position: fixed; 
+      bottom: 75px; 
+      right: 15px; 
+      background: rgba(12, 16, 32, 0.92); 
+      border: 1.5px solid var(--secondary); 
+      border-radius: 50px; 
+      padding: 7px 14px; 
+      display: flex; 
+      align-items: center; 
+      gap: 6px; 
+      text-decoration: none; 
+      color: #fff; 
+      font-size: 12px; 
+      font-weight: 700; 
+      box-shadow: 0 0 16px rgba(255, 0, 127, 0.5); 
+      z-index: 99; 
+      animation: holoAnim 3s infinite ease-in-out alternate; 
+    }
+    @keyframes holoAnim { 0% { transform: translateY(0); } 100% { transform: translateY(-5px); } }
+
+    .nav-bar { 
+      position: fixed; 
+      bottom: 0; 
+      left: 0; 
+      right: 0; 
+      background: rgba(8, 10, 20, 0.96); 
+      border-top: 1px solid var(--border); 
+      display: flex; 
+      justify-content: space-around; 
+      padding: 8px 0; 
+      backdrop-filter: blur(15px); 
+      z-index: 100; 
+      height: 56px; 
+    }
+    .nav-tab { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #5f709c; text-decoration: none; font-size: 11px; cursor: pointer; flex: 1; }
     .nav-tab.active { color: var(--primary); text-shadow: 0 0 8px var(--primary); }
-    .nav-tab i { font-size: 15px; }
+    .nav-tab i { font-size: 16px; }
   </style>
 </head>
 <body>
@@ -168,7 +225,7 @@
 
   <header>
     <div class="header-left">
-      <div class="brand-badge"><i class="fa-solid fa-bolt" style="color:var(--primary); font-size:8px;"></i><span>Story Engine Active</span></div>
+      <div class="brand-badge"><i class="fa-solid fa-bolt" style="color:var(--primary); font-size:9px;"></i><span>Story Engine Active</span></div>
       <h1>CYBERWISH VIP</h1>
     </div>
     <button type="button" class="lang-btn" onclick="toggleNoticeLanguage()">
@@ -178,14 +235,17 @@
 
   <div class="container">
 
-    <!-- Perfectly Compact Sleek Header Banner -->
+    <!-- Clean Header Banner -->
     <div class="showcase-banner" id="showcase-box">
       <div class="showcase-header">
-        <span class="badge-official"><i class="fa-solid fa-gem"></i> <span id="sc-tag">3D VIP Story Studio</span></span>
+        <span class="badge-official"><i class="fa-solid fa-gem"></i> <span id="sc-tag">VIP Engine</span></span>
         <span class="free-pill">100% Free</span>
       </div>
-      <div id="sc-line-1" style="margin-bottom: 2px;">🎁 <strong>Create 3D digital surprise cards</strong> with YouTube background music & runaway 'No' button.</div>
-      <div id="sc-line-2" style="color: #94a3b8; font-size: 10px;">💡 Other sites charge <strong>₹499 - ₹1,499</strong>. CyberWish VIP offers all elite features completely free!</div>
+      <div class="quick-bullet-list" id="sc-bullet-list">
+        <div class="q-item"><i class="fa-solid fa-sparkles" style="color:#00f2fe;"></i> <span><strong>What is it?</strong> 3D surprise story webpages with YouTube music & runaway 'No' button.</span></div>
+        <div class="q-item"><i class="fa-solid fa-money-bill-wave" style="color:#ff007f;"></i> <span><strong>Market Price:</strong> Other portals charge <strong>₹499 - ₹1,499</strong>.</span></div>
+        <div class="q-item"><i class="fa-solid fa-gift" style="color:#25D366;"></i> <span><strong>CyberWish:</strong> All VIP features are <span class="free-pill">100% FREE</span>!</span></div>
+      </div>
     </div>
 
     <!-- Auth View -->
@@ -217,7 +277,7 @@
             <button class="cat-btn" onclick="toggleCategory(this, 'Happy Anniversary 💍')"><i class="fa-solid fa-ring"></i> Anniversary</button>
             <button class="cat-btn" onclick="toggleCategory(this, 'Missing You Deeply 🥺')"><i class="fa-solid fa-cloud-moon"></i> Miss You</button>
           </div>
-          <input type="text" id="custom-cat-val" class="input-box" placeholder="Type your custom category..." style="display:none; margin-top: 8px;">
+          <input type="text" id="custom-cat-val" class="input-box" placeholder="Type your custom category..." style="display:none; margin-top: 10px;">
         </div>
 
         <div class="card">
@@ -280,7 +340,7 @@
             </div>
           </div>
 
-          <div class="section-title" style="margin-top: 10px;"><span>4. Multi-Select Floating FX:</span></div>
+          <div class="section-title" style="margin-top: 12px;"><span>4. Multi-Select Floating FX:</span></div>
           <div class="theme-scroll" id="fx-row">
             <div class="theme-chip active" onclick="toggleMultiFX(this, 'hearts')">💖 3D Hearts</div>
             <div class="theme-chip" onclick="toggleMultiFX(this, 'galaxy')">🌌 Cosmic Galaxy</div>
@@ -289,9 +349,9 @@
             <div class="theme-chip" onclick="toggleMultiFX(this, 'gold')">✨ Fairy Dust</div>
             <div class="theme-chip" onclick="toggleMultiFX(this, 'butterflies')">🦋 Butterflies</div>
           </div>
-          <input type="text" id="custom-emojis" class="input-box" placeholder="Custom floating emojis (e.g. 🧸 💍 🌹) [Optional]" style="margin-top: 8px;">
+          <input type="text" id="custom-emojis" class="input-box" placeholder="Custom floating emojis (e.g. 🧸 💍 🌹) [Optional]" style="margin-top: 10px;">
 
-          <div class="section-title" style="margin-top: 10px;"><span>5. Motion Dynamics:</span></div>
+          <div class="section-title" style="margin-top: 12px;"><span>5. Motion Dynamics:</span></div>
           <div class="theme-scroll" id="motion-row">
             <div class="theme-chip active" onclick="toggleMotion(this, 'up')">⬆️ Upward Drift</div>
             <div class="theme-chip" onclick="toggleMotion(this, 'down')">🌧️ Falling Rain</div>
@@ -301,33 +361,33 @@
             <div class="theme-chip" onclick="toggleMotion(this, 'orbit')">🪐 Floating Orbit</div>
           </div>
 
-          <div class="section-title" style="margin-top: 10px;"><span>6. Background Audio / YouTube:</span></div>
+          <div class="section-title" style="margin-top: 12px;"><span>6. Background Audio / YouTube:</span></div>
           <div class="theme-scroll" id="bgm-row">
-            <div class="theme-chip active" onclick="toggleBGM(this, 'piano')">🎹 Piano</div>
-            <div class="theme-chip" onclick="toggleBGM(this, 'lofi')">🎧 Lo-Fi</div>
-            <div class="theme-chip" onclick="toggleBGM(this, 'synth')">⚡ Synth</div>
+            <div class="theme-chip active" onclick="toggleBGM(this, 'piano')">🎹 Romantic Piano</div>
+            <div class="theme-chip" onclick="toggleBGM(this, 'lofi')">🎧 Lo-Fi Chill</div>
+            <div class="theme-chip" onclick="toggleBGM(this, 'synth')">⚡ Cyber Synth</div>
             <div class="theme-chip" onclick="toggleBGM(this, 'none')">🔇 Mute</div>
           </div>
           
-          <div style="margin-top: 8px;">
+          <div style="margin-top: 10px;">
             <input type="text" id="youtube-url" class="input-box" placeholder="Paste YouTube song link (Optional)">
-            <p style="font-size: 10px; color: #ff85be; margin-top: -6px; margin-bottom: 10px;">
+            <p style="font-size: 11px; color: #ff85be; margin-top: -6px; margin-bottom: 12px;">
               <i class="fa-brands fa-youtube"></i> YouTube video will be hidden, only romantic audio will play!
             </p>
           </div>
 
-          <button class="btn-submit" style="margin-top: 10px;" onclick="startBuildProcess()">
+          <button class="btn-submit" style="margin-top: 14px;" onclick="startBuildProcess()">
             <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Ultra-Short Link
           </button>
 
           <div id="result-view">
-            <p style="font-size:11.5px; color:var(--primary); margin-bottom:8px;">✔ Ultra-Short Secret Link Ready!</p>
-            <input type="text" id="final-url-box" class="input-box" readonly style="text-align:center; font-size:12.5px; font-weight:bold; color:#00f2fe;">
+            <p style="font-size:12px; color:var(--primary); margin-bottom:8px;">✔ Ultra-Short Secret Link Ready!</p>
+            <input type="text" id="final-url-box" class="input-box" readonly style="text-align:center; font-size:13px; font-weight:bold; color:#00f2fe;">
             <div style="display:flex; gap:8px;">
-              <button class="btn-submit" style="flex:1; background:linear-gradient(90deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); font-size:11px;" onclick="shareDirectLink()">
+              <button class="btn-submit" style="flex:1; background:linear-gradient(90deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); font-size:12px;" onclick="shareDirectLink()">
                 <i class="fa-brands fa-instagram"></i> Instagram DM
               </button>
-              <button class="btn-submit" style="flex:1; background:#11172f; border:1px solid var(--primary); font-size:11px;" onclick="copyLink()">
+              <button class="btn-submit" style="flex:1; background:#11172f; border:1px solid var(--primary); font-size:12px;" onclick="copyLink()">
                 <i class="fa-regular fa-copy"></i> Copy Link
               </button>
             </div>
@@ -339,38 +399,31 @@
       <div id="tab-history" style="display: none;">
         <div class="card">
           <div class="section-title"><span>📜 History</span></div>
-          <div id="history-list"><p style="font-size:11px; color:#6b7ba4;">Fetching records...</p></div>
+          <div id="history-list"><p style="font-size:12px; color:#6b7ba4;">Fetching records...</p></div>
         </div>
       </div>
 
       <div id="tab-profile" style="display: none;">
         <div class="card">
           <div class="section-title"><span>💬 Connect with Developer</span></div>
-          <p style="font-size:11px; color:#8ea0cb; margin-bottom:8px;">Have an idea or need custom features? Send a direct message to developer:</p>
-          <textarea id="suggest-text" class="input-box" style="height:70px; resize:none;" placeholder="Write your message or idea here..."></textarea>
+          <p style="font-size:12px; color:#8ea0cb; margin-bottom:10px;">Have an idea or need custom features? Send a direct message to developer:</p>
+          <textarea id="suggest-text" class="input-box" style="height:85px; resize:none;" placeholder="Write your message or idea here..."></textarea>
           <button class="btn-submit" onclick="submitSuggestion()"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
         </div>
 
         <div class="card" style="text-align: center;">
           <div class="section-title" style="justify-content:center;"><span>👤 Your Account</span></div>
-          <p style="font-size:15px; color:#00f2fe; font-weight:800; margin-bottom:12px;" id="profile-display-name"></p>
+          <p style="font-size:16px; color:#00f2fe; font-weight:800; margin-bottom:14px;" id="profile-display-name"></p>
           <button class="btn-submit" style="background:#220914; border:1.5px solid #ff0055;" onclick="logout()">
             <i class="fa-solid fa-right-from-bracket"></i> LOG OUT
           </button>
         </div>
       </div>
 
-    </div>
-
-    <!-- Centered Aesthetic Follow & Credit Bar -->
-    <div class="brand-footer-wrap">
-      <a href="https://instagram.com/madxninja_" target="_blank" class="insta-pill">
-        <i class="fa-brands fa-instagram" style="color:var(--secondary); font-size:13px;"></i>
-        <span>Follow @madxninja_</span>
-      </a>
-      <div style="font-size:10px; color:#5c6e97;">
+      <div class="bottom-credit">
         Designed & Developed with ❤️ by <strong>@madxninja_</strong>
       </div>
+
     </div>
 
   </div>
@@ -387,6 +440,12 @@
       <div class="term-line" id="term-4">> [4/4] Short surprise link published live!</div>
     </div>
   </div>
+
+  <!-- Original Floating Instagram Badge -->
+  <a href="https://instagram.com/madxninja_" target="_blank" class="insta-float">
+    <i class="fa-brands fa-instagram" style="color:var(--secondary);"></i>
+    <span>Follow @madxninja_</span>
+  </a>
 
   <div class="nav-bar" id="bottom-nav" style="display:none;">
     <div class="nav-tab active" onclick="switchTab('create')"><i class="fa-solid fa-wand-magic-sparkles"></i> Create</div>
@@ -408,15 +467,21 @@
     const noticeContent = {
       en: {
         indicator: 'हिन्दी',
-        tag: '3D VIP Story Studio',
-        line1: '🎁 <strong>Create 3D digital surprise cards</strong> with YouTube background music & runaway \'No\' button.',
-        line2: '💡 Other sites charge <strong>₹499 - ₹1,499</strong>. CyberWish VIP offers all elite features completely free!'
+        tag: 'VIP Engine',
+        bullets: `
+          <div class="q-item"><i class="fa-solid fa-sparkles" style="color:#00f2fe;"></i> <span><strong>What is it?</strong> 3D surprise story webpages with YouTube music & runaway 'No' button.</span></div>
+          <div class="q-item"><i class="fa-solid fa-money-bill-wave" style="color:#ff007f;"></i> <span><strong>Market Price:</strong> Other portals charge <strong>₹499 - ₹1,499</strong>.</span></div>
+          <div class="q-item"><i class="fa-solid fa-gift" style="color:#25D366;"></i> <span><strong>CyberWish:</strong> All VIP features are <span class="free-pill">100% FREE</span>!</span></div>
+        `
       },
       hi: {
         indicator: 'English',
-        tag: '3D VIP स्टोरी स्टूडियो',
-        line1: '🎁 <strong>3D डिजिटल सरप्राइज कार्ड्स बनाएँ</strong> यूट्यूब बैकग्राउंड म्यूजिक और भागने वाले \'No\' बटन के साथ।',
-        line2: '💡 दूसरी साइट्स <strong>₹499 से ₹1,499</strong> लेती हैं। CyberWish VIP पर यह सब 100% मुफ़्त है!'
+        tag: 'VIP इंजन',
+        bullets: `
+          <div class="q-item"><i class="fa-solid fa-sparkles" style="color:#00f2fe;"></i> <span><strong>यह क्या है?</strong> मनपसंद यूट्यूब गाने और भागने वाले 'No' गेम के साथ 3D डिजिटल सरप्राइज पेज बनाएँ।</span></div>
+          <div class="q-item"><i class="fa-solid fa-money-bill-wave" style="color:#ff007f;"></i> <span><strong>बाज़ार का रेट:</strong> दूसरी कमर्शियल साइट्स इसके <strong>₹499 से ₹1,499</strong> तक लेती हैं।</span></div>
+          <div class="q-item"><i class="fa-solid fa-gift" style="color:#25D366;"></i> <span><strong>CyberWish:</strong> यह पूरा VIP अनुभव आपके लिए <span class="free-pill">100% मुफ़्त (FREE)</span> है!</span></div>
+        `
       }
     };
 
@@ -425,8 +490,7 @@
       const c = noticeContent[currentNoticeLang];
       document.getElementById('lang-indicator').innerText = c.indicator;
       document.getElementById('sc-tag').innerText = c.tag;
-      document.getElementById('sc-line-1').innerHTML = c.line1;
-      document.getElementById('sc-line-2').innerHTML = c.line2;
+      document.getElementById('sc-bullet-list').innerHTML = c.bullets;
     }
 
     let authMode = 'login';
@@ -762,7 +826,7 @@
       const box = document.getElementById('history-list');
       db.ref('history/' + currentUser).on('value', snapshot => {
         if (!snapshot.exists()) {
-          box.innerHTML = '<p style="font-size:11px; color:#6b7ba4;">No surprises found in history.</p>';
+          box.innerHTML = '<p style="font-size:12px; color:#6b7ba4;">No surprises found in history.</p>';
           return;
         }
         const data = snapshot.val();
@@ -771,9 +835,9 @@
           <div class="history-item">
             <div>
               <strong>${h.name}</strong> (${h.cat})<br>
-              <span style="color:#5f709c; font-size:9.5px;">${new Date(h.timestamp).toLocaleDateString()}</span>
+              <span style="color:#5f709c; font-size:10px;">${new Date(h.timestamp).toLocaleDateString()}</span>
             </div>
-            <button style="padding:5px 10px; background:#1b2346; color:#00f2fe; border:none; border-radius:6px; cursor:pointer;" onclick="navigator.clipboard.writeText('${h.url}'); alert('Link copied to clipboard!');">Copy</button>
+            <button style="padding:6px 12px; background:#1b2346; color:#00f2fe; border:none; border-radius:6px; cursor:pointer;" onclick="navigator.clipboard.writeText('${h.url}'); alert('Link copied to clipboard!');">Copy</button>
           </div>
         `).join('');
       });
