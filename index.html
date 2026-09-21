@@ -18,7 +18,14 @@
       --card: rgba(14, 18, 36, 0.88);
       --border: rgba(0, 242, 254, 0.25);
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      -webkit-tap-highlight-color: transparent !important;
+      outline: none !important;
+    }
     body { background: var(--bg); color: #fff; min-height: 100vh; padding-bottom: 90px; overflow-x: hidden; }
 
     .glow-blob-1 { position: fixed; width: 350px; height: 350px; background: var(--primary); filter: blur(160px); border-radius: 50%; top: -50px; left: -50px; opacity: 0.2; pointer-events: none; z-index: 0; }
@@ -39,20 +46,54 @@
     .card { background: var(--card); border: 1.5px solid var(--border); border-radius: 20px; padding: 20px; margin-bottom: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); backdrop-filter: blur(15px); }
     .section-title { font-size: 13px; font-weight: 700; color: var(--primary); margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; text-transform: uppercase; letter-spacing: 1px; }
 
-    .btn-pill-action { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 30px; background: rgba(255, 0, 127, 0.12); border: 1px solid var(--secondary); color: #ff85be; font-size: 11px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.25s ease; box-shadow: 0 0 10px rgba(255, 0, 127, 0.2); }
-    .btn-pill-action:hover, .btn-pill-action:active { background: var(--secondary); color: #fff; box-shadow: 0 0 18px rgba(255, 0, 127, 0.6); transform: scale(1.03); }
+    .btn-pill-action { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 30px; background: rgba(255, 0, 127, 0.12); border: 1px solid var(--secondary); color: #ff85be; font-size: 11px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.25s ease; }
+    .btn-pill-action:active { background: var(--secondary); color: #fff; transform: scale(1.03); }
 
     .category-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .cat-btn { background: #0b0f20; border: 1px solid #1b2447; padding: 12px 10px; border-radius: 12px; color: #cbd5e1; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.2s; }
+    .cat-btn { background: #0b0f20; border: 1px solid #1b2447; padding: 12px 10px; border-radius: 12px; color: #cbd5e1; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.2s; user-select: none; }
     .cat-btn.active { border-color: var(--secondary); background: rgba(255, 0, 127, 0.15); color: #fff; box-shadow: 0 0 15px rgba(255, 0, 127, 0.4); }
 
     .input-box { width: 100%; background: #080b17; border: 1.5px solid #1c264a; border-radius: 12px; padding: 12px 14px; color: #fff; font-size: 14px; margin-bottom: 12px; outline: none; transition: 0.2s; }
     .input-box:focus { border-color: var(--primary); box-shadow: 0 0 12px rgba(0, 242, 254, 0.3); }
     textarea.input-box { height: 95px; resize: none; }
 
-    .theme-scroll { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; }
-    .theme-chip { padding: 9px 15px; border-radius: 30px; background: #0b0f20; border: 1px solid #1d274c; font-size: 12px; cursor: pointer; white-space: nowrap; color: #a1b0d8; font-weight: 600; }
-    .theme-chip.active { background: linear-gradient(90deg, var(--primary), #4facfe); color: #000; font-weight: 800; border-color: transparent; box-shadow: 0 0 15px rgba(0, 242, 254, 0.5); }
+    /* Visual Universe Cards */
+    .style-card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 12px; }
+    .style-card { background: #080d1e; border: 1.5px solid #1a254c; border-radius: 14px; padding: 14px 12px; cursor: pointer; text-align: left; transition: all 0.25s ease; position: relative; overflow: hidden; }
+    .style-card.active { border-color: var(--primary); box-shadow: 0 0 18px rgba(0, 242, 254, 0.35); background: rgba(0, 242, 254, 0.08); }
+    .style-card h4 { font-size: 13px; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+    .style-card p { font-size: 11px; color: #7f91b8; line-height: 1.4; }
+
+    .theme-scroll { 
+      display: flex; 
+      gap: 8px; 
+      overflow-x: auto; 
+      padding-bottom: 6px; 
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .theme-scroll::-webkit-scrollbar { display: none; }
+
+    .theme-chip { 
+      padding: 9px 15px; 
+      border-radius: 30px; 
+      background: #0b0f20; 
+      border: 1px solid #1d274c; 
+      font-size: 12px; 
+      cursor: pointer; 
+      white-space: nowrap; 
+      color: #a1b0d8; 
+      font-weight: 600; 
+      user-select: none;
+      transition: all 0.2s;
+    }
+    .theme-chip.active { 
+      background: linear-gradient(90deg, var(--primary), #4facfe); 
+      color: #000; 
+      font-weight: 800; 
+      border-color: transparent; 
+      box-shadow: 0 0 14px rgba(0, 242, 254, 0.5); 
+    }
 
     .btn-submit { width: 100%; padding: 14px; border-radius: 12px; border: none; background: linear-gradient(90deg, var(--secondary), #7928ca); color: #fff; font-size: 15px; font-weight: 700; cursor: pointer; letter-spacing: 1px; box-shadow: 0 0 20px rgba(255, 0, 127, 0.4); transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; text-transform: uppercase; }
     .btn-submit:active { transform: scale(0.98); }
@@ -88,7 +129,6 @@
 
   <div class="container">
 
-    <!-- Auth Screen -->
     <div id="auth-screen">
       <div class="auth-tabs">
         <div class="auth-tab active" id="tab-login-btn" onclick="setAuthMode('login')">Sign In</div>
@@ -99,10 +139,8 @@
       <button class="btn-submit" id="auth-submit-btn" onclick="handleAuth()"><i class="fa-solid fa-lock"></i> Log In</button>
     </div>
 
-    <!-- Main Workspace -->
     <div id="main-workspace" style="display: none;">
 
-      <!-- Tab: Create -->
       <div id="tab-create">
         <div class="card">
           <div class="section-title">
@@ -110,46 +148,73 @@
             <button type="button" class="btn-pill-action" onclick="triggerCustomCat()"><i class="fa-solid fa-pen-fancy"></i> Custom Category</button>
           </div>
           <div class="category-grid" id="cat-container">
-            <button class="cat-btn active" onclick="setCategory(this, 'Make Up & Apology 🥺')"><i class="fa-solid fa-face-pleading"></i> Sorry / Patch-up</button>
-            <button class="cat-btn" onclick="setCategory(this, 'Happy Birthday 🎂')"><i class="fa-solid fa-cake-candles"></i> Birthday Wish</button>
-            <button class="cat-btn" onclick="setCategory(this, 'Love & Proposal ❤️')"><i class="fa-solid fa-heart"></i> Proposal Special</button>
-            <button class="cat-btn" onclick="setCategory(this, 'Best Friends Forever 🤝')"><i class="fa-solid fa-user-group"></i> Friendship</button>
-            <button class="cat-btn" onclick="setCategory(this, 'Happy Anniversary 💍')"><i class="fa-solid fa-ring"></i> Anniversary</button>
-            <button class="cat-btn" onclick="setCategory(this, 'Missing You Deeply 🥺')"><i class="fa-solid fa-cloud-moon"></i> Miss You</button>
+            <button class="cat-btn active" onclick="toggleCategory(this, 'Make Up & Apology 🥺')"><i class="fa-solid fa-face-pleading"></i> Sorry / Patch-up</button>
+            <button class="cat-btn" onclick="toggleCategory(this, 'Happy Birthday 🎂')"><i class="fa-solid fa-cake-candles"></i> Birthday Wish</button>
+            <button class="cat-btn" onclick="toggleCategory(this, 'Love & Proposal ❤️')"><i class="fa-solid fa-heart"></i> Proposal Special</button>
+            <button class="cat-btn" onclick="toggleCategory(this, 'Best Friends Forever 🤝')"><i class="fa-solid fa-user-group"></i> Friendship</button>
+            <button class="cat-btn" onclick="toggleCategory(this, 'Happy Anniversary 💍')"><i class="fa-solid fa-ring"></i> Anniversary</button>
+            <button class="cat-btn" onclick="toggleCategory(this, 'Missing You Deeply 🥺')"><i class="fa-solid fa-cloud-moon"></i> Miss You</button>
           </div>
           <input type="text" id="custom-cat-val" class="input-box" placeholder="Type your custom category..." style="display:none; margin-top: 10px;">
         </div>
 
         <div class="card">
           <div class="section-title">
-            <span>2. Personalize Message</span>
-            <button type="button" class="btn-pill-action" onclick="suggestShayari()"><i class="fa-solid fa-dice-d20"></i> Auto-Suggest Lines</button>
+            <span>2. Choose Surprise Universe Style</span>
           </div>
+          <div class="style-card-grid">
+            <div class="style-card active" onclick="selectUniverseCard(this, 'love')">
+              <h4 style="color:#ff007f;"><i class="fa-solid fa-heart"></i> Crimson Velvet</h4>
+              <p>Glowing hearts, warm velvet background & rose aura.</p>
+            </div>
+            <div class="style-card" onclick="selectUniverseCard(this, 'galaxy')">
+              <h4 style="color:#b845ff;"><i class="fa-solid fa-meteor"></i> Deep Cosmic</h4>
+              <p>Infinite galaxy, aurora stars & shooting meteors.</p>
+            </div>
+            <div class="style-card" onclick="selectUniverseCard(this, 'cyber')">
+              <h4 style="color:#00f2fe;"><i class="fa-solid fa-vr-cardboard"></i> Neon Matrix</h4>
+              <p>Cyberpunk grids, electric cyan lasers & glitch vibes.</p>
+            </div>
+            <div class="style-card" onclick="selectUniverseCard(this, 'gold')">
+              <h4 style="color:#ffd700;"><i class="fa-solid fa-crown"></i> Obsidian Luxury</h4>
+              <p>VIP royal gold dust, black crystal & champagne glow.</p>
+            </div>
+            <div class="style-card" onclick="selectUniverseCard(this, 'fairy')">
+              <h4 style="color:#ff9ff3;"><i class="fa-solid fa-wand-magic-sparkles"></i> Fairy Garden</h4>
+              <p>Magical floating butterflies, fireflies & soft petals.</p>
+            </div>
+            <div class="style-card" onclick="selectUniverseCard(this, 'clean')">
+              <h4 style="color:#a8b2d1;"><i class="fa-solid fa-moon"></i> Midnight Minimal</h4>
+              <p>Modern aesthetic, elegant typography & smooth stars.</p>
+            </div>
+          </div>
+
+          <div class="section-title" style="margin-top: 12px;"><span>3. Message & Receiver</span><button type="button" class="btn-pill-action" onclick="suggestShayari()"><i class="fa-solid fa-dice-d20"></i> Auto-Lines</button></div>
           <input type="text" id="target-name" class="input-box" placeholder="Who is this for? (Name / Nickname)">
           <textarea id="target-msg" class="input-box" placeholder="Write your heartfelt message or poetry here..."></textarea>
           
           <input type="text" id="target-photo" class="input-box" placeholder="Direct photo URL (Optional)">
           <input type="password" id="target-pin" class="input-box" maxlength="4" placeholder="4-Digit secret passcode lock (Optional)">
-          
-          <div class="section-title" style="margin-top: 5px;"><span>3. Visual Theme:</span></div>
-          <div class="theme-scroll">
-            <div class="theme-chip active" onclick="setTheme(this, 'love')">❤️ Crimson Love</div>
-            <div class="theme-chip" onclick="setTheme(this, 'galaxy')">🌌 Deep Galaxy</div>
-            <div class="theme-chip" onclick="setTheme(this, 'cyber')">⚡ Cyberpunk</div>
-            <div class="theme-chip" onclick="setTheme(this, 'gold')">✨ Obsidian Gold</div>
+
+          <div class="section-title" style="margin-top: 12px;"><span>4. Multi-Select Floating FX:</span></div>
+          <div class="theme-scroll" id="fx-row">
+            <div class="theme-chip active" onclick="toggleMultiFX(this, 'hearts')">💖 3D Hearts</div>
+            <div class="theme-chip" onclick="toggleMultiFX(this, 'galaxy')">🌌 Cosmic Galaxy</div>
+            <div class="theme-chip" onclick="toggleMultiFX(this, 'sparks')">⚡ Neon Matrix</div>
+            <div class="theme-chip" onclick="toggleMultiFX(this, 'petals')">🌸 Rose Petals</div>
+            <div class="theme-chip" onclick="toggleMultiFX(this, 'gold')">✨ Fairy Dust</div>
+            <div class="theme-chip" onclick="toggleMultiFX(this, 'butterflies')">🦋 Butterflies</div>
           </div>
 
-          <div class="section-title" style="margin-top: 10px;"><span>4. Background Universe FX:</span></div>
-          <div class="theme-scroll">
-            <div class="theme-chip active" onclick="setAnim(this, 'hearts')">💖 3D Floating Hearts</div>
-            <div class="theme-chip" onclick="setAnim(this, 'galaxy')">🌌 Cosmic Galaxy & Stars</div>
-            <div class="theme-chip" onclick="setAnim(this, 'sparks')">⚡ Neon Matrix Sparks</div>
-            <div class="theme-chip" onclick="setAnim(this, 'petals')">🌸 Rose Blossom Petals</div>
-            <div class="theme-chip" onclick="setAnim(this, 'gold')">✨ Golden Fairy Dust</div>
-            <div class="theme-chip" onclick="setAnim(this, 'butterflies')">🦋 Glowing Butterfly Aura</div>
+          <div class="section-title" style="margin-top: 12px;"><span>5. Background Audio Tune:</span></div>
+          <div class="theme-scroll" id="bgm-row">
+            <div class="theme-chip active" onclick="toggleBGM(this, 'piano')">🎹 Romantic Piano</div>
+            <div class="theme-chip" onclick="toggleBGM(this, 'lofi')">🎧 Lo-Fi Chill</div>
+            <div class="theme-chip" onclick="toggleBGM(this, 'synth')">⚡ Cyber Synth</div>
+            <div class="theme-chip" onclick="toggleBGM(this, 'none')">🔇 Mute</div>
           </div>
 
-          <button class="btn-submit" style="margin-top: 18px;" onclick="startBuildProcess()">
+          <button class="btn-submit" style="margin-top: 20px;" onclick="startBuildProcess()">
             <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Surprise Link
           </button>
 
@@ -168,7 +233,6 @@
         </div>
       </div>
 
-      <!-- Tab: History -->
       <div id="tab-history" style="display: none;">
         <div class="card">
           <div class="section-title"><span>📜 History</span></div>
@@ -176,7 +240,6 @@
         </div>
       </div>
 
-      <!-- Tab: Connect with Developer -->
       <div id="tab-profile" style="display: none;">
         <div class="card">
           <div class="section-title"><span>💬 Connect with Developer</span></div>
@@ -197,7 +260,6 @@
     </div>
   </div>
 
-  <!-- Terminal Loading Modal -->
   <div id="loading-modal">
     <div class="terminal-box">
       <div class="terminal-header">
@@ -205,20 +267,18 @@
         <i class="fa-solid fa-terminal"></i>
       </div>
       <div class="term-line" id="term-1">> [1/4] Connecting to Firebase Cloud...</div>
-      <div class="term-line" id="term-2">> [2/4] Compiling universe shaders & particle FX...</div>
-      <div class="term-line" id="term-3">> [3/4] Locking security passcode & interactive triggers...</div>
+      <div class="term-line" id="term-2">> [2/4] Compiling universe visual shaders & FX...</div>
+      <div class="term-line" id="term-3">> [3/4] Locking security passcode & audio synthesis...</div>
       <div class="term-line" id="term-4">> [4/4] Finalizing clean URL & publishing live...</div>
     </div>
   </div>
 
-  <!-- Bottom Nav -->
   <div class="nav-bar" id="bottom-nav" style="display:none;">
     <div class="nav-tab active" onclick="switchTab('create')"><i class="fa-solid fa-wand-magic-sparkles"></i> Create</div>
     <div class="nav-tab" onclick="switchTab('history')"><i class="fa-solid fa-clock-rotate-left"></i> History</div>
     <div class="nav-tab" onclick="switchTab('profile')"><i class="fa-solid fa-user-astronaut"></i> Me</div>
   </div>
 
-  <!-- Instagram Hologram -->
   <a href="https://instagram.com/madxninja_" target="_blank" class="insta-float">
     <i class="fa-brands fa-instagram" style="color:var(--secondary);"></i>
     <span>Follow @madxninja_</span>
@@ -238,7 +298,8 @@
     let currentUser = localStorage.getItem('cw_user') || null;
     let activeCat = 'Make Up & Apology 🥺';
     let activeTheme = 'love';
-    let activeAnim = 'hearts';
+    let selectedFX = ['hearts'];
+    let selectedBGM = 'piano';
 
     const shayariVault = {
       'Make Up & Apology 🥺': [
@@ -313,10 +374,15 @@
       location.reload();
     }
 
-    function setCategory(el, cat) {
-      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-      el.classList.add('active');
-      activeCat = cat;
+    function toggleCategory(el, cat) {
+      if (el.classList.contains('active')) {
+        el.classList.remove('active');
+        activeCat = '';
+      } else {
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+        el.classList.add('active');
+        activeCat = cat;
+      }
       document.getElementById('custom-cat-val').style.display = 'none';
     }
 
@@ -328,16 +394,26 @@
       activeCat = 'custom';
     }
 
-    function setTheme(el, th) {
-      document.querySelectorAll('.theme-scroll:nth-of-type(1) .theme-chip').forEach(c => c.classList.remove('active'));
+    function selectUniverseCard(el, themeName) {
+      document.querySelectorAll('.style-card').forEach(c => c.classList.remove('active'));
       el.classList.add('active');
-      activeTheme = th;
+      activeTheme = themeName;
     }
 
-    function setAnim(el, anim) {
-      document.querySelectorAll('.theme-scroll:nth-of-type(2) .theme-chip').forEach(c => c.classList.remove('active'));
+    function toggleMultiFX(el, fxName) {
+      if (el.classList.contains('active')) {
+        el.classList.remove('active');
+        selectedFX = selectedFX.filter(f => f !== fxName);
+      } else {
+        el.classList.add('active');
+        if (!selectedFX.includes(fxName)) selectedFX.push(fxName);
+      }
+    }
+
+    function toggleBGM(el, bgmName) {
+      document.querySelectorAll('#bgm-row .theme-chip').forEach(c => c.classList.remove('active'));
       el.classList.add('active');
-      activeAnim = anim;
+      selectedBGM = bgmName;
     }
 
     function suggestShayari() {
@@ -349,7 +425,7 @@
     function startBuildProcess() {
       const name = document.getElementById('target-name').value.trim() || 'My Special One';
       const customCat = document.getElementById('custom-cat-val').value.trim();
-      const finalCat = (activeCat === 'custom' && customCat) ? customCat : activeCat;
+      const finalCat = (activeCat === 'custom' && customCat) ? customCat : (activeCat || 'Special Surprise ❤️');
       const msg = document.getElementById('target-msg').value.trim() || 'You mean the absolute world to me. Keep shining and smiling always!';
       const photo = document.getElementById('target-photo').value.trim();
       const pin = document.getElementById('target-pin').value.trim();
@@ -382,7 +458,8 @@
           photo: photo,
           pin: pin,
           theme: activeTheme,
-          anim: activeAnim,
+          fxList: selectedFX.length ? selectedFX : ['hearts'],
+          bgm: selectedBGM,
           createdBy: currentUser,
           createdAt: Date.now()
         };
