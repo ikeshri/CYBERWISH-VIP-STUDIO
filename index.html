@@ -28,113 +28,104 @@
     }
     body { background: var(--bg); color: #fff; min-height: 100vh; padding-bottom: 90px; overflow-x: hidden; }
 
-    .glow-blob-1 { position: fixed; width: 350px; height: 350px; background: var(--primary); filter: blur(160px); border-radius: 50%; top: -50px; left: -50px; opacity: 0.2; pointer-events: none; z-index: 0; }
-    .glow-blob-2 { position: fixed; width: 350px; height: 350px; background: var(--secondary); filter: blur(160px); border-radius: 50%; bottom: -50px; right: -50px; opacity: 0.2; pointer-events: none; z-index: 0; }
+    .glow-blob-1 { position: fixed; width: 320px; height: 320px; background: var(--primary); filter: blur(160px); border-radius: 50%; top: -50px; left: -50px; opacity: 0.2; pointer-events: none; z-index: 0; }
+    .glow-blob-2 { position: fixed; width: 320px; height: 320px; background: var(--secondary); filter: blur(160px); border-radius: 50%; bottom: -50px; right: -50px; opacity: 0.2; pointer-events: none; z-index: 0; }
 
-    header { padding: 16px 18px; text-align: center; background: rgba(8, 10, 20, 0.95); border-bottom: 2px solid transparent; border-image: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent) 1; backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 25px rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: space-between; }
+    header { padding: 12px 16px; text-align: center; background: rgba(8, 10, 20, 0.95); border-bottom: 2px solid transparent; border-image: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent) 1; backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 25px rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: space-between; }
     .header-left { display: flex; flex-direction: column; align-items: flex-start; }
-    .brand-badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 50px; background: rgba(0, 242, 254, 0.08); border: 1px solid rgba(0, 242, 254, 0.3); margin-bottom: 3px; }
-    .brand-badge span { font-size: 9px; font-weight: 800; letter-spacing: 1.5px; color: var(--primary); text-transform: uppercase; }
-    header h1 { font-size: 18px; letter-spacing: 1.5px; text-transform: uppercase; background: linear-gradient(90deg, #00f2fe, #fff, #ff007f); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; }
+    .brand-badge { display: inline-flex; align-items: center; gap: 5px; padding: 2px 8px; border-radius: 50px; background: rgba(0, 242, 254, 0.08); border: 1px solid rgba(0, 242, 254, 0.3); margin-bottom: 2px; }
+    .brand-badge span { font-size: 8.5px; font-weight: 800; letter-spacing: 1.2px; color: var(--primary); text-transform: uppercase; }
+    header h1 { font-size: 16px; letter-spacing: 1px; text-transform: uppercase; background: linear-gradient(90deg, #00f2fe, #fff, #ff007f); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; }
     
-    .lang-btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 20px; background: rgba(255, 0, 127, 0.12); border: 1.5px solid var(--secondary); color: #fff; font-size: 11px; font-weight: 800; cursor: pointer; transition: 0.2s ease; }
+    .lang-btn { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 18px; background: rgba(255, 0, 127, 0.12); border: 1.2px solid var(--secondary); color: #fff; font-size: 10.5px; font-weight: 800; cursor: pointer; transition: 0.2s ease; }
     .lang-btn:active { transform: scale(0.95); background: var(--secondary); }
 
-    .container { max-width: 540px; margin: 0 auto; padding: 15px; position: relative; z-index: 10; }
+    .container { max-width: 500px; margin: 0 auto; padding: 10px 14px; position: relative; z-index: 10; }
 
-    /* Upgraded Showcase Banner */
+    /* Ultra Short & Crisp Notice */
     .showcase-banner {
-      background: radial-gradient(circle at top, rgba(255, 0, 127, 0.18), rgba(12, 16, 35, 0.96));
-      border: 1.5px solid rgba(255, 0, 127, 0.45);
-      border-radius: 20px;
-      padding: 22px 18px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 35px rgba(255, 0, 127, 0.3);
-      backdrop-filter: blur(15px);
+      background: radial-gradient(circle at top, rgba(255, 0, 127, 0.14), rgba(12, 16, 35, 0.94));
+      border: 1px solid rgba(255, 0, 127, 0.35);
+      border-radius: 14px;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+      box-shadow: 0 0 20px rgba(255, 0, 127, 0.15);
+      backdrop-filter: blur(10px);
     }
-    .showcase-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-    .badge-official { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 20px; background: rgba(0, 242, 254, 0.12); border: 1px solid var(--primary); font-size: 11px; font-weight: 800; color: #00f2fe; text-transform: uppercase; letter-spacing: 1px; }
-    .showcase-title { font-size: 17px; font-weight: 900; color: #fff; margin-bottom: 10px; line-height: 1.4; text-shadow: 0 0 12px rgba(255, 255, 255, 0.25); }
-    .showcase-desc { font-size: 12.5px; color: #cbd5e1; line-height: 1.65; margin-bottom: 14px; }
+    .showcase-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+    .badge-official { display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 12px; background: rgba(0, 242, 254, 0.1); border: 1px solid var(--primary); font-size: 9px; font-weight: 800; color: #00f2fe; text-transform: uppercase; }
     
-    /* Price Comparison Alert Box */
-    .price-compare-box {
-      background: rgba(8, 12, 26, 0.85);
-      border: 1px dashed #00f2fe;
-      border-radius: 12px;
-      padding: 12px 14px;
-      margin-bottom: 14px;
-      font-size: 11.5px;
-      line-height: 1.6;
-      color: #94a3b8;
+    .quick-bullet-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      font-size: 11px;
+      line-height: 1.45;
+      color: #cbd5e1;
     }
-    .price-compare-box strong { color: #ff85be; }
+    .q-item { display: flex; align-items: flex-start; gap: 6px; }
+    .q-item i { margin-top: 2px; font-size: 10px; }
     .free-pill {
-      display: inline-block;
       background: #25D366;
       color: #000;
-      padding: 2px 8px;
-      border-radius: 6px;
+      padding: 1px 5px;
+      border-radius: 4px;
       font-weight: 900;
-      font-size: 10px;
+      font-size: 9px;
       text-transform: uppercase;
-      margin-left: 4px;
+      margin-left: 2px;
     }
 
-    .feature-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .f-tag { font-size: 10px; font-weight: 700; padding: 5px 10px; border-radius: 8px; background: rgba(10, 15, 30, 0.85); border: 1px solid #1f2b54; color: #a1b0d8; display: flex; align-items: center; gap: 5px; }
-    .f-tag i { color: #00f2fe; }
+    #auth-screen { background: var(--card); border: 1.5px solid var(--border); border-radius: 16px; padding: 18px 15px; box-shadow: 0 0 25px rgba(0,242,254,0.15); backdrop-filter: blur(15px); }
+    .auth-tabs { display: flex; gap: 8px; margin-bottom: 12px; }
+    .auth-tab { flex: 1; padding: 8px; text-align: center; background: #0b0f20; border: 1px solid #1a2344; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 600; color: #8fa0c9; }
+    .auth-tab.active { background: rgba(0, 242, 254, 0.15); border-color: var(--primary); color: var(--primary); box-shadow: 0 0 12px rgba(0, 242, 254, 0.3); }
 
-    #auth-screen { background: var(--card); border: 1.5px solid var(--border); border-radius: 20px; padding: 24px; box-shadow: 0 0 30px rgba(0,242,254,0.15); backdrop-filter: blur(15px); }
-    .auth-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
-    .auth-tab { flex: 1; padding: 10px; text-align: center; background: #0b0f20; border: 1px solid #1a2344; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 600; color: #8fa0c9; }
-    .auth-tab.active { background: rgba(0, 242, 254, 0.15); border-color: var(--primary); color: var(--primary); box-shadow: 0 0 15px rgba(0, 242, 254, 0.3); }
+    .card { background: var(--card); border: 1.5px solid var(--border); border-radius: 18px; padding: 18px; margin-bottom: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); backdrop-filter: blur(15px); }
+    .section-title { font-size: 12.5px; font-weight: 700; color: var(--primary); margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; text-transform: uppercase; letter-spacing: 0.8px; }
 
-    .card { background: var(--card); border: 1.5px solid var(--border); border-radius: 20px; padding: 20px; margin-bottom: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); backdrop-filter: blur(15px); }
-    .section-title { font-size: 13px; font-weight: 700; color: var(--primary); margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; text-transform: uppercase; letter-spacing: 1px; }
-
-    .btn-pill-action { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 30px; background: rgba(255, 0, 127, 0.12); border: 1px solid var(--secondary); color: #ff85be; font-size: 11px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.25s ease; }
+    .btn-pill-action { display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 25px; background: rgba(255, 0, 127, 0.12); border: 1px solid var(--secondary); color: #ff85be; font-size: 10.5px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.2s ease; }
     .btn-pill-action:active { background: var(--secondary); color: #fff; transform: scale(1.03); }
 
-    .category-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .cat-btn { background: #0b0f20; border: 1px solid #1b2447; padding: 12px 10px; border-radius: 12px; color: #cbd5e1; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.2s; user-select: none; }
+    .category-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .cat-btn { background: #0b0f20; border: 1px solid #1b2447; padding: 11px 8px; border-radius: 10px; color: #cbd5e1; font-size: 12.5px; cursor: pointer; display: flex; align-items: center; gap: 7px; transition: 0.2s; user-select: none; }
     .cat-btn.active { border-color: var(--secondary); background: rgba(255, 0, 127, 0.15); color: #fff; box-shadow: 0 0 15px rgba(255, 0, 127, 0.4); }
 
-    .input-box { width: 100%; background: #080b17; border: 1.5px solid #1c264a; border-radius: 12px; padding: 12px 14px; color: #fff; font-size: 14px; margin-bottom: 12px; outline: none; transition: 0.2s; }
-    .input-box:focus { border-color: var(--primary); box-shadow: 0 0 12px rgba(0, 242, 254, 0.3); }
+    .input-box { width: 100%; background: #080b17; border: 1.5px solid #1c264a; border-radius: 10px; padding: 10px 12px; color: #fff; font-size: 13px; margin-bottom: 10px; outline: none; transition: 0.2s; }
+    .input-box:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(0, 242, 254, 0.3); }
 
-    .count-selector { display: flex; gap: 6px; margin-bottom: 15px; overflow-x: auto; scrollbar-width: none; }
+    .count-selector { display: flex; gap: 6px; margin-bottom: 12px; overflow-x: auto; scrollbar-width: none; }
     .count-selector::-webkit-scrollbar { display: none; }
-    .count-pill { flex: 1; min-width: 55px; padding: 8px 4px; text-align: center; border-radius: 10px; background: #080d1e; border: 1px solid #1c274e; color: #94a3b8; font-size: 12px; font-weight: 800; cursor: pointer; transition: 0.2s; white-space: nowrap; }
-    .count-pill.active { background: rgba(255, 0, 127, 0.2); border-color: var(--secondary); color: #fff; box-shadow: 0 0 15px rgba(255, 0, 127, 0.4); }
+    .count-pill { flex: 1; min-width: 50px; padding: 7px 4px; text-align: center; border-radius: 8px; background: #080d1e; border: 1px solid #1c274e; color: #94a3b8; font-size: 11.5px; font-weight: 800; cursor: pointer; transition: 0.2s; white-space: nowrap; }
+    .count-pill.active { background: rgba(255, 0, 127, 0.2); border-color: var(--secondary); color: #fff; box-shadow: 0 0 12px rgba(255, 0, 127, 0.4); }
 
-    .slide-carousel-container { position: relative; width: 100%; overflow: hidden; border-radius: 16px; margin-bottom: 14px; }
+    .slide-carousel-container { position: relative; width: 100%; overflow: hidden; border-radius: 14px; margin-bottom: 12px; }
     .slide-track { display: flex; transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1); width: 100%; }
-    .slide-item { min-width: 100%; box-sizing: border-box; padding: 2px; }
-    .slide-box { background: #070a18; border: 1.5px solid #ff007f; border-radius: 16px; padding: 14px; box-shadow: 0 0 20px rgba(255, 0, 127, 0.2); }
-    .slide-box-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 11px; font-weight: 800; color: #ff85be; text-transform: uppercase; }
-    .slide-textarea { width: 100%; height: 95px; background: transparent; border: none; color: #fff; font-size: 14px; resize: none; outline: none; font-family: inherit; }
+    .slide-item { min-width: 100%; box-sizing: border-box; padding: 1px; }
+    .slide-box { background: #070a18; border: 1.5px solid #ff007f; border-radius: 14px; padding: 12px; box-shadow: 0 0 16px rgba(255, 0, 127, 0.2); }
+    .slide-box-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; font-size: 10.5px; font-weight: 800; color: #ff85be; text-transform: uppercase; }
+    .slide-textarea { width: 100%; height: 85px; background: transparent; border: none; color: #fff; font-size: 13.5px; resize: none; outline: none; font-family: inherit; }
 
-    .slide-nav-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-    .slide-nav-btn { background: #0b112c; border: 1px solid #1f2b57; color: #00f2fe; padding: 7px 14px; border-radius: 20px; font-size: 11px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+    .slide-nav-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .slide-nav-btn { background: #0b112c; border: 1px solid #1f2b57; color: #00f2fe; padding: 6px 12px; border-radius: 16px; font-size: 10.5px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 5px; }
     .slide-nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-    .slide-dots { display: flex; gap: 6px; }
-    .dot { width: 7px; height: 7px; border-radius: 50%; background: #1e2a52; transition: 0.2s; }
-    .dot.active { background: #00f2fe; box-shadow: 0 0 8px #00f2fe; width: 18px; border-radius: 10px; }
+    .slide-dots { display: flex; gap: 5px; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: #1e2a52; transition: 0.2s; }
+    .dot.active { background: #00f2fe; box-shadow: 0 0 6px #00f2fe; width: 16px; border-radius: 8px; }
 
-    .style-card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 12px; }
-    .style-card { background: #080d1e; border: 1.5px solid #1a254c; border-radius: 14px; padding: 14px 12px; cursor: pointer; text-align: left; transition: all 0.25s ease; position: relative; }
-    .style-card.active { border-color: var(--primary); box-shadow: 0 0 18px rgba(0, 242, 254, 0.35); background: rgba(0, 242, 254, 0.08); }
-    .style-card h4 { font-size: 13px; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
-    .style-card p { font-size: 11px; color: #7f91b8; line-height: 1.4; }
+    .style-card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 10px; }
+    .style-card { background: #080d1e; border: 1.2px solid #1a254c; border-radius: 12px; padding: 12px 10px; cursor: pointer; text-align: left; transition: all 0.2s ease; position: relative; }
+    .style-card.active { border-color: var(--primary); box-shadow: 0 0 14px rgba(0, 242, 254, 0.3); background: rgba(0, 242, 254, 0.08); }
+    .style-card h4 { font-size: 12px; font-weight: 800; margin-bottom: 3px; display: flex; align-items: center; gap: 5px; }
+    .style-card p { font-size: 10px; color: #7f91b8; line-height: 1.35; }
 
-    .theme-scroll { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; }
+    .theme-scroll { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; }
     .theme-scroll::-webkit-scrollbar { display: none; }
 
-    .theme-chip { padding: 9px 15px; border-radius: 30px; background: #0b0f20; border: 1px solid #1d274c; font-size: 12px; cursor: pointer; white-space: nowrap; color: #a1b0d8; font-weight: 600; user-select: none; transition: all 0.2s; }
-    .theme-chip.active { background: linear-gradient(90deg, var(--primary), #4facfe); color: #00f2fe; font-weight: 800; border-color: transparent; box-shadow: 0 0 14px rgba(0, 242, 254, 0.5); }
+    .theme-chip { padding: 8px 13px; border-radius: 25px; background: #0b0f20; border: 1px solid #1d274c; font-size: 11px; cursor: pointer; white-space: nowrap; color: #a1b0d8; font-weight: 600; user-select: none; transition: all 0.2s; }
+    .theme-chip.active { background: linear-gradient(90deg, var(--primary), #4facfe); color: #000; font-weight: 800; border-color: transparent; box-shadow: 0 0 12px rgba(0, 242, 254, 0.4); }
 
-    .btn-submit { width: 100%; padding: 14px; border-radius: 12px; border: none; background: linear-gradient(90deg, var(--secondary), #7928ca); color: #fff; font-size: 15px; font-weight: 700; cursor: pointer; letter-spacing: 1px; box-shadow: 0 0 20px rgba(255, 0, 127, 0.4); transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; text-transform: uppercase; }
+    .btn-submit { width: 100%; padding: 12px; border-radius: 10px; border: none; background: linear-gradient(90deg, var(--secondary), #7928ca); color: #fff; font-size: 13.5px; font-weight: 700; cursor: pointer; letter-spacing: 0.6px; box-shadow: 0 0 18px rgba(255, 0, 127, 0.4); transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px; text-transform: uppercase; }
     .btn-submit:active { transform: scale(0.98); }
 
     #loading-modal { display: none; position: fixed; inset: 0; background: rgba(3, 4, 10, 0.92); z-index: 2000; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(10px); }
@@ -144,16 +135,15 @@
     .term-line.done { color: #00f2fe; }
     .term-line.active { color: var(--secondary); font-weight: bold; }
 
-    #result-view { display: none; background: rgba(0, 242, 254, 0.05); border: 1.5px dashed var(--primary); border-radius: 16px; padding: 16px; text-align: center; margin-top: 15px; }
-    .history-item { background: #080b18; border: 1px solid #1b2342; border-radius: 10px; padding: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+    #result-view { display: none; background: rgba(0, 242, 254, 0.05); border: 1.5px dashed var(--primary); border-radius: 14px; padding: 14px; text-align: center; margin-top: 14px; }
+    .history-item { background: #080b18; border: 1px solid #1b2342; border-radius: 8px; padding: 10px; margin-bottom: 7px; display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; }
 
-    .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(8, 10, 20, 0.95); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 10px 0; backdrop-filter: blur(15px); z-index: 100; }
-    .nav-tab { display: flex; flex-direction: column; align-items: center; gap: 4px; color: #5f709c; text-decoration: none; font-size: 11px; cursor: pointer; }
+    .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(8, 10, 20, 0.95); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 8px 0; backdrop-filter: blur(15px); z-index: 100; }
+    .nav-tab { display: flex; flex-direction: column; align-items: center; gap: 3px; color: #5f709c; text-decoration: none; font-size: 10.5px; cursor: pointer; }
     .nav-tab.active { color: var(--primary); text-shadow: 0 0 8px var(--primary); }
-    .nav-tab i { font-size: 17px; }
+    .nav-tab i { font-size: 16px; }
 
-    .insta-float { position: fixed; bottom: 75px; right: 15px; background: rgba(12, 16, 32, 0.9); border: 1.5px solid var(--secondary); border-radius: 50px; padding: 7px 14px; display: flex; align-items: center; gap: 6px; text-decoration: none; color: #fff; font-size: 12px; font-weight: 700; box-shadow: 0 0 16px rgba(255, 0, 127, 0.5); z-index: 99; animation: holoAnim 3s infinite ease-in-out alternate; }
-    @keyframes holoAnim { 0% { transform: translateY(0); } 100% { transform: translateY(-5px); } }
+    .insta-float { position: fixed; bottom: 65px; right: 12px; background: rgba(12, 16, 32, 0.9); border: 1.2px solid var(--secondary); border-radius: 50px; padding: 6px 12px; display: flex; align-items: center; gap: 5px; text-decoration: none; color: #fff; font-size: 11px; font-weight: 700; box-shadow: 0 0 14px rgba(255, 0, 127, 0.5); z-index: 99; }
   </style>
 </head>
 <body>
@@ -163,7 +153,7 @@
 
   <header>
     <div class="header-left">
-      <div class="brand-badge"><i class="fa-solid fa-bolt" style="color:var(--primary); font-size:9px;"></i><span>Story Engine Active</span></div>
+      <div class="brand-badge"><i class="fa-solid fa-bolt" style="color:var(--primary); font-size:8px;"></i><span>Story Engine Active</span></div>
       <h1>CYBERWISH VIP</h1>
     </div>
     <button type="button" class="lang-btn" onclick="toggleNoticeLanguage()">
@@ -173,33 +163,17 @@
 
   <div class="container">
 
-    <!-- About & Pricing Transparency Showcase -->
+    <!-- Super Short 3-Bullet Notice (No Scrolling Needed) -->
     <div class="showcase-banner" id="showcase-box">
       <div class="showcase-header">
-        <div class="badge-official"><i class="fa-solid fa-gem"></i> <span id="sc-tag">Official Notice</span></div>
-        <span style="font-size: 10px; color: #25D366; font-weight: bold;"><i class="fa-solid fa-circle-check"></i> 100% Free VIP Tier</span>
+        <div class="badge-official"><i class="fa-solid fa-gem"></i> <span id="sc-tag">VIP Engine</span></div>
+        <span style="font-size: 9px; color: #25D366; font-weight: bold;"><i class="fa-solid fa-circle-check"></i> 100% Free VIP Tier</span>
       </div>
 
-      <div class="showcase-title" id="sc-title">
-        The Ultimate 3D Interactive Story & Surprise Web Platform
-      </div>
-
-      <div class="showcase-desc" id="sc-desc">
-        CyberWish VIP lets you create deeply personal, unforgettable digital surprises for your girlfriend, crush, partner, or best friend. From multi-slide emotional poetry to viral runaway 'No' buttons and custom YouTube background music—your loved ones get a cinematic experience straight in their browser with no app download needed.
-      </div>
-
-      <!-- Price Comparison Note -->
-      <div class="price-compare-box" id="sc-compare">
-        💡 <strong>Did You Know?</strong> Commercial gift portals like <em>GiftASurprise</em>, <em>SurpriseGram</em>, or custom agency creators typically charge <strong>₹499 to ₹1,499</strong> for personalized digital greeting links with music and interactions.<br>
-        🎉 <strong>CyberWish VIP</strong> gives you all these elite features, secure cloud hosting, and instant Instagram reply sync for <span class="free-pill">100% FREE</span>!
-      </div>
-
-      <div class="feature-tags">
-        <div class="f-tag"><i class="fa-solid fa-layer-group"></i> Multi-Slide Story Mode</div>
-        <div class="f-tag"><i class="fa-solid fa-wand-magic-sparkles"></i> Topic-Matched Auto-Poetry</div>
-        <div class="f-tag"><i class="fa-brands fa-youtube" style="color:#ff0000;"></i> YouTube Audio Sync</div>
-        <div class="f-tag"><i class="fa-solid fa-person-running"></i> Runaway 'No' Engine</div>
-        <div class="f-tag"><i class="fa-solid fa-lock"></i> 4-Digit Passcode Lock</div>
+      <div class="quick-bullet-list" id="sc-bullet-list">
+        <div class="q-item"><i class="fa-solid fa-sparkles" style="color:#00f2fe;"></i> <span><strong>What is it?</strong> Create personal 3D interactive surprise webpages with YouTube music & runaway 'No' game.</span></div>
+        <div class="q-item"><i class="fa-solid fa-money-bill-wave" style="color:#ff007f;"></i> <span><strong>Market Price:</strong> Commercial portals charge <strong>₹499 - ₹1,499</strong> for such links.</span></div>
+        <div class="q-item"><i class="fa-solid fa-gift" style="color:#25D366;"></i> <span><strong>CyberWish:</strong> We offer this full VIP surprise engine for <span class="free-pill">100% FREE</span>!</span></div>
       </div>
     </div>
 
@@ -210,7 +184,7 @@
         <div class="auth-tab" id="tab-signup-btn" onclick="setAuthMode('signup')">Sign Up</div>
       </div>
       <input type="text" id="auth-user" class="input-box" placeholder="Enter username">
-      <input type="password" id="auth-pass" class="input-box" placeholder="Enter secret password">
+      <input type="password" id="auth-pass" class="input-box" placeholder="Enter secret password" onkeydown="if(event.key==='Enter') handleAuth()">
       <button class="btn-submit" id="auth-submit-btn" onclick="handleAuth()"><i class="fa-solid fa-lock"></i> Log In</button>
     </div>
 
@@ -222,7 +196,7 @@
         <div class="card">
           <div class="section-title">
             <span>1. Mood & Category</span>
-            <button type="button" class="btn-pill-action" onclick="triggerCustomCat()"><i class="fa-solid fa-pen-fancy"></i> Custom Category</button>
+            <button type="button" class="btn-pill-action" onclick="triggerCustomCat()"><i class="fa-solid fa-pen-fancy"></i> Custom</button>
           </div>
           <div class="category-grid" id="cat-container">
             <button class="cat-btn active" onclick="toggleCategory(this, 'Make Up & Apology 🥺')"><i class="fa-solid fa-face-pleading"></i> Sorry / Patch-up</button>
@@ -238,7 +212,7 @@
         <div class="card">
           <div class="section-title">
             <span>2. Story Slides Count</span>
-            <button type="button" class="btn-pill-action" onclick="suggestStoryLines()"><i class="fa-solid fa-dice-d20"></i> Auto-Fill Category Lines</button>
+            <button type="button" class="btn-pill-action" onclick="suggestStoryLines()"><i class="fa-solid fa-dice-d20"></i> Auto-Fill Lines</button>
           </div>
           
           <div class="count-selector">
@@ -326,12 +300,12 @@
           
           <div style="margin-top: 10px;">
             <input type="text" id="youtube-url" class="input-box" placeholder="Paste YouTube song link (Optional)">
-            <p style="font-size: 11px; color: #ff85be; margin-top: -6px; margin-bottom: 12px;">
-              <i class="fa-brands fa-youtube"></i> YouTube video will be completely hidden, only romantic audio will play!
+            <p style="font-size: 10.5px; color: #ff85be; margin-top: -6px; margin-bottom: 12px;">
+              <i class="fa-brands fa-youtube"></i> YouTube video will be hidden, only romantic audio will play!
             </p>
           </div>
 
-          <button class="btn-submit" style="margin-top: 15px;" onclick="startBuildProcess()">
+          <button class="btn-submit" style="margin-top: 12px;" onclick="startBuildProcess()">
             <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Ultra-Short Link
           </button>
 
@@ -339,10 +313,10 @@
             <p style="font-size:12px; color:var(--primary); margin-bottom:8px;">✔ Ultra-Short Secret Link Ready!</p>
             <input type="text" id="final-url-box" class="input-box" readonly style="text-align:center; font-size:13px; font-weight:bold; color:#00f2fe;">
             <div style="display:flex; gap:8px;">
-              <button class="btn-submit" style="flex:1; background:linear-gradient(90deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); font-size:12px;" onclick="shareDirectLink()">
-                <i class="fa-brands fa-instagram"></i> Share on Instagram
+              <button class="btn-submit" style="flex:1; background:linear-gradient(90deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); font-size:11.5px;" onclick="shareDirectLink()">
+                <i class="fa-brands fa-instagram"></i> Instagram DM
               </button>
-              <button class="btn-submit" style="flex:1; background:#11172f; border:1px solid var(--primary); font-size:12px;" onclick="copyLink()">
+              <button class="btn-submit" style="flex:1; background:#11172f; border:1px solid var(--primary); font-size:11.5px;" onclick="copyLink()">
                 <i class="fa-regular fa-copy"></i> Copy Link
               </button>
             </div>
@@ -416,17 +390,21 @@
     const noticeContent = {
       en: {
         indicator: 'हिन्दी',
-        tag: 'Official Notice',
-        title: 'The Ultimate 3D Interactive Story & Surprise Web Platform',
-        desc: 'CyberWish VIP lets you create deeply personal, unforgettable digital surprises for your girlfriend, crush, partner, or best friend. From multi-slide emotional poetry to viral runaway No buttons and custom YouTube background music—your loved ones get a cinematic experience straight in their browser with no app download needed.',
-        compare: '💡 <strong>Did You Know?</strong> Commercial gift portals like <em>GiftASurprise</em>, <em>SurpriseGram</em>, or custom agency creators typically charge <strong>₹499 to ₹1,499</strong> for personalized digital greeting links with music and interactions.<br>🎉 <strong>CyberWish VIP</strong> gives you all these elite features, secure cloud hosting, and instant Instagram reply sync for <span class="free-pill">100% FREE</span>!'
+        tag: 'VIP Engine',
+        bullets: `
+          <div class="q-item"><i class="fa-solid fa-sparkles" style="color:#00f2fe;"></i> <span><strong>What is it?</strong> Create personal 3D interactive surprise webpages with YouTube music & runaway 'No' game.</span></div>
+          <div class="q-item"><i class="fa-solid fa-money-bill-wave" style="color:#ff007f;"></i> <span><strong>Market Price:</strong> Commercial portals charge <strong>₹499 - ₹1,499</strong> for such links.</span></div>
+          <div class="q-item"><i class="fa-solid fa-gift" style="color:#25D366;"></i> <span><strong>CyberWish:</strong> We offer this full VIP surprise engine for <span class="free-pill">100% FREE</span>!</span></div>
+        `
       },
       hi: {
         indicator: 'English',
-        tag: 'महत्वपूर्ण सूचना (About & Pricing)',
-        title: 'अपनी गर्लफ्रेंड, पार्टनर या दोस्तों के लिए 3D डिजिटल सरप्राइज प्लेटफॉर्म',
-        desc: 'CyberWish VIP एक ऐसा आधुनिक प्लेटफॉर्म है, जहाँ आप अपने खास इंसान (गर्लफ्रेंड, क्रश, बेस्ट फ्रेंड) के लिए प्यार भरे मल्टी-स्लाइड सरप्राइज और प्रपोज़ल बना सकते हैं। इसमें मनपसंद शायरी, बैकग्राउंड में बजने वाला आपका पसंदीदा यू-ट्यूब गाना, और मना करने पर स्क्रीन पर भागने वाला फनी "No" बटन सब कुछ एक क्लिक में तैयार होता है।',
-        compare: '💡 <strong>क्या आप जानते हैं?</strong> दूसरी कमर्शियल वेबसाइट्स जैसे <em>GiftASurprise</em>, <em>SurpriseGram</em> आदि ऐसे कस्टमाइज़्ड डिजिटल ग्रीटिंग पेजों के <strong>₹499 से ₹1,499</strong> तक चार्ज करती हैं!<br>🎉 <strong>CyberWish VIP</strong> यह पूरा प्रीमियम अनुभव, सुरक्षित क्लाउड लिंक और इंस्टाग्राम रिप्लाई की सुविधा आपके लिए <span class="free-pill">बिल्कुल मुफ़्त (100% FREE)</span> लाया है!'
+        tag: 'VIP इंजन',
+        bullets: `
+          <div class="q-item"><i class="fa-solid fa-sparkles" style="color:#00f2fe;"></i> <span><strong>यह क्या है?</strong> मनपसंद यूट्यूब गाने और भागने वाले 'No' गेम के साथ 3D डिजिटल सरप्राइज पेज बनाएँ।</span></div>
+          <div class="q-item"><i class="fa-solid fa-money-bill-wave" style="color:#ff007f;"></i> <span><strong>बाज़ार का रेट:</strong> दूसरी कमर्शियल साइट्स इसके <strong>₹499 से ₹1,499</strong> तक लेती हैं।</span></div>
+          <div class="q-item"><i class="fa-solid fa-gift" style="color:#25D366;"></i> <span><strong>CyberWish:</strong> यह पूरा VIP अनुभव आपके लिए <span class="free-pill">100% मुफ़्त (FREE)</span> है!</span></div>
+        `
       }
     };
 
@@ -435,9 +413,7 @@
       const c = noticeContent[currentNoticeLang];
       document.getElementById('lang-indicator').innerText = c.indicator;
       document.getElementById('sc-tag').innerText = c.tag;
-      document.getElementById('sc-title').innerText = c.title;
-      document.getElementById('sc-desc').innerText = c.desc;
-      document.getElementById('sc-compare').innerHTML = c.compare;
+      document.getElementById('sc-bullet-list').innerHTML = c.bullets;
     }
 
     let authMode = 'login';
@@ -801,7 +777,7 @@
       const box = document.getElementById('final-url-box');
       box.select();
       navigator.clipboard.writeText(box.value);
-      alert("Short surprise link copied to clipboard!");
+      alert("Surprise URL copied to clipboard!");
     }
 
     function submitSuggestion() {
