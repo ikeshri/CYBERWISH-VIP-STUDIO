@@ -31,14 +31,40 @@
     .glow-blob-1 { position: fixed; width: 350px; height: 350px; background: var(--primary); filter: blur(160px); border-radius: 50%; top: -50px; left: -50px; opacity: 0.2; pointer-events: none; z-index: 0; }
     .glow-blob-2 { position: fixed; width: 350px; height: 350px; background: var(--secondary); filter: blur(160px); border-radius: 50%; bottom: -50px; right: -50px; opacity: 0.2; pointer-events: none; z-index: 0; }
 
-    header { padding: 18px 20px; text-align: center; background: rgba(8, 10, 20, 0.95); border-bottom: 2px solid transparent; border-image: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent) 1; backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 25px rgba(0,0,0,0.6); }
-    .brand-badge { display: inline-flex; align-items: center; gap: 8px; padding: 4px 14px; border-radius: 50px; background: rgba(0, 242, 254, 0.08); border: 1px solid rgba(0, 242, 254, 0.3); margin-bottom: 6px; }
-    .brand-badge span { font-size: 10px; font-weight: 800; letter-spacing: 2px; color: var(--primary); text-transform: uppercase; }
-    header h1 { font-size: 21px; letter-spacing: 2px; text-transform: uppercase; background: linear-gradient(90deg, #00f2fe, #fff, #ff007f); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; text-shadow: 0 0 25px rgba(0, 242, 254, 0.4); }
+    /* Header with Language Switcher */
+    header { padding: 16px 18px; text-align: center; background: rgba(8, 10, 20, 0.95); border-bottom: 2px solid transparent; border-image: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent) 1; backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 25px rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: space-between; }
+    .header-left { display: flex; flex-direction: column; align-items: flex-start; }
+    .brand-badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 50px; background: rgba(0, 242, 254, 0.08); border: 1px solid rgba(0, 242, 254, 0.3); margin-bottom: 3px; }
+    .brand-badge span { font-size: 9px; font-weight: 800; letter-spacing: 1.5px; color: var(--primary); text-transform: uppercase; }
+    header h1 { font-size: 18px; letter-spacing: 1.5px; text-transform: uppercase; background: linear-gradient(90deg, #00f2fe, #fff, #ff007f); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; }
+    
+    .lang-btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 20px; background: rgba(255, 0, 127, 0.12); border: 1.5px solid var(--secondary); color: #fff; font-size: 11px; font-weight: 800; cursor: pointer; transition: 0.2s ease; }
+    .lang-btn:active { transform: scale(0.95); background: var(--secondary); }
 
     .container { max-width: 540px; margin: 0 auto; padding: 15px; position: relative; z-index: 10; }
 
-    #auth-screen { background: var(--card); border: 1.5px solid var(--border); border-radius: 20px; padding: 24px; box-shadow: 0 0 30px rgba(0,242,254,0.15); margin-top: 25px; backdrop-filter: blur(15px); }
+    /* Ultra-Aesthetic About / Showcase Notice */
+    .showcase-banner {
+      background: radial-gradient(circle at top, rgba(255, 0, 127, 0.15), rgba(12, 16, 35, 0.95));
+      border: 1.5px solid rgba(255, 0, 127, 0.4);
+      border-radius: 20px;
+      padding: 20px 18px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 35px rgba(255, 0, 127, 0.25);
+      backdrop-filter: blur(15px);
+      position: relative;
+    }
+    .showcase-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .badge-official { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 20px; background: rgba(0, 242, 254, 0.12); border: 1px solid var(--primary); font-size: 11px; font-weight: 800; color: #00f2fe; text-transform: uppercase; letter-spacing: 1px; }
+    .showcase-title { font-size: 16px; font-weight: 900; color: #fff; margin-bottom: 8px; line-height: 1.4; text-shadow: 0 0 12px rgba(255, 255, 255, 0.3); }
+    .showcase-desc { font-size: 12px; color: #cbd5e1; line-height: 1.6; margin-bottom: 15px; }
+
+    .feature-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+    .f-tag { font-size: 10px; font-weight: 700; padding: 5px 10px; border-radius: 8px; background: rgba(10, 15, 30, 0.8); border: 1px solid #1f2b54; color: #a1b0d8; display: flex; align-items: center; gap: 5px; }
+    .f-tag i { color: #00f2fe; }
+
+    /* Auth Screen */
+    #auth-screen { background: var(--card); border: 1.5px solid var(--border); border-radius: 20px; padding: 24px; box-shadow: 0 0 30px rgba(0,242,254,0.15); backdrop-filter: blur(15px); }
     .auth-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
     .auth-tab { flex: 1; padding: 10px; text-align: center; background: #0b0f20; border: 1px solid #1a2344; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 600; color: #8fa0c9; }
     .auth-tab.active { background: rgba(0, 242, 254, 0.15); border-color: var(--primary); color: var(--primary); box-shadow: 0 0 15px rgba(0, 242, 254, 0.3); }
@@ -122,12 +148,41 @@
   <div class="glow-blob-2"></div>
 
   <header>
-    <div class="brand-badge"><i class="fa-solid fa-bolt" style="color:var(--primary); font-size:10px;"></i><span>VIP Engine Active</span></div>
-    <h1>CYBERWISH VIP STUDIO</h1>
+    <div class="header-left">
+      <div class="brand-badge"><i class="fa-solid fa-bolt" style="color:var(--primary); font-size:9px;"></i><span>VIP Engine Active</span></div>
+      <h1>CYBERWISH VIP</h1>
+    </div>
+    <button type="button" class="lang-btn" onclick="toggleNoticeLanguage()">
+      <i class="fa-solid fa-globe"></i> <span id="lang-indicator">हिन्दी</span>
+    </button>
   </header>
 
   <div class="container">
 
+    <!-- Client-Hook Showcase & About Notice -->
+    <div class="showcase-banner" id="showcase-box">
+      <div class="showcase-header">
+        <div class="badge-official"><i class="fa-solid fa-gem"></i> <span id="sc-tag">Official Notice</span></div>
+        <span style="font-size: 10px; color: #8fa0c9;"><i class="fa-solid fa-shield-halved"></i> 100% Private Cloud</span>
+      </div>
+
+      <div class="showcase-title" id="sc-title">
+        The Next-Gen VIP Surprise & Confession Engine for Special Ones
+      </div>
+
+      <div class="showcase-desc" id="sc-desc">
+        CyberWish VIP is an exclusive interactive platform designed to craft personalized, immersive 3D digital surprises for your partner, crush, or closest friends. Experience custom universe shaders, viral runaway buttons, floating particle physics, and direct Instagram replies—no app download required.
+      </div>
+
+      <div class="feature-tags">
+        <div class="f-tag"><i class="fa-solid fa-vr-cardboard"></i> 6 Universe Shaders</div>
+        <div class="f-tag"><i class="fa-solid fa-lock"></i> 4-Digit Passcode Lock</div>
+        <div class="f-tag"><i class="fa-solid fa-person-running"></i> Runaway 'No' Engine</div>
+        <div class="f-tag"><i class="fa-brands fa-instagram"></i> Instagram DM Sync</div>
+      </div>
+    </div>
+
+    <!-- Auth View -->
     <div id="auth-screen">
       <div class="auth-tabs">
         <div class="auth-tab active" id="tab-login-btn" onclick="setAuthMode('login')">Sign In</div>
@@ -138,6 +193,7 @@
       <button class="btn-submit" id="auth-submit-btn" onclick="handleAuth()"><i class="fa-solid fa-lock"></i> Log In</button>
     </div>
 
+    <!-- Main Workspace -->
     <div id="main-workspace" style="display: none;">
 
       <div id="tab-create">
@@ -305,6 +361,31 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
+    let currentNoticeLang = 'en';
+    const noticeContent = {
+      en: {
+        indicator: 'हिन्दी',
+        tag: 'Official Notice',
+        title: 'The Next-Gen VIP Surprise & Confession Engine for Special Ones',
+        desc: 'CyberWish VIP is an exclusive interactive platform designed to craft personalized, immersive 3D digital surprises for your partner, crush, or closest friends. Experience custom universe shaders, viral runaway buttons, floating particle physics, and direct Instagram replies—no app download required.'
+      },
+      hi: {
+        indicator: 'English',
+        tag: 'महत्वपूर्ण सूचना (About)',
+        title: 'अपने खास लोगों के लिए नेक्स्ट-जेन वीआईपी सरप्राइज और प्रपोज़ल इंजन',
+        desc: 'CyberWish VIP एक खास इंटरैक्टिव प्लेटफॉर्म है, जिसे आपकी गर्लफ्रेंड, पार्टनर या दोस्तों के लिए व्यक्तिगत 3D डिजिटल सरप्राइज वेबसाइट बनाने के लिए डिज़ाइन किया गया है। इसमें 6 तरह के ब्रह्मांडीय थीम्स, भागने वाला "No" बटन, तैरते हुए 3D दिल-सितारे और सीधे इंस्टाग्राम रिप्लाई की सुविधा हमेशा के लिए सुरक्षित मिलती है।'
+      }
+    };
+
+    function toggleNoticeLanguage() {
+      currentNoticeLang = (currentNoticeLang === 'en') ? 'hi' : 'en';
+      const c = noticeContent[currentNoticeLang];
+      document.getElementById('lang-indicator').innerText = c.indicator;
+      document.getElementById('sc-tag').innerText = c.tag;
+      document.getElementById('sc-title').innerText = c.title;
+      document.getElementById('sc-desc').innerText = c.desc;
+    }
+
     let authMode = 'login';
     let currentUser = localStorage.getItem('cw_user') || null;
     let activeCat = 'Make Up & Apology 🥺';
@@ -375,6 +456,7 @@
 
     function setupWorkspace() {
       document.getElementById('auth-screen').style.display = 'none';
+      document.getElementById('showcase-box').style.display = 'none';
       document.getElementById('main-workspace').style.display = 'block';
       document.getElementById('bottom-nav').style.display = 'flex';
       document.getElementById('profile-display-name').innerText = "@" + currentUser;
