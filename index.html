@@ -27,7 +27,7 @@
       outline: none !important;
     }
     html, body {
-      height: 100%;
+      min-height: 100%;
       background: var(--bg); 
       color: #fff; 
       overflow-x: hidden;
@@ -69,7 +69,7 @@
       max-width: 500px; 
       width: 100%;
       margin: 0 auto; 
-      padding: 14px 16px 70px 16px; 
+      padding: 14px 16px 75px 16px; 
       position: relative; 
       z-index: 10; 
       flex: 1;
@@ -77,7 +77,6 @@
       flex-direction: column;
     }
 
-    /* FULL-SCREEN AUTH WRAPPER */
     #auth-view-wrap {
       flex: 1;
       display: flex;
@@ -177,23 +176,6 @@
     .btn-submit { width: 100%; padding: 14px; border-radius: 12px; border: none; background: linear-gradient(90deg, var(--secondary), #7928ca); color: #fff; font-size: 14.5px; font-weight: 800; cursor: pointer; letter-spacing: 0.8px; box-shadow: 0 0 20px rgba(255, 0, 127, 0.4); transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; text-transform: uppercase; }
     .btn-submit:active { transform: scale(0.98); }
 
-    /* FULL-SCREEN ME (PROFILE) TAB */
-    #tab-profile {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: calc(100dvh - 145px);
-      padding: 4px 0;
-    }
-    .profile-feed-card {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      margin-bottom: 14px;
-    }
-
     #loading-modal { display: none; position: fixed; inset: 0; background: rgba(3, 4, 10, 0.92); z-index: 2000; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(10px); }
     .terminal-box { width: 100%; max-width: 440px; background: #090c18; border: 1.5px solid var(--primary); border-radius: 16px; padding: 20px; box-shadow: 0 0 40px rgba(0, 242, 254, 0.3); font-family: monospace; }
     .terminal-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #1a2346; padding-bottom: 8px; margin-bottom: 15px; font-size: 12px; color: var(--primary); }
@@ -203,6 +185,15 @@
 
     #result-view { display: none; background: rgba(0, 242, 254, 0.05); border: 1.5px dashed var(--primary); border-radius: 16px; padding: 14px; text-align: center; margin-top: 14px; }
     .history-item { background: #080b18; border: 1px solid #1b2342; border-radius: 10px; padding: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+
+    /* Live Reaction Tracker & Cards */
+    .tracker-card { background: #080b18; border: 1px solid #1b274e; border-radius: 14px; padding: 14px; margin-bottom: 10px; }
+    .tracker-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 12px; font-weight: bold; color: #00f2fe; }
+    .tracker-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 8px 0; }
+    .stat-box { background: #060914; border: 1px solid #151d38; border-radius: 8px; padding: 8px 4px; text-align: center; font-size: 10.5px; }
+    .stat-val { font-size: 14px; font-weight: 900; margin-top: 2px; }
+    .btn-del-link { background: rgba(255, 0, 85, 0.15); border: 1px solid #ff0055; color: #ff3366; padding: 5px 10px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+    .btn-del-link:active { transform: scale(0.95); }
 
     .bottom-credit-wrap {
       text-align: center;
@@ -263,7 +254,7 @@
 
   <div class="container">
 
-    <!-- FULL SCREEN AUTH VIEW (NO DEAD BOTTOM SPACE) -->
+    <!-- FULL SCREEN AUTH VIEW -->
     <div id="auth-view-wrap">
       
       <div class="showcase-banner" id="showcase-box">
@@ -442,22 +433,38 @@
         </div>
       </div>
 
-      <!-- FULL SCREEN ME TAB (NO DEAD BOTTOM SPACE) -->
+      <!-- POWERFUL & USEFUL 'ME' PROFILE TAB -->
       <div id="tab-profile" style="display: none;">
         
-        <div class="card profile-feed-card">
-          <div>
-            <div class="section-title"><span>💬 Connect with Developer</span></div>
-            <p style="font-size:12.5px; color:#8ea0cb; margin-bottom:12px; line-height:1.5;">Have an idea, need custom features, or want to report something? Send a direct message:</p>
-            <textarea id="suggest-text" class="input-box" style="height:110px; resize:none; font-size:14px;" placeholder="Write your message or idea here..."></textarea>
+        <!-- Feature 1: My Instagram Handle Setup -->
+        <div class="card">
+          <div class="section-title"><span><i class="fa-brands fa-instagram" style="color:var(--secondary);"></i> My Instagram Handle</span></div>
+          <p style="font-size:12px; color:#cbd5e1; margin-bottom:10px;">When your special one clicks "YES", their Instagram reply will open directly in <strong>your personal Instagram chat</strong>!</p>
+          <div style="display:flex; gap:8px;">
+            <input type="text" id="user-my-insta" class="input-box" placeholder="Your Instagram username (e.g. rohit_07)" style="margin-bottom:0; flex:1;">
+            <button class="btn-submit" style="width:auto; padding:0 18px; font-size:12px;" onclick="saveUserInsta()"><i class="fa-solid fa-check"></i> Save</button>
           </div>
-          <button class="btn-submit" onclick="submitSuggestion()"><i class="fa-solid fa-paper-plane"></i> Send Message To Developer</button>
         </div>
 
-        <div class="card" style="text-align: center; padding: 22px 18px;">
-          <div class="section-title" style="justify-content:center; margin-bottom:14px;"><span>👤 Your Active Session</span></div>
-          <div style="font-size:42px; color:#ff007f; margin-bottom:8px;"><i class="fa-solid fa-circle-user"></i></div>
-          <p style="font-size:18px; color:#00f2fe; font-weight:900; letter-spacing:1px; margin-bottom:16px;" id="profile-display-name"></p>
+        <!-- Feature 2: Live Reaction Tracker & Expire/Delete Engine -->
+        <div class="card">
+          <div class="section-title"><span><i class="fa-solid fa-chart-line"></i> Live Reaction Tracker</span></div>
+          <p style="font-size:11.5px; color:#8ea0cb; margin-bottom:12px;">Track whether they unlocked your wish, answered YES, or tried catching the NO button:</p>
+          <div id="reaction-tracker-list"><p style="font-size:12px; color:#6b7ba4;">Loading tracker data...</p></div>
+        </div>
+
+        <!-- Connect with Developer -->
+        <div class="card">
+          <div class="section-title"><span>💬 Connect with Developer</span></div>
+          <p style="font-size:12px; color:#8ea0cb; margin-bottom:10px;">Have an idea or need custom features? Send a direct message to developer:</p>
+          <textarea id="suggest-text" class="input-box" style="height:75px; resize:none;" placeholder="Write your message or idea here..."></textarea>
+          <button class="btn-submit" onclick="submitSuggestion()"><i class="fa-solid fa-paper-plane"></i> Send Message to Developer</button>
+        </div>
+
+        <!-- Account Card -->
+        <div class="card" style="text-align: center; padding: 20px 18px;">
+          <div class="section-title" style="justify-content:center; margin-bottom:12px;"><span>👤 Your Account</span></div>
+          <p style="font-size:16px; color:#00f2fe; font-weight:800; margin-bottom:14px;" id="profile-display-name"></p>
           <button class="btn-submit" style="background:rgba(255, 0, 85, 0.15); border:1.5px solid #ff0055; color:#ff3366;" onclick="logout()">
             <i class="fa-solid fa-right-from-bracket"></i> LOG OUT ACCOUNT
           </button>
@@ -727,10 +734,12 @@
 
     function setupWorkspace() {
       document.getElementById('auth-view-wrap').style.display = 'none';
-      document.getElementById('main-workspace').style.display = 'flex';
+      document.getElementById('main-workspace').style.display = 'block';
       document.getElementById('bottom-nav').style.display = 'flex';
       document.getElementById('profile-display-name').innerText = "@" + currentUser;
       syncCloudHistory();
+      loadUserInsta();
+      syncReactionTracker();
     }
 
     function logout() {
@@ -789,6 +798,23 @@
       return (match && match[2].length === 11) ? match[2] : null;
     }
 
+    // Save Personal Instagram Handle
+    function saveUserInsta() {
+      let handle = document.getElementById('user-my-insta').value.trim().replace('@', '');
+      if (!handle) return alert("Please enter your Instagram username!");
+      db.ref('users/' + currentUser + '/myInsta').set(handle).then(() => {
+        alert("Instagram handle saved! All your surprise links will now direct replies to @" + handle);
+      });
+    }
+
+    function loadUserInsta() {
+      db.ref('users/' + currentUser + '/myInsta').once('value').then(snap => {
+        if (snap.exists()) {
+          document.getElementById('user-my-insta').value = snap.val();
+        }
+      });
+    }
+
     function startBuildProcess() {
       const name = document.getElementById('target-name').value.trim() || 'My Special One';
       const customCat = document.getElementById('custom-cat-val').value.trim();
@@ -798,6 +824,7 @@
       const customEmojis = document.getElementById('custom-emojis').value.trim();
       const youtubeUrl = document.getElementById('youtube-url').value.trim();
       const ytId = extractYouTubeID(youtubeUrl);
+      const userInsta = document.getElementById('user-my-insta').value.trim().replace('@', '') || null;
 
       const finalSlides = slidesData.slice(0, totalSlides).map(s => s.trim() || 'You mean the absolute world to me. ✨');
 
@@ -834,8 +861,15 @@
           motion: selectedMotion,
           bgm: selectedBGM,
           ytId: ytId || null,
+          replyInsta: userInsta,
           createdBy: currentUser,
-          createdAt: Date.now()
+          createdAt: Date.now(),
+          stats: {
+            opened: false,
+            answeredYes: false,
+            noDodges: 0,
+            lastOpenedAt: null
+          }
         };
 
         try {
@@ -856,6 +890,7 @@
             timestamp: Date.now()
           });
           syncCloudHistory();
+          syncReactionTracker();
         } catch(err) {
           modal.style.display = 'none';
           alert("Database Error: " + err.message);
@@ -882,6 +917,59 @@
             <button style="padding:6px 12px; background:#1b2346; color:#00f2fe; border:none; border-radius:6px; cursor:pointer;" onclick="navigator.clipboard.writeText('${h.url}'); alert('Link copied to clipboard!');">Copy</button>
           </div>
         `).join('');
+      });
+    }
+
+    // Sync Live Reaction Tracker & Delete Engine
+    function syncReactionTracker() {
+      const box = document.getElementById('reaction-tracker-list');
+      db.ref('surprises').orderByChild('createdBy').equalTo(currentUser).on('value', snap => {
+        if (!snap.exists()) {
+          box.innerHTML = '<p style="font-size:12px; color:#6b7ba4;">No active surprise links created yet.</p>';
+          return;
+        }
+        const data = snap.val();
+        const keys = Object.keys(data).reverse();
+
+        box.innerHTML = keys.map(key => {
+          const item = data[key];
+          const st = item.stats || {};
+          const isOpened = st.opened ? '<span style="color:#25D366;">Unlocked ✔</span>' : '<span style="color:#94a3b8;">Not Yet</span>';
+          const isYes = st.answeredYes ? '<span style="color:#ff007f;">YES! ❤️</span>' : '<span style="color:#94a3b8;">Pending</span>';
+          const dodges = st.noDodges || 0;
+
+          return `
+            <div class="tracker-card">
+              <div class="tracker-header">
+                <span>🎁 ${item.name} (${key})</span>
+                <button class="btn-del-link" onclick="deleteSurpriseLink('${key}')"><i class="fa-solid fa-trash"></i> Delete</button>
+              </div>
+              <div style="font-size:11px; color:#8fa0c9;">Category: ${item.category}</div>
+              <div class="tracker-stats-grid">
+                <div class="stat-box">
+                  <div style="color:#7f93c3;">Opened</div>
+                  <div class="stat-val">${isOpened}</div>
+                </div>
+                <div class="stat-box">
+                  <div style="color:#7f93c3;">Reaction</div>
+                  <div class="stat-val">${isYes}</div>
+                </div>
+                <div class="stat-box">
+                  <div style="color:#7f93c3;">No Attempts</div>
+                  <div class="stat-val" style="color:#00f2fe;">${dodges} times</div>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      });
+    }
+
+    // Delete / Expire Link Anytime
+    function deleteSurpriseLink(id) {
+      if (!confirm("Are you sure you want to delete/expire this link? Anyone opening it will see expired!")) return;
+      db.ref('surprises/' + id).remove().then(() => {
+        alert("Link successfully deleted!");
       });
     }
 
@@ -918,7 +1006,7 @@
       event.currentTarget.classList.add('active');
       document.getElementById('tab-create').style.display = (tab === 'create') ? 'block' : 'none';
       document.getElementById('tab-history').style.display = (tab === 'history') ? 'block' : 'none';
-      document.getElementById('tab-profile').style.display = (tab === 'profile') ? 'flex' : 'none';
+      document.getElementById('tab-profile').style.display = (tab === 'profile') ? 'block' : 'none';
     }
   </script>
 </body>

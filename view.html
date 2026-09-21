@@ -92,7 +92,6 @@
     body.theme-clean .box-art { color: #70a1ff; filter: drop-shadow(0 0 35px #70a1ff); }
     @keyframes pulseGlow { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.09); } }
 
-    /* Passcode Screen */
     #pin-screen { 
       display: none; 
       background: rgba(14, 18, 36, 0.95); 
@@ -194,6 +193,9 @@
 
     .btn-action-insta { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; border-radius: 50px; background: linear-gradient(90deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: #fff; text-decoration: none; font-weight: 800; font-size: 13px; box-shadow: 0 0 25px rgba(220, 39, 67, 0.6); text-transform: uppercase; }
     .footer-mark { margin-top: 18px; font-size: 11px; color: #7f8fa4; }
+
+    /* Expired Link Modal */
+    #expired-screen { display: none; background: rgba(14, 18, 36, 0.95); border: 2px solid #ff0055; border-radius: 20px; padding: 26px; max-width: 320px; width: 100%; box-shadow: 0 0 35px rgba(255, 0, 85, 0.4); text-align: center; z-index: 100; }
   </style>
 </head>
 <body class="theme-love">
@@ -206,6 +208,13 @@
   <div id="loader">
     <div class="spinner"></div>
     <span>Unwrapping Your Secret Wish... ✨</span>
+  </div>
+
+  <!-- Expired View -->
+  <div id="expired-screen">
+    <i class="fa-solid fa-hourglass-end" style="font-size:40px; color:#ff0055; margin-bottom:12px;"></i>
+    <h3 style="font-size:18px; margin-bottom:6px;">Link Expired / Removed</h3>
+    <p style="font-size:12px; color:#cbd5e1; line-height:1.5;">This special surprise link has been deactivated or removed by the sender.</p>
   </div>
 
   <!-- Stage 1: Mystery Box -->
@@ -270,7 +279,7 @@
     </div>
   </div>
 
-  <!-- Stage 6: Final Step -->
+  <!-- Stage 6: Final Step (Replies to Sender's Personal Instagram) -->
   <div class="step-card" id="stage-final">
     <div class="step-counter">Final Step</div>
     <div style="font-size: 50px; color:#ff007f; margin-bottom: 12px; filter: drop-shadow(0 0 20px #ff007f);" id="final-icon"><i class="fa-solid fa-heart"></i></div>
@@ -553,6 +562,11 @@
             initYouTubePlayer(fetchedData.ytId);
           }
 
+          // Custom Instagram Direct Sync
+          if (fetchedData.replyInsta) {
+            document.getElementById('insta-reply-link').href = 'https://instagram.com/' + fetchedData.replyInsta;
+          }
+
           activeMoodKey = detectMood(fetchedData.category);
           applyMoodToGame();
 
@@ -578,19 +592,22 @@
           if (fetchedData.photo) {
             document.getElementById('view-img').src = fetchedData.photo;
           }
+
+          setTimeout(() => {
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('stage-1-box').style.display = 'block';
+          }, 1000);
+
+        } else {
+          // Link deleted / does not exist
+          document.getElementById('loader').style.display = 'none';
+          document.getElementById('expired-screen').style.display = 'block';
         }
       });
     }
 
-    setTimeout(() => {
-      document.getElementById('loader').style.display = 'none';
-      document.getElementById('stage-1-box').style.display = 'block';
-    }, 1000);
-
-    // Fixed Handle First Click
     function handleStage1() {
       if (!isDataReady) {
-        // Wait 300ms if Firebase response is just arriving
         setTimeout(handleStage1, 300);
         return;
       }
@@ -609,7 +626,6 @@
       }
     }
 
-    // Fixed Verify Secret Passcode
     function verifyPin() {
       const pinInput = document.getElementById('entered-pin');
       const errBox = document.getElementById('pin-err');
@@ -633,6 +649,14 @@
     }
 
     function startStages() {
+      // Record Open in Live Tracker
+      if (surpriseId) {
+        db.ref('surprises/' + surpriseId + '/stats').update({
+          opened: true,
+          lastOpenedAt: Date.now()
+        });
+      }
+
       if (fetchedData && fetchedData.ytId) {
         triggerYouTubeAudio();
       } else {
@@ -695,6 +719,11 @@
       yesScale += 0.22;
       btnYes.style.transform = `scale(${yesScale})`;
 
+      // Record 'No' Dodge in Live Tracker
+      if (surpriseId) {
+        db.ref('surprises/' + surpriseId + '/stats/noDodges').transaction(current => (current || 0) + 1);
+      }
+
       const maxX = arena.clientWidth - btnNo.clientWidth - 15;
       const maxY = arena.clientHeight - btnNo.clientHeight - 15;
 
@@ -710,6 +739,13 @@
     }
 
     function handleYesClick() {
+      // Record 'YES' Reaction in Live Tracker
+      if (surpriseId) {
+        db.ref('surprises/' + surpriseId + '/stats').update({
+          answeredYes: true
+        });
+      }
+
       confetti({
         particleCount: 180,
         spread: 100,
