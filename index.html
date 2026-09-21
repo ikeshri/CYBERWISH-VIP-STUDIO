@@ -15,7 +15,7 @@
       --primary: #00f2fe;
       --secondary: #ff007f;
       --bg: #05060c;
-      --card: rgba(14, 18, 36, 0.88);
+      --card: rgba(14, 18, 36, 0.92);
       --border: rgba(0, 242, 254, 0.25);
     }
     * { 
@@ -26,20 +26,24 @@
       -webkit-tap-highlight-color: transparent !important;
       outline: none !important;
     }
-    body { 
+    html, body {
+      height: 100%;
       background: var(--bg); 
       color: #fff; 
-      min-height: 100vh; 
-      padding-bottom: 90px; 
-      overflow-x: hidden; 
+      overflow-x: hidden;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100dvh;
     }
 
-    .glow-blob-1 { position: fixed; width: 350px; height: 350px; background: var(--primary); filter: blur(160px); border-radius: 50%; top: -50px; left: -50px; opacity: 0.2; pointer-events: none; z-index: 0; }
-    .glow-blob-2 { position: fixed; width: 350px; height: 350px; background: var(--secondary); filter: blur(160px); border-radius: 50%; bottom: -50px; right: -50px; opacity: 0.2; pointer-events: none; z-index: 0; }
+    .glow-blob-1 { position: fixed; width: 320px; height: 320px; background: var(--primary); filter: blur(150px); border-radius: 50%; top: -40px; left: -40px; opacity: 0.2; pointer-events: none; z-index: 0; }
+    .glow-blob-2 { position: fixed; width: 320px; height: 320px; background: var(--secondary); filter: blur(150px); border-radius: 50%; bottom: -40px; right: -40px; opacity: 0.2; pointer-events: none; z-index: 0; }
 
     header { 
-      padding: 14px 18px; 
-      text-align: center; 
+      height: 56px;
+      padding: 0 16px; 
       background: rgba(8, 10, 20, 0.95); 
       border-bottom: 2px solid transparent; 
       border-image: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent) 1; 
@@ -47,63 +51,76 @@
       position: sticky; 
       top: 0; 
       z-index: 100; 
-      box-shadow: 0 4px 25px rgba(0,0,0,0.6); 
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6); 
       display: flex; 
       align-items: center; 
       justify-content: space-between; 
+      flex-shrink: 0;
     }
     .header-left { display: flex; flex-direction: column; align-items: flex-start; }
-    .brand-badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 50px; background: rgba(0, 242, 254, 0.08); border: 1px solid rgba(0, 242, 254, 0.3); margin-bottom: 3px; }
-    .brand-badge span { font-size: 9px; font-weight: 800; letter-spacing: 1.5px; color: var(--primary); text-transform: uppercase; }
-    header h1 { font-size: 17px; letter-spacing: 1.5px; text-transform: uppercase; background: linear-gradient(90deg, #00f2fe, #fff, #ff007f); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; }
+    .brand-badge { display: inline-flex; align-items: center; gap: 5px; padding: 2px 8px; border-radius: 50px; background: rgba(0, 242, 254, 0.08); border: 1px solid rgba(0, 242, 254, 0.3); margin-bottom: 2px; }
+    .brand-badge span { font-size: 8px; font-weight: 800; letter-spacing: 1px; color: var(--primary); text-transform: uppercase; }
+    header h1 { font-size: 16px; letter-spacing: 1px; text-transform: uppercase; background: linear-gradient(90deg, #00f2fe, #fff, #ff007f); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; }
     
-    .lang-btn { display: inline-flex; align-items: center; gap: 5px; padding: 5px 11px; border-radius: 20px; background: rgba(255, 0, 127, 0.12); border: 1.5px solid var(--secondary); color: #fff; font-size: 11px; font-weight: 800; cursor: pointer; transition: 0.2s ease; }
+    .lang-btn { display: inline-flex; align-items: center; gap: 5px; padding: 5px 11px; border-radius: 20px; background: rgba(255, 0, 127, 0.12); border: 1.2px solid var(--secondary); color: #fff; font-size: 11px; font-weight: 800; cursor: pointer; transition: 0.2s ease; }
     .lang-btn:active { transform: scale(0.95); background: var(--secondary); }
 
     .container { 
-      max-width: 520px; 
+      max-width: 500px; 
+      width: 100%;
       margin: 0 auto; 
-      padding: 16px; 
+      padding: 14px 16px 70px 16px; 
       position: relative; 
       z-index: 10; 
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* Clean Compact Notice Banner */
+    /* FULL-SCREEN AUTH WRAPPER */
+    #auth-view-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: calc(100dvh - 80px);
+      padding: 6px 0;
+    }
+
     .showcase-banner {
       background: radial-gradient(circle at top, rgba(255, 0, 127, 0.15), rgba(12, 16, 35, 0.95));
       border: 1.5px solid rgba(255, 0, 127, 0.38);
       border-radius: 18px;
-      padding: 14px 16px;
-      margin-bottom: 16px;
+      padding: 16px;
       box-shadow: 0 0 25px rgba(255, 0, 127, 0.2);
       backdrop-filter: blur(15px);
     }
     .showcase-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-    .badge-official { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 20px; background: rgba(0, 242, 254, 0.1); border: 1px solid var(--primary); font-size: 10px; font-weight: 800; color: #00f2fe; text-transform: uppercase; letter-spacing: 1px; }
+    .badge-official { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 20px; background: rgba(0, 242, 254, 0.1); border: 1px solid var(--primary); font-size: 10px; font-weight: 800; color: #00f2fe; text-transform: uppercase; }
     .free-pill { background: #25D366; color: #000; padding: 2px 7px; border-radius: 5px; font-weight: 900; font-size: 9.5px; text-transform: uppercase; }
 
     .quick-bullet-list {
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      font-size: 11.5px;
+      gap: 7px;
+      font-size: 12px;
       line-height: 1.5;
       color: #cbd5e1;
     }
     .q-item { display: flex; align-items: flex-start; gap: 7px; }
-    .q-item i { margin-top: 3px; font-size: 10px; flex-shrink: 0; }
+    .q-item i { margin-top: 3px; font-size: 11px; flex-shrink: 0; }
 
-    /* Original Solid Auth Card */
     #auth-screen { 
       background: var(--card); 
       border: 1.5px solid var(--border); 
       border-radius: 20px; 
-      padding: 22px 18px; 
-      box-shadow: 0 0 30px rgba(0,242,254,0.15); 
+      padding: 24px 20px; 
+      box-shadow: 0 0 35px rgba(0,242,254,0.18); 
       backdrop-filter: blur(15px); 
+      margin: 14px 0;
     }
-    .auth-tabs { display: flex; gap: 10px; margin-bottom: 18px; }
-    .auth-tab { flex: 1; padding: 10px; text-align: center; background: #0b0f20; border: 1px solid #1a2344; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 700; color: #8fa0c9; }
+    .auth-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+    .auth-tab { flex: 1; padding: 12px; text-align: center; background: #0b0f20; border: 1px solid #1a2344; border-radius: 12px; cursor: pointer; font-size: 13px; font-weight: 700; color: #8fa0c9; }
     .auth-tab.active { background: rgba(0, 242, 254, 0.15); border-color: var(--primary); color: var(--primary); box-shadow: 0 0 15px rgba(0, 242, 254, 0.3); }
 
     .card { 
@@ -123,7 +140,7 @@
     .cat-btn { background: #0b0f20; border: 1px solid #1b2447; padding: 12px 10px; border-radius: 12px; color: #cbd5e1; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.2s; user-select: none; }
     .cat-btn.active { border-color: var(--secondary); background: rgba(255, 0, 127, 0.15); color: #fff; box-shadow: 0 0 15px rgba(255, 0, 127, 0.4); }
 
-    .input-box { width: 100%; background: #080b17; border: 1.5px solid #1c264a; border-radius: 12px; padding: 12px 14px; color: #fff; font-size: 14px; margin-bottom: 12px; outline: none; transition: 0.2s; }
+    .input-box { width: 100%; background: #080b17; border: 1.5px solid #1c264a; border-radius: 12px; padding: 13px 14px; color: #fff; font-size: 14px; margin-bottom: 14px; outline: none; transition: 0.2s; }
     .input-box:focus { border-color: var(--primary); box-shadow: 0 0 12px rgba(0, 242, 254, 0.3); }
 
     .count-selector { display: flex; gap: 6px; margin-bottom: 14px; overflow-x: auto; scrollbar-width: none; }
@@ -134,12 +151,12 @@
     .slide-carousel-container { position: relative; width: 100%; overflow: hidden; border-radius: 14px; margin-bottom: 12px; }
     .slide-track { display: flex; transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1); width: 100%; }
     .slide-item { min-width: 100%; box-sizing: border-box; padding: 2px; }
-    .slide-box { background: #070a18; border: 1.5px solid #ff007f; border-radius: 14px; padding: 12px; box-shadow: 0 0 18px rgba(255, 0, 127, 0.2); }
+    .slide-box { background: #070a18; border: 1.5px solid #ff007f; border-radius: 14px; padding: 14px; box-shadow: 0 0 18px rgba(255, 0, 127, 0.2); }
     .slide-box-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; font-size: 11px; font-weight: 800; color: #ff85be; text-transform: uppercase; }
-    .slide-textarea { width: 100%; height: 88px; background: transparent; border: none; color: #fff; font-size: 13.5px; resize: none; outline: none; font-family: inherit; }
+    .slide-textarea { width: 100%; height: 90px; background: transparent; border: none; color: #fff; font-size: 14px; resize: none; outline: none; font-family: inherit; }
 
     .slide-nav-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-    .slide-nav-btn { background: #0b112c; border: 1px solid #1f2b57; color: #00f2fe; padding: 6px 12px; border-radius: 18px; font-size: 11px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+    .slide-nav-btn { background: #0b112c; border: 1px solid #1f2b57; color: #00f2fe; padding: 7px 13px; border-radius: 18px; font-size: 11px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 5px; }
     .slide-nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
     .slide-dots { display: flex; gap: 5px; }
     .dot { width: 7px; height: 7px; border-radius: 50%; background: #1e2a52; transition: 0.2s; }
@@ -154,11 +171,28 @@
     .theme-scroll { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; }
     .theme-scroll::-webkit-scrollbar { display: none; }
 
-    .theme-chip { padding: 8px 14px; border-radius: 25px; background: #0b0f20; border: 1px solid #1d274c; font-size: 11.5px; cursor: pointer; white-space: nowrap; color: #a1b0d8; font-weight: 600; user-select: none; transition: all 0.2s; }
+    .theme-chip { padding: 9px 15px; border-radius: 25px; background: #0b0f20; border: 1px solid #1d274c; font-size: 12px; cursor: pointer; white-space: nowrap; color: #a1b0d8; font-weight: 600; user-select: none; transition: all 0.2s; }
     .theme-chip.active { background: linear-gradient(90deg, var(--primary), #4facfe); color: #000; font-weight: 800; border-color: transparent; box-shadow: 0 0 12px rgba(0, 242, 254, 0.5); }
 
-    .btn-submit { width: 100%; padding: 13px; border-radius: 12px; border: none; background: linear-gradient(90deg, var(--secondary), #7928ca); color: #fff; font-size: 14px; font-weight: 800; cursor: pointer; letter-spacing: 0.8px; box-shadow: 0 0 18px rgba(255, 0, 127, 0.4); transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 7px; text-transform: uppercase; }
+    .btn-submit { width: 100%; padding: 14px; border-radius: 12px; border: none; background: linear-gradient(90deg, var(--secondary), #7928ca); color: #fff; font-size: 14.5px; font-weight: 800; cursor: pointer; letter-spacing: 0.8px; box-shadow: 0 0 20px rgba(255, 0, 127, 0.4); transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; text-transform: uppercase; }
     .btn-submit:active { transform: scale(0.98); }
+
+    /* FULL-SCREEN ME (PROFILE) TAB */
+    #tab-profile {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: calc(100dvh - 145px);
+      padding: 4px 0;
+    }
+    .profile-feed-card {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
 
     #loading-modal { display: none; position: fixed; inset: 0; background: rgba(3, 4, 10, 0.92); z-index: 2000; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(10px); }
     .terminal-box { width: 100%; max-width: 440px; background: #090c18; border: 1.5px solid var(--primary); border-radius: 16px; padding: 20px; box-shadow: 0 0 40px rgba(0, 242, 254, 0.3); font-family: monospace; }
@@ -170,34 +204,28 @@
     #result-view { display: none; background: rgba(0, 242, 254, 0.05); border: 1.5px dashed var(--primary); border-radius: 16px; padding: 14px; text-align: center; margin-top: 14px; }
     .history-item { background: #080b18; border: 1px solid #1b2342; border-radius: 10px; padding: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
 
-    .bottom-credit {
+    .bottom-credit-wrap {
       text-align: center;
-      font-size: 11px;
-      color: #5c6e97;
-      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
     }
-
-    /* Original Floating Instagram Pill */
-    .insta-float { 
-      position: fixed; 
-      bottom: 75px; 
-      right: 15px; 
-      background: rgba(12, 16, 32, 0.92); 
-      border: 1.5px solid var(--secondary); 
-      border-radius: 50px; 
-      padding: 7px 14px; 
-      display: flex; 
+    .insta-pill { 
+      display: inline-flex; 
       align-items: center; 
       gap: 6px; 
-      text-decoration: none; 
+      padding: 7px 16px; 
+      border-radius: 50px; 
+      background: rgba(14, 18, 38, 0.95); 
+      border: 1.5px solid var(--secondary); 
       color: #fff; 
-      font-size: 12px; 
+      font-size: 11.5px; 
       font-weight: 700; 
-      box-shadow: 0 0 16px rgba(255, 0, 127, 0.5); 
-      z-index: 99; 
-      animation: holoAnim 3s infinite ease-in-out alternate; 
+      text-decoration: none; 
+      box-shadow: 0 0 16px rgba(255, 0, 127, 0.4); 
     }
-    @keyframes holoAnim { 0% { transform: translateY(0); } 100% { transform: translateY(-5px); } }
 
     .nav-bar { 
       position: fixed; 
@@ -208,7 +236,7 @@
       border-top: 1px solid var(--border); 
       display: flex; 
       justify-content: space-around; 
-      padding: 8px 0; 
+      padding: 6px 0; 
       backdrop-filter: blur(15px); 
       z-index: 100; 
       height: 56px; 
@@ -225,7 +253,7 @@
 
   <header>
     <div class="header-left">
-      <div class="brand-badge"><i class="fa-solid fa-bolt" style="color:var(--primary); font-size:9px;"></i><span>Story Engine Active</span></div>
+      <div class="brand-badge"><i class="fa-solid fa-bolt" style="color:var(--primary); font-size:8px;"></i><span>Story Engine Active</span></div>
       <h1>CYBERWISH VIP</h1>
     </div>
     <button type="button" class="lang-btn" onclick="toggleNoticeLanguage()">
@@ -235,32 +263,43 @@
 
   <div class="container">
 
-    <!-- Clean Header Banner -->
-    <div class="showcase-banner" id="showcase-box">
-      <div class="showcase-header">
-        <span class="badge-official"><i class="fa-solid fa-gem"></i> <span id="sc-tag">VIP Engine</span></span>
-        <span class="free-pill">100% Free</span>
+    <!-- FULL SCREEN AUTH VIEW (NO DEAD BOTTOM SPACE) -->
+    <div id="auth-view-wrap">
+      
+      <div class="showcase-banner" id="showcase-box">
+        <div class="showcase-header">
+          <span class="badge-official"><i class="fa-solid fa-gem"></i> <span id="sc-tag">VIP Engine</span></span>
+          <span class="free-pill">100% Free</span>
+        </div>
+        <div class="quick-bullet-list" id="sc-bullet-list">
+          <div class="q-item"><i class="fa-solid fa-sparkles" style="color:#00f2fe;"></i> <span><strong>What is it?</strong> 3D surprise story webpages with YouTube music & runaway 'No' button.</span></div>
+          <div class="q-item"><i class="fa-solid fa-money-bill-wave" style="color:#ff007f;"></i> <span><strong>Market Price:</strong> Other portals charge <strong>₹499 - ₹1,499</strong>.</span></div>
+          <div class="q-item"><i class="fa-solid fa-gift" style="color:#25D366;"></i> <span><strong>CyberWish:</strong> All VIP features are <span class="free-pill">100% FREE</span>!</span></div>
+        </div>
       </div>
-      <div class="quick-bullet-list" id="sc-bullet-list">
-        <div class="q-item"><i class="fa-solid fa-sparkles" style="color:#00f2fe;"></i> <span><strong>What is it?</strong> 3D surprise story webpages with YouTube music & runaway 'No' button.</span></div>
-        <div class="q-item"><i class="fa-solid fa-money-bill-wave" style="color:#ff007f;"></i> <span><strong>Market Price:</strong> Other portals charge <strong>₹499 - ₹1,499</strong>.</span></div>
-        <div class="q-item"><i class="fa-solid fa-gift" style="color:#25D366;"></i> <span><strong>CyberWish:</strong> All VIP features are <span class="free-pill">100% FREE</span>!</span></div>
+
+      <div id="auth-screen">
+        <div class="auth-tabs">
+          <div class="auth-tab active" id="tab-login-btn" onclick="setAuthMode('login')">Sign In</div>
+          <div class="auth-tab" id="tab-signup-btn" onclick="setAuthMode('signup')">Sign Up</div>
+        </div>
+        <input type="text" id="auth-user" class="input-box" placeholder="Enter username" autocomplete="off">
+        <input type="password" id="auth-pass" class="input-box" placeholder="Enter secret password" onkeydown="if(event.key==='Enter') handleAuth()">
+        <button class="btn-submit" id="auth-submit-btn" onclick="handleAuth()"><i class="fa-solid fa-lock"></i> Log In</button>
       </div>
+
+      <div class="bottom-credit-wrap">
+        <a href="https://instagram.com/madxninja_" target="_blank" class="insta-pill">
+          <i class="fa-brands fa-instagram" style="color:var(--secondary); font-size:13px;"></i>
+          <span>Follow @madxninja_</span>
+        </a>
+        <div style="font-size:11px; color:#5c6e97;">Designed & Developed with ❤️ by <strong>@madxninja_</strong></div>
+      </div>
+
     </div>
 
-    <!-- Auth View -->
-    <div id="auth-screen">
-      <div class="auth-tabs">
-        <div class="auth-tab active" id="tab-login-btn" onclick="setAuthMode('login')">Sign In</div>
-        <div class="auth-tab" id="tab-signup-btn" onclick="setAuthMode('signup')">Sign Up</div>
-      </div>
-      <input type="text" id="auth-user" class="input-box" placeholder="Enter username" autocomplete="off">
-      <input type="password" id="auth-pass" class="input-box" placeholder="Enter secret password" onkeydown="if(event.key==='Enter') handleAuth()">
-      <button class="btn-submit" id="auth-submit-btn" onclick="handleAuth()"><i class="fa-solid fa-lock"></i> Log In</button>
-    </div>
-
-    <!-- Main Workspace -->
-    <div id="main-workspace" style="display: none;">
+    <!-- MAIN WORKSPACE -->
+    <div id="main-workspace" style="display: none; flex: 1;">
 
       <div id="tab-create">
         
@@ -403,25 +442,35 @@
         </div>
       </div>
 
+      <!-- FULL SCREEN ME TAB (NO DEAD BOTTOM SPACE) -->
       <div id="tab-profile" style="display: none;">
-        <div class="card">
-          <div class="section-title"><span>💬 Connect with Developer</span></div>
-          <p style="font-size:12px; color:#8ea0cb; margin-bottom:10px;">Have an idea or need custom features? Send a direct message to developer:</p>
-          <textarea id="suggest-text" class="input-box" style="height:85px; resize:none;" placeholder="Write your message or idea here..."></textarea>
-          <button class="btn-submit" onclick="submitSuggestion()"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+        
+        <div class="card profile-feed-card">
+          <div>
+            <div class="section-title"><span>💬 Connect with Developer</span></div>
+            <p style="font-size:12.5px; color:#8ea0cb; margin-bottom:12px; line-height:1.5;">Have an idea, need custom features, or want to report something? Send a direct message:</p>
+            <textarea id="suggest-text" class="input-box" style="height:110px; resize:none; font-size:14px;" placeholder="Write your message or idea here..."></textarea>
+          </div>
+          <button class="btn-submit" onclick="submitSuggestion()"><i class="fa-solid fa-paper-plane"></i> Send Message To Developer</button>
         </div>
 
-        <div class="card" style="text-align: center;">
-          <div class="section-title" style="justify-content:center;"><span>👤 Your Account</span></div>
-          <p style="font-size:16px; color:#00f2fe; font-weight:800; margin-bottom:14px;" id="profile-display-name"></p>
-          <button class="btn-submit" style="background:#220914; border:1.5px solid #ff0055;" onclick="logout()">
-            <i class="fa-solid fa-right-from-bracket"></i> LOG OUT
+        <div class="card" style="text-align: center; padding: 22px 18px;">
+          <div class="section-title" style="justify-content:center; margin-bottom:14px;"><span>👤 Your Active Session</span></div>
+          <div style="font-size:42px; color:#ff007f; margin-bottom:8px;"><i class="fa-solid fa-circle-user"></i></div>
+          <p style="font-size:18px; color:#00f2fe; font-weight:900; letter-spacing:1px; margin-bottom:16px;" id="profile-display-name"></p>
+          <button class="btn-submit" style="background:rgba(255, 0, 85, 0.15); border:1.5px solid #ff0055; color:#ff3366;" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i> LOG OUT ACCOUNT
           </button>
         </div>
-      </div>
 
-      <div class="bottom-credit">
-        Designed & Developed with ❤️ by <strong>@madxninja_</strong>
+        <div class="bottom-credit-wrap">
+          <a href="https://instagram.com/madxninja_" target="_blank" class="insta-pill">
+            <i class="fa-brands fa-instagram" style="color:var(--secondary); font-size:13px;"></i>
+            <span>Follow @madxninja_</span>
+          </a>
+          <div style="font-size:11px; color:#5c6e97;">Designed & Developed with ❤️ by <strong>@madxninja_</strong></div>
+        </div>
+
       </div>
 
     </div>
@@ -440,12 +489,6 @@
       <div class="term-line" id="term-4">> [4/4] Short surprise link published live!</div>
     </div>
   </div>
-
-  <!-- Original Floating Instagram Badge -->
-  <a href="https://instagram.com/madxninja_" target="_blank" class="insta-float">
-    <i class="fa-brands fa-instagram" style="color:var(--secondary);"></i>
-    <span>Follow @madxninja_</span>
-  </a>
 
   <div class="nav-bar" id="bottom-nav" style="display:none;">
     <div class="nav-tab active" onclick="switchTab('create')"><i class="fa-solid fa-wand-magic-sparkles"></i> Create</div>
@@ -683,9 +726,8 @@
     }
 
     function setupWorkspace() {
-      document.getElementById('auth-screen').style.display = 'none';
-      document.getElementById('showcase-box').style.display = 'none';
-      document.getElementById('main-workspace').style.display = 'block';
+      document.getElementById('auth-view-wrap').style.display = 'none';
+      document.getElementById('main-workspace').style.display = 'flex';
       document.getElementById('bottom-nav').style.display = 'flex';
       document.getElementById('profile-display-name').innerText = "@" + currentUser;
       syncCloudHistory();
@@ -876,7 +918,7 @@
       event.currentTarget.classList.add('active');
       document.getElementById('tab-create').style.display = (tab === 'create') ? 'block' : 'none';
       document.getElementById('tab-history').style.display = (tab === 'history') ? 'block' : 'none';
-      document.getElementById('tab-profile').style.display = (tab === 'profile') ? 'block' : 'none';
+      document.getElementById('tab-profile').style.display = (tab === 'profile') ? 'flex' : 'none';
     }
   </script>
 </body>
