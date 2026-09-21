@@ -40,7 +40,6 @@
 
     #particles-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
 
-    /* Completely Invisible YouTube Player Container */
     #yt-hidden-player {
       position: fixed;
       top: -9999px;
@@ -99,7 +98,7 @@
       max-width: 440px; 
       width: 100%; 
       max-height: 88vh;
-      background: rgba(14, 18, 38, 0.9); 
+      background: rgba(14, 18, 38, 0.92); 
       border-radius: 24px; 
       padding: 24px 18px; 
       backdrop-filter: blur(25px); 
@@ -147,8 +146,8 @@
     .btn-next:active { transform: scale(0.98); }
 
     .arena-container { min-height: 140px; position: relative; display: flex; align-items: center; justify-content: center; gap: 18px; margin: 15px 0; }
-    #btn-yes { padding: 12px 28px; border-radius: 50px; background: #25D366; color: #fff; font-weight: 800; font-size: 16px; border: none; cursor: pointer; box-shadow: 0 0 20px rgba(37,211,102,0.6); transition: all 0.25s ease-out; z-index: 15; }
-    #btn-no { padding: 12px 24px; border-radius: 50px; background: #ff0055; color: #fff; font-weight: 700; font-size: 14px; border: none; cursor: pointer; transition: all 0.2s ease; z-index: 20; }
+    #btn-yes { padding: 12px 28px; border-radius: 50px; background: #25D366; color: #fff; font-weight: 800; font-size: 16px; border: none; cursor: pointer; box-shadow: 0 0 20px rgba(37,211,102,0.6); transition: all 0.25s ease-out; z-index: 15; white-space: nowrap; }
+    #btn-no { padding: 12px 24px; border-radius: 50px; background: #ff0055; color: #fff; font-weight: 700; font-size: 14px; border: none; cursor: pointer; transition: all 0.2s ease; z-index: 20; white-space: nowrap; }
 
     .btn-action-insta { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; border-radius: 50px; background: linear-gradient(90deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: #fff; text-decoration: none; font-weight: 800; font-size: 13px; box-shadow: 0 0 25px rgba(220, 39, 67, 0.6); text-transform: uppercase; }
     .footer-mark { margin-top: 18px; font-size: 11px; color: #7f8fa4; }
@@ -157,8 +156,6 @@
 <body class="theme-love">
 
   <canvas id="particles-canvas"></canvas>
-  
-  <!-- Hidden YouTube Player -->
   <div id="yt-hidden-player"></div>
 
   <div id="loader">
@@ -183,7 +180,7 @@
     <div class="step-counter">Story Introduction</div>
     <div class="tag-badge" id="view-cat">Special Wish</div>
     <h1 class="title-name" id="view-name">Dearest</h1>
-    <p style="font-size: 14px; color:#cbd5e1; line-height: 1.6; margin-bottom: 20px;">
+    <p style="font-size: 14px; color:#cbd5e1; line-height: 1.6; margin-bottom: 20px;" id="welcome-subtext">
       Someone has dedicated a private multi-slide story universe especially for you. Ready to read their secret words?
     </p>
     <button class="btn-next" onclick="startReadingSlides()">Start Story Journey <i class="fa-solid fa-arrow-right"></i></button>
@@ -205,10 +202,11 @@
     <button class="btn-next" onclick="goToGameStage()">Proceed <i class="fa-solid fa-arrow-right"></i></button>
   </div>
 
+  <!-- Smart Mood-Adaptive Game Stage -->
   <div class="step-card" id="stage-game">
-    <div class="step-counter">Interactive Mood Check</div>
-    <h2 id="question-text" style="font-size: 20px; margin-bottom: 6px; color:#ff007f; text-shadow:0 0 15px #ff007f;">Did you like this surprise?</h2>
-    <p style="font-size: 13px; color: #94a3b8;">Try tapping "No" if you dare! 😉</p>
+    <div class="step-counter" id="game-tag">Interactive Mood Check</div>
+    <h2 id="question-text" style="font-size: 20px; margin-bottom: 6px; color:#ff007f; text-shadow:0 0 15px #ff007f;">Are you happy?</h2>
+    <p style="font-size: 13px; color: #94a3b8;" id="game-hint">Try tapping "No" if you dare! 😉</p>
 
     <div class="arena-container" id="arena">
       <button id="btn-yes" onclick="handleYesClick()">YES! ❤️</button>
@@ -216,11 +214,12 @@
     </div>
   </div>
 
+  <!-- Smart Mood-Adaptive Final Stage -->
   <div class="step-card" id="stage-final">
     <div class="step-counter">Final Step</div>
-    <div style="font-size: 50px; color:#ff007f; margin-bottom: 12px; filter: drop-shadow(0 0 20px #ff007f);"><i class="fa-solid fa-heart"></i></div>
-    <h2 style="font-size: 22px; margin-bottom: 8px; color:#fff;">Yay! I knew you'd say Yes! ❤️</h2>
-    <p style="font-size: 13px; color: #cbd5e1; line-height: 1.5; margin-bottom: 20px;">
+    <div style="font-size: 50px; color:#ff007f; margin-bottom: 12px; filter: drop-shadow(0 0 20px #ff007f);" id="final-icon"><i class="fa-solid fa-heart"></i></div>
+    <h2 style="font-size: 22px; margin-bottom: 8px; color:#fff;" id="final-heading">Yay! I knew you'd say Yes! ❤️</h2>
+    <p style="font-size: 13px; color: #cbd5e1; line-height: 1.5; margin-bottom: 20px;" id="final-subtext">
       Your smile is the most beautiful thing in this world. Send a direct reply on Instagram now!
     </p>
 
@@ -249,9 +248,97 @@
     let yesScale = 1.0;
     let noDodgeCount = 0;
     let ytPlayer = null;
-    let ytPlayerReady = false;
 
-    // YouTube IFrame API Ready Callback
+    // Mood & Category Recognition Engine
+    const moodProfiles = {
+      birthday: {
+        question: "Are you ready for the Birthday Treat? 🎂🎉",
+        hint: "Saying 'No' is strictly not allowed today! 😜",
+        yesBtn: "Treat On Me! 🥳",
+        noBtn: "No Treat 🙅‍♂️",
+        doxTexts: ["Nice try, kanjoos! 😂", "Treat toh deni padegi! 🍕", "No option exists! 🍰", "Party confirm! 🥳"],
+        finalHeading: "Woohoo! Birthday Party Locked In! 🎂🎉",
+        finalSubtext: "Wishing you the sweetest, happiest year ahead. Now send your birthday thanks on Instagram!",
+        finalIcon: '<i class="fa-solid fa-cake-candles"></i>'
+      },
+      proposal: {
+        question: "Will you stay with me forever and ever? 💍❤️",
+        hint: "Think carefully before touching 'No'... 😉",
+        yesBtn: "YES, Forever! 💖",
+        noBtn: "Thinking... 🙈",
+        doxTexts: ["Heart already said Yes! ❤️", "Can't run from destiny! 💍", "You are mine! 🥰", "Forever it is! 💖"],
+        finalHeading: "My Heart Is Officially Yours Forever! 💍❤️",
+        finalSubtext: "You just made me the happiest person in the universe. Seal this moment on Instagram!",
+        finalIcon: '<i class="fa-solid fa-ring"></i>'
+      },
+      apology: {
+        question: "Are you still angry, or did you forgive me? 🥺",
+        hint: "Look at my puppy eyes before clicking 'No'! 🥺",
+        yesBtn: "Forgiven! 🥺❤️",
+        noBtn: "Still Mad! 😤",
+        doxTexts: ["Maan jao na please! 🥺", "I promise no more mistakes! ❤️", "Look at my smile! 🥺", "Yay, no more anger! 🥰"],
+        finalHeading: "Yay! You Forgave Me! 🥺❤️",
+        finalSubtext: "Thank you for understanding my heart. I promise to cherish your smile forever!",
+        finalIcon: '<i class="fa-solid fa-face-smile-beam"></i>'
+      },
+      friendship: {
+        question: "Promise to be my crazy crime-partner forever? 🤝😎",
+        hint: "Friends never say no to each other! 😜",
+        yesBtn: "Pakka Promise! 🤜🤛",
+        noBtn: "Never! 😝",
+        doxTexts: ["Dost dost na raha? 😂", "You can't escape our bond! 🍕", "Besties for life! 😎", "Crime partner locked! 🤜🤛"],
+        finalHeading: "Crazy Besties For Life! 🤝🔥",
+        finalSubtext: "Cheers to our endless stupid memories and unbreakable bond. Drop a shoutout on Instagram!",
+        finalIcon: '<i class="fa-solid fa-user-group"></i>'
+      },
+      anniversary: {
+        question: "Do you love me more than yesterday? 💍✨",
+        hint: "There is only one correct answer here! ❤️",
+        yesBtn: "Always More! ❤️",
+        noBtn: "Less! 😜",
+        doxTexts: ["Liar! You love me! 😂", "Love grows every second! ✨", "Can't click that! ❤️", "Infinite love! 💍"],
+        finalHeading: "Happy Anniversary, My Entire World! 🥂💖",
+        finalSubtext: "Another year of loving you more deeply than words could ever say. Let's celebrate!",
+        finalIcon: '<i class="fa-solid fa-champagne-glasses"></i>'
+      },
+      generic: {
+        question: "Did this little surprise make you smile? ✨",
+        hint: "Try tapping 'No' if you dare! 😉",
+        yesBtn: "Big Smile! 🥰",
+        noBtn: "Nope 😜",
+        doxTexts: ["Nice try! 😜", "Nope! 🏃‍♂️", "Can't touch this! 😂", "Say Yes please! 🥺"],
+        finalHeading: "Yay! Seeing You Smile Means The World! ❤️",
+        finalSubtext: "Your happiness is everything. Send a sweet reaction back on Instagram!",
+        finalIcon: '<i class="fa-solid fa-heart"></i>'
+      }
+    };
+
+    function detectMood(catName) {
+      if (!catName) return 'generic';
+      const c = catName.toLowerCase();
+      if (c.includes('birth') || c.includes('बर्थडे') || c.includes('cake')) return 'birthday';
+      if (c.includes('propos') || c.includes('प्रपोज़') || c.includes('love') || c.includes('प्यार')) return 'proposal';
+      if (c.includes('sorry') || c.includes('apolog') || c.includes('मनाना') || c.includes('माफी')) return 'apology';
+      if (c.includes('friend') || c.includes('दोस्त') || c.includes('यार')) return 'friendship';
+      if (c.includes('anniversary') || c.includes('एनिवर्सरी')) return 'anniversary';
+      return 'generic';
+    }
+
+    let activeMoodKey = 'generic';
+
+    function applyMoodToGame() {
+      const mood = moodProfiles[activeMoodKey] || moodProfiles.generic;
+      document.getElementById('question-text').innerText = mood.question;
+      document.getElementById('game-hint').innerText = mood.hint;
+      document.getElementById('btn-yes').innerText = mood.yesBtn;
+      document.getElementById('btn-no').innerText = mood.noBtn;
+
+      document.getElementById('final-heading').innerText = mood.finalHeading;
+      document.getElementById('final-subtext').innerText = mood.finalSubtext;
+      document.getElementById('final-icon').innerHTML = mood.finalIcon;
+    }
+
+    // YouTube API
     function onYouTubeIframeAPIReady() {
       if (fetchedData && fetchedData.ytId) {
         initYouTubePlayer(fetchedData.ytId);
@@ -271,9 +358,6 @@
           loop: 1,
           playlist: videoId,
           modestbranding: 1
-        },
-        events: {
-          onReady: () => { ytPlayerReady = true; }
         }
       });
     }
@@ -426,10 +510,13 @@
 
           initParticles(fetchedData.fxList, fetchedData.customEmojis, fetchedData.motion);
 
-          // If YouTube API already loaded, init player
           if (window.YT && window.YT.Player && fetchedData.ytId) {
             initYouTubePlayer(fetchedData.ytId);
           }
+
+          // Detect Mood and configure game
+          activeMoodKey = detectMood(fetchedData.category);
+          applyMoodToGame();
 
           const iconBox = document.getElementById('box-icon');
           if (theme === 'love') iconBox.innerHTML = '<i class="fa-solid fa-heart"></i>';
@@ -477,7 +564,6 @@
     }
 
     function startStages() {
-      // First user tap triggers audio / YouTube playback seamlessly
       playSoundtrack(fetchedData ? fetchedData.bgm : 'piano');
       document.getElementById('stage-1-box').style.display = 'none';
       confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
@@ -529,6 +615,7 @@
       const btnNo = document.getElementById('btn-no');
       const btnYes = document.getElementById('btn-yes');
       const arena = document.getElementById('arena');
+      const mood = moodProfiles[activeMoodKey] || moodProfiles.generic;
 
       noDodgeCount++;
       yesScale += 0.22;
@@ -544,8 +631,8 @@
       btnNo.style.left = `${Math.max(8, Math.min(maxX, arena.clientWidth/2 + randomX))}px`;
       btnNo.style.top = `${Math.max(8, Math.min(maxY, arena.clientHeight/2 + randomY))}px`;
 
-      const wittyTexts = ["Nice try! 😜", "Nope! 🏃‍♂️", "Can't touch this! 😂", "Say Yes please! 🥺"];
-      btnNo.innerText = wittyTexts[noDodgeCount % wittyTexts.length];
+      const texts = mood.doxTexts || ["Nice try! 😜", "Nope! 🏃‍♂️", "Can't touch this! 😂", "Say Yes please! 🥺"];
+      btnNo.innerText = texts[noDodgeCount % texts.length];
     }
 
     function handleYesClick() {
