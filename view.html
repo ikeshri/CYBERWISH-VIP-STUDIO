@@ -46,9 +46,31 @@
     body.theme-fairy { background: radial-gradient(circle, #2a0b2e 0%, #06020c 100%); }
     body.theme-clean { background: radial-gradient(circle, #0d1322 0%, #04060b 100%); }
 
-    #loader { display: flex; flex-direction: column; align-items: center; gap: 12px; font-size: 14px; color: #00f2fe; z-index: 10; }
-    .spinner { width: 45px; height: 45px; border: 3px solid rgba(0,242,254,0.2); border-top-color: #00f2fe; border-radius: 50%; animation: spin 0.8s linear infinite; }
+    /* Exactly 1 Second Premium Loader */
+    #loader { 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      gap: 14px; 
+      font-size: 14px; 
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #ff85be; 
+      text-shadow: 0 0 15px #ff007f;
+      z-index: 50; 
+      animation: fadeIn 0.3s ease-in;
+    }
+    .spinner { 
+      width: 48px; 
+      height: 48px; 
+      border: 3px solid rgba(255, 0, 127, 0.2); 
+      border-top-color: #ff007f; 
+      border-radius: 50%; 
+      animation: spin 0.75s linear infinite; 
+      box-shadow: 0 0 20px rgba(255, 0, 127, 0.4);
+    }
     @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     #stage-1-box { display: none; cursor: pointer; animation: pulseGlow 2.2s infinite ease-in-out; z-index: 10; }
     .box-art { font-size: 85px; margin-bottom: 16px; }
@@ -75,7 +97,7 @@
       backdrop-filter: blur(25px); 
       border: 1.5px solid rgba(255, 0, 127, 0.35); 
       box-shadow: 0 0 45px rgba(255, 0, 127, 0.25); 
-      animation: zoomReveal 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+      animation: zoomReveal 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
       position: relative; 
       z-index: 10;
       overflow-y: auto;
@@ -89,7 +111,6 @@
     .tag-badge { display: inline-block; padding: 5px 15px; border-radius: 30px; font-size: 12px; margin-bottom: 10px; font-weight: 700; text-transform: uppercase; background: rgba(255, 0, 127, 0.15); border: 1px solid #ff007f; color: #ff85be; }
     .title-name { font-size: 28px; font-weight: 900; margin-bottom: 12px; letter-spacing: 1px; color: #fff; text-shadow: 0 0 25px #ff007f; }
 
-    /* Ultra Glowing Pink Poetry Box with Controlled Height */
     .quote-box-container {
       background: radial-gradient(circle at top left, rgba(255, 0, 127, 0.15), rgba(18, 5, 22, 0.92));
       border: 2px solid #ff007f;
@@ -131,11 +152,13 @@
   <canvas id="particles-canvas"></canvas>
   <audio id="custom-audio-elem" preload="auto"></audio>
 
+  <!-- 1-Second Aesthetic Loader -->
   <div id="loader">
     <div class="spinner"></div>
-    <span>Decrypting VIP Surprise...</span>
+    <span>Unwrapping Your Secret Wish... ✨</span>
   </div>
 
+  <!-- Stage 1: The Mystery Box -->
   <div id="stage-1-box" onclick="handleStage1()">
     <div class="box-art" id="box-icon"><i class="fa-solid fa-heart"></i></div>
     <h2 style="font-size: 20px; letter-spacing:1px; margin-bottom: 6px;">YOU RECEIVED A SECRET SURPRISE</h2>
@@ -163,7 +186,7 @@
     <div class="step-counter">Step 2 of 5</div>
     <div style="font-size: 26px; color: #ff007f; margin-bottom: 8px;"><i class="fa-solid fa-quote-left"></i></div>
     <div class="quote-box-container">
-      <div class="quote-box" id="view-msg">Message loading...</div>
+      <div class="quote-box" id="view-msg">Loading message...</div>
     </div>
     <button class="btn-next" onclick="checkNextAfterMsg()">Continue Journey <i class="fa-solid fa-arrow-right"></i></button>
   </div>
@@ -232,7 +255,7 @@
     function initParticles(fxList, customEmojis, motion) {
       particles = [];
       currentMotion = motion || 'up';
-      const count = 55;
+      const count = 45;
 
       let types = fxList && fxList.length ? [...fxList] : ['hearts'];
       if (customEmojis) {
@@ -343,57 +366,52 @@
           osc.start(audioCtx.currentTime + idx * 0.2);
           osc.stop(audioCtx.currentTime + idx * 0.2 + 0.8);
         });
-      } catch(e) { }
+      } catch(e) {}
     }
 
-    window.onload = () => {
-      const params = new URLSearchParams(window.location.search);
-      const surpriseId = params.get('id');
+    // Default Particles
+    initParticles(['hearts'], null, 'up');
+    renderParticles();
 
-      if (!surpriseId) {
-        document.getElementById('loader').innerHTML = "<p style='color:#ff0055;'>❌ Invalid or missing surprise link!</p>";
-        return;
-      }
+    // Start Exactly 1 Second Timer
+    setTimeout(() => {
+      document.getElementById('loader').style.display = 'none';
+      document.getElementById('stage-1-box').style.display = 'block';
+    }, 1000);
 
+    const params = new URLSearchParams(window.location.search);
+    const surpriseId = params.get('id');
+
+    if (surpriseId) {
       db.ref('surprises/' + surpriseId).once('value').then(snapshot => {
-        if (!snapshot.exists()) {
-          document.getElementById('loader').innerHTML = "<p style='color:#ff0055;'>❌ Surprise expired or deleted!</p>";
-          return;
+        if (snapshot.exists()) {
+          fetchedData = snapshot.val();
+
+          const theme = fetchedData.theme || 'love';
+          document.body.className = 'theme-' + theme;
+
+          initParticles(fetchedData.fxList, fetchedData.customEmojis, fetchedData.motion);
+
+          const iconBox = document.getElementById('box-icon');
+          if (theme === 'love') iconBox.innerHTML = '<i class="fa-solid fa-heart"></i>';
+          else if (theme === 'galaxy') iconBox.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i>';
+          else if (theme === 'cyber') iconBox.innerHTML = '<i class="fa-solid fa-box-open"></i>';
+          else if (theme === 'gold') iconBox.innerHTML = '<i class="fa-solid fa-crown"></i>';
+          else if (theme === 'fairy') iconBox.innerHTML = '<i class="fa-solid fa-feather"></i>';
+          else iconBox.innerHTML = '<i class="fa-solid fa-moon"></i>';
+
+          document.getElementById('view-name').innerText = fetchedData.name || 'Special One';
+          document.getElementById('view-cat').innerText = fetchedData.category || 'Special Wish';
+          document.getElementById('view-msg').innerText = fetchedData.message || '';
+
+          if (fetchedData.photo) {
+            document.getElementById('view-img').src = fetchedData.photo;
+          }
         }
-
-        fetchedData = snapshot.val();
-        document.getElementById('loader').style.display = 'none';
-        document.getElementById('stage-1-box').style.display = 'block';
-
-        const theme = fetchedData.theme || 'love';
-        document.body.className = 'theme-' + theme;
-
-        initParticles(fetchedData.fxList, fetchedData.customEmojis, fetchedData.motion);
-        renderParticles();
-
-        const iconBox = document.getElementById('box-icon');
-        if (theme === 'love') iconBox.innerHTML = '<i class="fa-solid fa-heart"></i>';
-        else if (theme === 'galaxy') iconBox.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i>';
-        else if (theme === 'cyber') iconBox.innerHTML = '<i class="fa-solid fa-box-open"></i>';
-        else if (theme === 'gold') iconBox.innerHTML = '<i class="fa-solid fa-crown"></i>';
-        else if (theme === 'fairy') iconBox.innerHTML = '<i class="fa-solid fa-feather"></i>';
-        else iconBox.innerHTML = '<i class="fa-solid fa-moon"></i>';
-
-        document.getElementById('view-name').innerText = fetchedData.name || 'Special One';
-        document.getElementById('view-cat').innerText = fetchedData.category || 'Special Wish';
-        document.getElementById('view-msg').innerText = fetchedData.message || '';
-
-        if (fetchedData.photo) {
-          document.getElementById('view-img').src = fetchedData.photo;
-        }
-
-      }).catch(err => {
-        document.getElementById('loader').innerHTML = "<p style='color:#ff0055;'>Error: " + err.message + "</p>";
       });
-    };
+    }
 
     function handleStage1() {
-      playSoundtrack(fetchedData ? fetchedData.bgm : 'piano', fetchedData ? fetchedData.customAudio : null);
       if (fetchedData && fetchedData.pin) {
         document.getElementById('stage-1-box').style.display = 'none';
         document.getElementById('pin-screen').style.display = 'block';
@@ -404,7 +422,7 @@
 
     function verifyPin() {
       const pin = document.getElementById('entered-pin').value.trim();
-      if (pin === fetchedData.pin) {
+      if (fetchedData && pin === fetchedData.pin) {
         document.getElementById('pin-screen').style.display = 'none';
         startStages();
       } else {
@@ -413,6 +431,7 @@
     }
 
     function startStages() {
+      playSoundtrack(fetchedData ? fetchedData.bgm : 'piano', fetchedData ? fetchedData.customAudio : null);
       document.getElementById('stage-1-box').style.display = 'none';
       confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
       goToStep(2);
