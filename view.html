@@ -40,14 +40,17 @@
 
     #particles-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
 
-    #yt-hidden-player {
-      position: fixed;
-      top: -9999px;
-      left: -9999px;
-      width: 1px;
-      height: 1px;
-      opacity: 0;
+    /* Hidden but Active Player (Prevents Mobile Browser Throttle) */
+    #yt-wrapper {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 2px;
+      height: 2px;
+      opacity: 0.01;
       pointer-events: none;
+      overflow: hidden;
+      z-index: -10;
     }
 
     body.theme-love { background: radial-gradient(circle, #380211 0%, #0d0004 100%); }
@@ -156,7 +159,11 @@
 <body class="theme-love">
 
   <canvas id="particles-canvas"></canvas>
-  <div id="yt-hidden-player"></div>
+  
+  <!-- Active Audio Anchor for YouTube -->
+  <div id="yt-wrapper">
+    <div id="yt-hidden-player"></div>
+  </div>
 
   <div id="loader">
     <div class="spinner"></div>
@@ -202,7 +209,6 @@
     <button class="btn-next" onclick="goToGameStage()">Proceed <i class="fa-solid fa-arrow-right"></i></button>
   </div>
 
-  <!-- Smart Mood-Adaptive Game Stage -->
   <div class="step-card" id="stage-game">
     <div class="step-counter" id="game-tag">Interactive Mood Check</div>
     <h2 id="question-text" style="font-size: 20px; margin-bottom: 6px; color:#ff007f; text-shadow:0 0 15px #ff007f;">Are you happy?</h2>
@@ -214,7 +220,6 @@
     </div>
   </div>
 
-  <!-- Smart Mood-Adaptive Final Stage -->
   <div class="step-card" id="stage-final">
     <div class="step-counter">Final Step</div>
     <div style="font-size: 50px; color:#ff007f; margin-bottom: 12px; filter: drop-shadow(0 0 20px #ff007f);" id="final-icon"><i class="fa-solid fa-heart"></i></div>
@@ -248,8 +253,8 @@
     let yesScale = 1.0;
     let noDodgeCount = 0;
     let ytPlayer = null;
+    let isYtPlaying = false;
 
-    // Mood & Category Recognition Engine
     const moodProfiles = {
       birthday: {
         question: "Are you ready for the Birthday Treat? 🎂🎉",
@@ -338,28 +343,25 @@
       document.getElementById('final-icon').innerHTML = mood.finalIcon;
     }
 
-    // YouTube API
-    function onYouTubeIframeAPIReady() {
-      if (fetchedData && fetchedData.ytId) {
-        initYouTubePlayer(fetchedData.ytId);
-      }
+    // Direct Embedded YouTube Player with Autoplay Permission
+    function initYouTubePlayer(videoId) {
+      if (!videoId) return;
+      const origin = window.location.origin;
+      const iframeUrl = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1&loop=1&playlist=${videoId}&controls=0&playsinline=1&origin=${encodeURIComponent(origin)}`;
+      
+      const wrapper = document.getElementById('yt-wrapper');
+      wrapper.innerHTML = `<iframe id="yt-iframe" width="200" height="200" src="${iframeUrl}" frameborder="0" allow="autoplay; encrypted-media"></iframe>`;
     }
 
-    function initYouTubePlayer(videoId) {
-      ytPlayer = new YT.Player('yt-hidden-player', {
-        height: '1',
-        width: '1',
-        videoId: videoId,
-        playerVars: {
-          autoplay: 0,
-          controls: 0,
-          disablekb: 1,
-          fs: 0,
-          loop: 1,
-          playlist: videoId,
-          modestbranding: 1
+    function triggerYouTubeAudio() {
+      try {
+        const iframe = document.getElementById('yt-iframe');
+        if (iframe && iframe.contentWindow) {
+          iframe.contentWindow.postMessage('{"event":"command","func":"unMute","args":""}', '*');
+          iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+          isYtPlaying = true;
         }
-      });
+      } catch(e) {}
     }
 
     const canvas = document.getElementById('particles-canvas');
@@ -459,14 +461,7 @@
       requestAnimationFrame(renderParticles);
     }
 
-    function playSoundtrack(bgmType) {
-      if (fetchedData && fetchedData.ytId) {
-        if (ytPlayer && ytPlayer.playVideo) {
-          ytPlayer.playVideo();
-          return;
-        }
-      }
-
+    function playFallbackMelody(bgmType) {
       if (bgmType === 'none') return;
       try {
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -479,7 +474,7 @@
           const gain = audioCtx.createGain();
           osc.type = (bgmType === 'synth') ? 'sawtooth' : 'sine';
           osc.frequency.value = freq;
-          gain.gain.setValueAtTime(0.06, audioCtx.currentTime + idx * 0.2);
+          gain.gain.setValueAtTime(0.08, audioCtx.currentTime + idx * 0.2);
           gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + idx * 0.2 + 0.7);
           osc.connect(gain);
           gain.connect(audioCtx.destination);
@@ -510,11 +505,11 @@
 
           initParticles(fetchedData.fxList, fetchedData.customEmojis, fetchedData.motion);
 
-          if (window.YT && window.YT.Player && fetchedData.ytId) {
+          // Preload YouTube Iframe so audio is ready to play
+          if (fetchedData.ytId) {
             initYouTubePlayer(fetchedData.ytId);
           }
 
-          // Detect Mood and configure game
           activeMoodKey = detectMood(fetchedData.category);
           applyMoodToGame();
 
@@ -545,6 +540,13 @@
     }
 
     function handleStage1() {
+      // Immediate audio trigger on user touch
+      if (fetchedData && fetchedData.ytId) {
+        triggerYouTubeAudio();
+      } else {
+        playFallbackMelody(fetchedData ? fetchedData.bgm : 'piano');
+      }
+
       if (fetchedData && fetchedData.pin) {
         document.getElementById('stage-1-box').style.display = 'none';
         document.getElementById('pin-screen').style.display = 'block';
@@ -564,7 +566,9 @@
     }
 
     function startStages() {
-      playSoundtrack(fetchedData ? fetchedData.bgm : 'piano');
+      if (fetchedData && fetchedData.ytId) {
+        triggerYouTubeAudio();
+      }
       document.getElementById('stage-1-box').style.display = 'none';
       confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
       showCard('stage-welcome');
