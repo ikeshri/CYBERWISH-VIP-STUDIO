@@ -208,14 +208,14 @@
     <span>Unwrapping Your Secret Wish... ✨</span>
   </div>
 
-  <!-- Stage 1: Tap to open mystery box -->
+  <!-- Stage 1: Mystery Box -->
   <div id="stage-1-box" onclick="handleStage1()">
     <div class="box-art" id="box-icon"><i class="fa-solid fa-heart"></i></div>
     <h2 style="font-size: 20px; letter-spacing:1px; margin-bottom: 6px;">YOU RECEIVED A SECRET SURPRISE</h2>
     <p style="color:#a6b4d8; font-size: 13px;">🎁 Tap Anywhere To Unlock 🎁</p>
   </div>
 
-  <!-- Fixed Passcode Screen -->
+  <!-- Passcode Screen -->
   <div id="pin-screen">
     <i class="fa-solid fa-lock" style="font-size:36px; color:#ff007f; filter:drop-shadow(0 0 10px #ff007f);"></i>
     <h3 style="font-size:16px; margin-top:10px; color:#fff;">Secret Passcode Protected</h3>
@@ -299,6 +299,7 @@
     const db = firebase.database();
 
     let fetchedData = null;
+    let isDataReady = false;
     let storySlides = [];
     let currentStorySlide = 0;
     let yesScale = 1.0;
@@ -534,11 +535,6 @@
     initParticles(['hearts'], null, 'up');
     renderParticles();
 
-    setTimeout(() => {
-      document.getElementById('loader').style.display = 'none';
-      document.getElementById('stage-1-box').style.display = 'block';
-    }, 1000);
-
     const params = new URLSearchParams(window.location.search);
     const surpriseId = params.get('id');
 
@@ -546,6 +542,7 @@
       db.ref('surprises/' + surpriseId).once('value').then(snapshot => {
         if (snapshot.exists()) {
           fetchedData = snapshot.val();
+          isDataReady = true;
 
           const theme = fetchedData.theme || 'love';
           document.body.className = 'theme-' + theme;
@@ -585,9 +582,19 @@
       });
     }
 
-    // Handle First Click
+    setTimeout(() => {
+      document.getElementById('loader').style.display = 'none';
+      document.getElementById('stage-1-box').style.display = 'block';
+    }, 1000);
+
+    // Fixed Handle First Click
     function handleStage1() {
-      // If PIN is present, strictly show PIN Screen
+      if (!isDataReady) {
+        // Wait 300ms if Firebase response is just arriving
+        setTimeout(handleStage1, 300);
+        return;
+      }
+
       const hasPin = fetchedData && fetchedData.pin && fetchedData.pin.toString().trim().length > 0;
 
       if (hasPin) {
@@ -596,13 +603,13 @@
         pinScreen.style.display = 'block';
         setTimeout(() => {
           document.getElementById('entered-pin').focus();
-        }, 200);
+        }, 150);
       } else {
         startStages();
       }
     }
 
-    // Verify Secret Passcode
+    // Fixed Verify Secret Passcode
     function verifyPin() {
       const pinInput = document.getElementById('entered-pin');
       const errBox = document.getElementById('pin-err');
@@ -626,7 +633,6 @@
     }
 
     function startStages() {
-      // Trigger Audio safely on explicit user action
       if (fetchedData && fetchedData.ytId) {
         triggerYouTubeAudio();
       } else {
