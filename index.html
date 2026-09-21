@@ -204,13 +204,16 @@
             <div class="theme-chip" onclick="toggleMultiFX(this, 'gold')">✨ Fairy Dust</div>
             <div class="theme-chip" onclick="toggleMultiFX(this, 'butterflies')">🦋 Butterflies</div>
           </div>
+          <input type="text" id="custom-emojis" class="input-box" placeholder="Custom floating emojis (e.g. 🧸 💍 🌹) [Optional]" style="margin-top: 10px;">
 
-          <div class="section-title" style="margin-top: 12px;"><span>5. Floating Motion Dynamics:</span></div>
+          <div class="section-title" style="margin-top: 12px;"><span>5. 6-Direction Motion Dynamics:</span></div>
           <div class="theme-scroll" id="motion-row">
             <div class="theme-chip active" onclick="toggleMotion(this, 'up')">⬆️ Upward Drift</div>
             <div class="theme-chip" onclick="toggleMotion(this, 'down')">🌧️ Falling Rain</div>
             <div class="theme-chip" onclick="toggleMotion(this, 'swirl')">🌀 Spiral Swirl</div>
             <div class="theme-chip" onclick="toggleMotion(this, 'pulse')">💥 Cosmic Pulse</div>
+            <div class="theme-chip" onclick="toggleMotion(this, 'zigzag')">⚡ Zig-Zag Wave</div>
+            <div class="theme-chip" onclick="toggleMotion(this, 'orbit')">🪐 Floating Orbit</div>
           </div>
 
           <div class="section-title" style="margin-top: 12px;"><span>6. Background Audio Tune:</span></div>
@@ -220,6 +223,7 @@
             <div class="theme-chip" onclick="toggleBGM(this, 'synth')">⚡ Cyber Synth</div>
             <div class="theme-chip" onclick="toggleBGM(this, 'none')">🔇 Mute</div>
           </div>
+          <input type="text" id="custom-audio-url" class="input-box" placeholder="Custom MP3 audio URL (Optional)" style="margin-top: 10px;">
 
           <button class="btn-submit" style="margin-top: 20px;" onclick="startBuildProcess()">
             <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Surprise Link
@@ -443,6 +447,8 @@
       const msg = document.getElementById('target-msg').value.trim() || 'You mean the absolute world to me. Keep shining and smiling always!';
       const photo = document.getElementById('target-photo').value.trim();
       const pin = document.getElementById('target-pin').value.trim();
+      const customEmojis = document.getElementById('custom-emojis').value.trim();
+      const customAudio = document.getElementById('custom-audio-url').value.trim();
 
       const modal = document.getElementById('loading-modal');
       modal.style.display = 'flex';
@@ -473,8 +479,10 @@
           pin: pin,
           theme: activeTheme,
           fxList: selectedFX.length ? selectedFX : ['hearts'],
+          customEmojis: customEmojis || null,
           motion: selectedMotion,
           bgm: selectedBGM,
+          customAudio: customAudio || null,
           createdBy: currentUser,
           createdAt: Date.now()
         };
