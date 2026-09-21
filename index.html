@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CyberWish Studio - VIP Surprise Engine</title>
+  <title>CyberWish Studio - VIP Multi-Slide Story Engine</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Firebase SDK -->
@@ -31,7 +31,6 @@
     .glow-blob-1 { position: fixed; width: 350px; height: 350px; background: var(--primary); filter: blur(160px); border-radius: 50%; top: -50px; left: -50px; opacity: 0.2; pointer-events: none; z-index: 0; }
     .glow-blob-2 { position: fixed; width: 350px; height: 350px; background: var(--secondary); filter: blur(160px); border-radius: 50%; bottom: -50px; right: -50px; opacity: 0.2; pointer-events: none; z-index: 0; }
 
-    /* Header with Language Switcher */
     header { padding: 16px 18px; text-align: center; background: rgba(8, 10, 20, 0.95); border-bottom: 2px solid transparent; border-image: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent) 1; backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 25px rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: space-between; }
     .header-left { display: flex; flex-direction: column; align-items: flex-start; }
     .brand-badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 50px; background: rgba(0, 242, 254, 0.08); border: 1px solid rgba(0, 242, 254, 0.3); margin-bottom: 3px; }
@@ -43,7 +42,6 @@
 
     .container { max-width: 540px; margin: 0 auto; padding: 15px; position: relative; z-index: 10; }
 
-    /* Ultra-Aesthetic About / Showcase Notice */
     .showcase-banner {
       background: radial-gradient(circle at top, rgba(255, 0, 127, 0.15), rgba(12, 16, 35, 0.95));
       border: 1.5px solid rgba(255, 0, 127, 0.4);
@@ -52,18 +50,16 @@
       margin-bottom: 20px;
       box-shadow: 0 0 35px rgba(255, 0, 127, 0.25);
       backdrop-filter: blur(15px);
-      position: relative;
     }
     .showcase-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
     .badge-official { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 20px; background: rgba(0, 242, 254, 0.12); border: 1px solid var(--primary); font-size: 11px; font-weight: 800; color: #00f2fe; text-transform: uppercase; letter-spacing: 1px; }
-    .showcase-title { font-size: 16px; font-weight: 900; color: #fff; margin-bottom: 8px; line-height: 1.4; text-shadow: 0 0 12px rgba(255, 255, 255, 0.3); }
+    .showcase-title { font-size: 16px; font-weight: 900; color: #fff; margin-bottom: 8px; line-height: 1.4; }
     .showcase-desc { font-size: 12px; color: #cbd5e1; line-height: 1.6; margin-bottom: 15px; }
 
-    .feature-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+    .feature-tags { display: flex; flex-wrap: wrap; gap: 8px; }
     .f-tag { font-size: 10px; font-weight: 700; padding: 5px 10px; border-radius: 8px; background: rgba(10, 15, 30, 0.8); border: 1px solid #1f2b54; color: #a1b0d8; display: flex; align-items: center; gap: 5px; }
     .f-tag i { color: #00f2fe; }
 
-    /* Auth Screen */
     #auth-screen { background: var(--card); border: 1.5px solid var(--border); border-radius: 20px; padding: 24px; box-shadow: 0 0 30px rgba(0,242,254,0.15); backdrop-filter: blur(15px); }
     .auth-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
     .auth-tab { flex: 1; padding: 10px; text-align: center; background: #0b0f20; border: 1px solid #1a2344; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 600; color: #8fa0c9; }
@@ -81,7 +77,25 @@
 
     .input-box { width: 100%; background: #080b17; border: 1.5px solid #1c264a; border-radius: 12px; padding: 12px 14px; color: #fff; font-size: 14px; margin-bottom: 12px; outline: none; transition: 0.2s; }
     .input-box:focus { border-color: var(--primary); box-shadow: 0 0 12px rgba(0, 242, 254, 0.3); }
-    textarea.input-box { height: 95px; resize: none; }
+
+    .count-selector { display: flex; gap: 6px; margin-bottom: 15px; overflow-x: auto; scrollbar-width: none; }
+    .count-selector::-webkit-scrollbar { display: none; }
+    .count-pill { flex: 1; min-width: 55px; padding: 8px 4px; text-align: center; border-radius: 10px; background: #080d1e; border: 1px solid #1c274e; color: #94a3b8; font-size: 12px; font-weight: 800; cursor: pointer; transition: 0.2s; white-space: nowrap; }
+    .count-pill.active { background: rgba(255, 0, 127, 0.2); border-color: var(--secondary); color: #fff; box-shadow: 0 0 15px rgba(255, 0, 127, 0.4); }
+
+    .slide-carousel-container { position: relative; width: 100%; overflow: hidden; border-radius: 16px; margin-bottom: 14px; }
+    .slide-track { display: flex; transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1); width: 100%; }
+    .slide-item { min-width: 100%; box-sizing: border-box; padding: 2px; }
+    .slide-box { background: #070a18; border: 1.5px solid #ff007f; border-radius: 16px; padding: 14px; box-shadow: 0 0 20px rgba(255, 0, 127, 0.2); }
+    .slide-box-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 11px; font-weight: 800; color: #ff85be; text-transform: uppercase; }
+    .slide-textarea { width: 100%; height: 95px; background: transparent; border: none; color: #fff; font-size: 14px; resize: none; outline: none; font-family: inherit; }
+
+    .slide-nav-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .slide-nav-btn { background: #0b112c; border: 1px solid #1f2b57; color: #00f2fe; padding: 7px 14px; border-radius: 20px; font-size: 11px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+    .slide-nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .slide-dots { display: flex; gap: 6px; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: #1e2a52; transition: 0.2s; }
+    .dot.active { background: #00f2fe; box-shadow: 0 0 8px #00f2fe; width: 18px; border-radius: 10px; }
 
     .style-card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 12px; }
     .style-card { background: #080d1e; border: 1.5px solid #1a254c; border-radius: 14px; padding: 14px 12px; cursor: pointer; text-align: left; transition: all 0.25s ease; position: relative; }
@@ -89,36 +103,11 @@
     .style-card h4 { font-size: 13px; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
     .style-card p { font-size: 11px; color: #7f91b8; line-height: 1.4; }
 
-    .theme-scroll { 
-      display: flex; 
-      gap: 8px; 
-      overflow-x: auto; 
-      padding-bottom: 6px; 
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
+    .theme-scroll { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; }
     .theme-scroll::-webkit-scrollbar { display: none; }
 
-    .theme-chip { 
-      padding: 9px 15px; 
-      border-radius: 30px; 
-      background: #0b0f20; 
-      border: 1px solid #1d274c; 
-      font-size: 12px; 
-      cursor: pointer; 
-      white-space: nowrap; 
-      color: #a1b0d8; 
-      font-weight: 600; 
-      user-select: none;
-      transition: all 0.2s;
-    }
-    .theme-chip.active { 
-      background: linear-gradient(90deg, var(--primary), #4facfe); 
-      color: #000; 
-      font-weight: 800; 
-      border-color: transparent; 
-      box-shadow: 0 0 14px rgba(0, 242, 254, 0.5); 
-    }
+    .theme-chip { padding: 9px 15px; border-radius: 30px; background: #0b0f20; border: 1px solid #1d274c; font-size: 12px; cursor: pointer; white-space: nowrap; color: #a1b0d8; font-weight: 600; user-select: none; transition: all 0.2s; }
+    .theme-chip.active { background: linear-gradient(90deg, var(--primary), #4facfe); color: #000; font-weight: 800; border-color: transparent; box-shadow: 0 0 14px rgba(0, 242, 254, 0.5); }
 
     .btn-submit { width: 100%; padding: 14px; border-radius: 12px; border: none; background: linear-gradient(90deg, var(--secondary), #7928ca); color: #fff; font-size: 15px; font-weight: 700; cursor: pointer; letter-spacing: 1px; box-shadow: 0 0 20px rgba(255, 0, 127, 0.4); transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; text-transform: uppercase; }
     .btn-submit:active { transform: scale(0.98); }
@@ -149,7 +138,7 @@
 
   <header>
     <div class="header-left">
-      <div class="brand-badge"><i class="fa-solid fa-bolt" style="color:var(--primary); font-size:9px;"></i><span>VIP Engine Active</span></div>
+      <div class="brand-badge"><i class="fa-solid fa-bolt" style="color:var(--primary); font-size:9px;"></i><span>Story Engine Active</span></div>
       <h1>CYBERWISH VIP</h1>
     </div>
     <button type="button" class="lang-btn" onclick="toggleNoticeLanguage()">
@@ -159,7 +148,6 @@
 
   <div class="container">
 
-    <!-- Client-Hook Showcase & About Notice -->
     <div class="showcase-banner" id="showcase-box">
       <div class="showcase-header">
         <div class="badge-official"><i class="fa-solid fa-gem"></i> <span id="sc-tag">Official Notice</span></div>
@@ -167,22 +155,21 @@
       </div>
 
       <div class="showcase-title" id="sc-title">
-        The Next-Gen VIP Surprise & Confession Engine for Special Ones
+        Multi-Slide Storytelling & VIP Surprise Engine for Special Ones
       </div>
 
       <div class="showcase-desc" id="sc-desc">
-        CyberWish VIP is an exclusive interactive platform designed to craft personalized, immersive 3D digital surprises for your partner, crush, or closest friends. Experience custom universe shaders, viral runaway buttons, floating particle physics, and direct Instagram replies—no app download required.
+        Create multi-page story surprises with custom slide counts, category-matched auto poetry, viral runaway 'No' buttons, 6-direction particle physics, and direct Instagram replies.
       </div>
 
       <div class="feature-tags">
-        <div class="f-tag"><i class="fa-solid fa-vr-cardboard"></i> 6 Universe Shaders</div>
+        <div class="f-tag"><i class="fa-solid fa-layer-group"></i> Multi-Slide Story Mode</div>
+        <div class="f-tag"><i class="fa-solid fa-wand-magic-sparkles"></i> Topic-Matched Auto-Poetry</div>
         <div class="f-tag"><i class="fa-solid fa-lock"></i> 4-Digit Passcode Lock</div>
-        <div class="f-tag"><i class="fa-solid fa-person-running"></i> Runaway 'No' Engine</div>
         <div class="f-tag"><i class="fa-brands fa-instagram"></i> Instagram DM Sync</div>
       </div>
     </div>
 
-    <!-- Auth View -->
     <div id="auth-screen">
       <div class="auth-tabs">
         <div class="auth-tab active" id="tab-login-btn" onclick="setAuthMode('login')">Sign In</div>
@@ -193,10 +180,10 @@
       <button class="btn-submit" id="auth-submit-btn" onclick="handleAuth()"><i class="fa-solid fa-lock"></i> Log In</button>
     </div>
 
-    <!-- Main Workspace -->
     <div id="main-workspace" style="display: none;">
 
       <div id="tab-create">
+        
         <div class="card">
           <div class="section-title">
             <span>1. Mood & Category</span>
@@ -215,8 +202,37 @@
 
         <div class="card">
           <div class="section-title">
-            <span>2. Universe Theme Style</span>
+            <span>2. Story Slides Count</span>
+            <button type="button" class="btn-pill-action" onclick="suggestStoryLines()"><i class="fa-solid fa-dice-d20"></i> Auto-Fill Category Lines</button>
           </div>
+          
+          <div class="count-selector">
+            <div class="count-pill" onclick="setSlideCount(1)">1 Slide</div>
+            <div class="count-pill" onclick="setSlideCount(2)">2 Slides</div>
+            <div class="count-pill active" onclick="setSlideCount(3)">3 Slides</div>
+            <div class="count-pill" onclick="setSlideCount(4)">4 Slides</div>
+            <div class="count-pill" onclick="setSlideCount(5)">5 Slides</div>
+            <div class="count-pill" onclick="setSlideCount(6)">6 Slides</div>
+            <div class="count-pill" onclick="setSlideCount(7)">7 Slides</div>
+          </div>
+
+          <div class="slide-nav-controls">
+            <button type="button" class="slide-nav-btn" id="btn-prev-slide" onclick="moveSlide(-1)"><i class="fa-solid fa-arrow-left"></i> Prev</button>
+            <div class="slide-dots" id="carousel-dots"></div>
+            <button type="button" class="slide-nav-btn" id="btn-next-slide" onclick="moveSlide(1)">Next <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+
+          <div class="slide-carousel-container">
+            <div class="slide-track" id="slide-track"></div>
+          </div>
+
+          <input type="text" id="target-name" class="input-box" placeholder="Who is this for? (Name / Nickname)">
+          <input type="text" id="target-photo" class="input-box" placeholder="Direct photo URL (Optional)">
+          <input type="password" id="target-pin" class="input-box" maxlength="4" placeholder="4-Digit secret passcode lock (Optional)">
+        </div>
+
+        <div class="card">
+          <div class="section-title"><span>3. Universe Theme Style</span></div>
           <div class="style-card-grid">
             <div class="style-card active" onclick="selectUniverseCard(this, 'love')">
               <h4 style="color:#ff007f;"><i class="fa-solid fa-heart"></i> Crimson Velvet</h4>
@@ -244,14 +260,7 @@
             </div>
           </div>
 
-          <div class="section-title" style="margin-top: 12px;"><span>3. Message & Details</span><button type="button" class="btn-pill-action" onclick="suggestShayari()"><i class="fa-solid fa-dice-d20"></i> Auto-Lines</button></div>
-          <input type="text" id="target-name" class="input-box" placeholder="Who is this for? (Name / Nickname)">
-          <textarea id="target-msg" class="input-box" placeholder="Write your heartfelt message or poetry here..."></textarea>
-          
-          <input type="text" id="target-photo" class="input-box" placeholder="Direct photo URL (Optional)">
-          <input type="password" id="target-pin" class="input-box" maxlength="4" placeholder="4-Digit secret passcode lock (Optional)">
-
-          <div class="section-title" style="margin-top: 12px;"><span>4. Particle Types (Multi-Select):</span></div>
+          <div class="section-title" style="margin-top: 12px;"><span>4. Multi-Select Floating FX:</span></div>
           <div class="theme-scroll" id="fx-row">
             <div class="theme-chip active" onclick="toggleMultiFX(this, 'hearts')">💖 3D Hearts</div>
             <div class="theme-chip" onclick="toggleMultiFX(this, 'galaxy')">🌌 Cosmic Galaxy</div>
@@ -286,7 +295,7 @@
           </button>
 
           <div id="result-view">
-            <p style="font-size:12px; color:var(--primary); margin-bottom:8px;">✔ Secret link generated successfully!</p>
+            <p style="font-size:12px; color:var(--primary); margin-bottom:8px;">✔ Secret multi-slide link generated successfully!</p>
             <input type="text" id="final-url-box" class="input-box" readonly style="text-align:center; font-size:12px; font-weight:bold; color:#00f2fe;">
             <div style="display:flex; gap:8px;">
               <button class="btn-submit" style="flex:1; background:linear-gradient(90deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); font-size:12px;" onclick="shareDirectLink()">
@@ -298,6 +307,7 @@
             </div>
           </div>
         </div>
+
       </div>
 
       <div id="tab-history" style="display: none;">
@@ -330,12 +340,12 @@
   <div id="loading-modal">
     <div class="terminal-box">
       <div class="terminal-header">
-        <span>[EXEC] REALTIME_DATABASE_PIPELINE</span>
+        <span>[EXEC] MULTI_SLIDE_STORY_PIPELINE</span>
         <i class="fa-solid fa-terminal"></i>
       </div>
-      <div class="term-line" id="term-1">> [1/4] Connecting to Firebase Cloud...</div>
-      <div class="term-line" id="term-2">> [2/4] Compiling universe visual shaders & FX...</div>
-      <div class="term-line" id="term-3">> [3/4] Locking security passcode & motion dynamics...</div>
+      <div class="term-line" id="term-1">> [1/4] Packing story slides into Firebase Cloud...</div>
+      <div class="term-line" id="term-2">> [2/4] Compiling universe shaders & particle motion...</div>
+      <div class="term-line" id="term-3">> [3/4] Locking security passcode & interactive triggers...</div>
       <div class="term-line" id="term-4">> [4/4] Finalizing clean URL & publishing live...</div>
     </div>
   </div>
@@ -366,14 +376,14 @@
       en: {
         indicator: 'हिन्दी',
         tag: 'Official Notice',
-        title: 'The Next-Gen VIP Surprise & Confession Engine for Special Ones',
-        desc: 'CyberWish VIP is an exclusive interactive platform designed to craft personalized, immersive 3D digital surprises for your partner, crush, or closest friends. Experience custom universe shaders, viral runaway buttons, floating particle physics, and direct Instagram replies—no app download required.'
+        title: 'Multi-Slide Storytelling & VIP Surprise Engine for Special Ones',
+        desc: 'Create multi-page story surprises with custom slide counts, category-matched auto poetry, viral runaway No buttons, 6-direction particle physics, and direct Instagram replies.'
       },
       hi: {
         indicator: 'English',
         tag: 'महत्वपूर्ण सूचना (About)',
-        title: 'अपने खास लोगों के लिए नेक्स्ट-जेन वीआईपी सरप्राइज और प्रपोज़ल इंजन',
-        desc: 'CyberWish VIP एक खास इंटरैक्टिव प्लेटफॉर्म है, जिसे आपकी गर्लफ्रेंड, पार्टनर या दोस्तों के लिए व्यक्तिगत 3D डिजिटल सरप्राइज वेबसाइट बनाने के लिए डिज़ाइन किया गया है। इसमें 6 तरह के ब्रह्मांडीय थीम्स, भागने वाला "No" बटन, तैरते हुए 3D दिल-सितारे और सीधे इंस्टाग्राम रिप्लाई की सुविधा हमेशा के लिए सुरक्षित मिलती है।'
+        title: 'मल्टी-स्लाइड स्टोरीटेलिंग और वीआईपी सरप्राइज इंजन',
+        desc: 'अब अपनी पसंद के अनुसार 1 से 7 स्लाइड्स में दिल की बात लिखें! ऊपर चुनी गई कैटेगरी के अनुसार ऑटो-शायरी, 6-दिशाओं में उड़ते पार्टिकल्स, भागने वाला No बटन और सीधे इंस्टाग्राम रिप्लाई की सुविधा हमेशा एक्टिव रहेगी।'
       }
     };
 
@@ -394,25 +404,140 @@
     let selectedMotion = 'up';
     let selectedBGM = 'piano';
 
-    const shayariVault = {
+    // Slide Engine State
+    let totalSlides = 3;
+    let currentSlideIdx = 0;
+    let slidesData = [];
+
+    // Category-Specific Auto-Poetry Vault
+    const categoryStoryVault = {
       'Make Up & Apology 🥺': [
-        "Words fell short and I made a mistake, but my heart beats only for you. Forgive me please? ❤️",
-        "Your silence hurts more than any anger. I am truly sorry, please come back into my arms!",
-        "Every second without your smile feels like an eternity. I promise to make it right!"
+        "Words fell short and I made a mistake, but my heart beats only for you. 🥺",
+        "Your silence hurts more than any anger. I am truly sorry from the bottom of my heart.",
+        "Every second without your sweet smile feels like an endless storm.",
+        "Please forgive me this once; I promise to make you smile every single day ahead. ❤️",
+        "You are my favourite person and my safe home. Please come back to my arms!",
+        "Holding on to your memories because you mean the absolute universe to me.",
+        "Can we erase the sadness and start a beautiful fresh chapter together? 🥺✨"
       ],
       'Happy Birthday 🎂': [
-        "Wishing you a day filled with endless joy, magic, and sweet memories. Happy Birthday! 🎂🎉",
-        "May the universe gift you everything your heart whispers for. Have the most wonderful year ahead!"
+        "Wishing the most magical human in my life a very Happy Birthday! 🎂🎉",
+        "May the universe gift you everything your heart silently whispers for.",
+        "Your presence in my world is the greatest blessing I could ever ask for.",
+        "Keep shining brighter than the stars, today and for all the years ahead! ✨",
+        "May your smile never fade and every dream you hold turn into reality.",
+        "Here is to another year of endless laughs, pure love, and sweet adventures together!",
+        "Happy Birthday once again to my favourite star in the entire universe! 💖"
       ],
       'Love & Proposal ❤️': [
-        "You are my favorite thought, my endless dream, and the love of my life. Will you stay forever? ❤️",
-        "In a world full of temporary things, you are my permanent home. I love you endlessly!"
+        "In a world full of temporary moments, my love for you is completely infinite. ❤️",
+        "Your smile is my sunrise and your laughter is my favourite melody in this universe.",
+        "Every single day with you feels like a beautiful dream I never want to wake from.",
+        "I want to walk through all of life's seasons holding only your precious hand.",
+        "You are my favorite thought, my endless dream, and the keeper of my heart.",
+        "No matter what tomorrow brings, my soul has already chosen you forever.",
+        "Will you stay beside me as my partner, my love, and my forever home? 💍❤️"
+      ],
+      'Best Friends Forever 🤝': [
+        "To the one person who knows all my secrets and still chooses to stick by me! 🤝",
+        "Thank you for turning ordinary boring days into unforgettable crazy memories.",
+        "Distance or time will never change the unbreakable bond we share.",
+        "No matter where life takes us, you will always be my number one partner in crime! 😎",
+        "Life is a thousand times brighter with a true soul like you around.",
+        "Cheers to endless inside jokes, midnight talks, and unbreakable trust!",
+        "Best friends forever and always, through every high and low! ✨"
+      ],
+      'Happy Anniversary 💍': [
+        "Happy Anniversary to the one who makes my heart skip a beat every single day! 💍❤️",
+        "Looking back at our journey, loving you has been the greatest decision of my life.",
+        "Through every smile and every tear, our bond has only grown stronger.",
+        "Thank you for being my anchor, my best friend, and my greatest blessing.",
+        "I fell in love with you then, and I fall deeper with each passing day.",
+        "Here is to all the beautiful memories behind us and the countless ones yet to come!",
+        "Happy Anniversary my love, forever and always yours! 🥂💖"
+      ],
+      'Missing You Deeply 🥺': [
+        "My days feel incomplete and quiet without your laughter around me. 🥺",
+        "Every little thing reminds me of your smile and the warmth of your voice.",
+        "Distance only proves how deeply my heart is connected to yours.",
+        "Counting every single second until I can finally see your face again.",
+        "The nights are long and lonely, wishing you were sitting right beside me.",
+        "No matter the miles between us, you are always living inside my thoughts.",
+        "I miss you more than words can ever explain; please come back soon! ❤️"
       ]
     };
 
     window.onload = () => {
+      suggestStoryLines();
       if(currentUser) setupWorkspace();
     };
+
+    function setSlideCount(cnt) {
+      totalSlides = cnt;
+      document.querySelectorAll('.count-pill').forEach((p, idx) => {
+        p.classList.toggle('active', (idx + 1) === cnt);
+      });
+      while (slidesData.length < totalSlides) slidesData.push("");
+      if (currentSlideIdx >= totalSlides) currentSlideIdx = totalSlides - 1;
+      renderSlideInputs();
+    }
+
+    function renderSlideInputs() {
+      const track = document.getElementById('slide-track');
+      track.innerHTML = "";
+      for (let i = 0; i < totalSlides; i++) {
+        const item = document.createElement('div');
+        item.className = 'slide-item';
+        item.innerHTML = `
+          <div class="slide-box">
+            <div class="slide-box-header">
+              <span>Slide ${i + 1} of ${totalSlides}</span>
+              <span><i class="fa-solid fa-pen"></i> Message Part ${i + 1}</span>
+            </div>
+            <textarea class="slide-textarea" placeholder="Write message for slide ${i + 1}..." oninput="slidesData[${i}] = this.value">${slidesData[i] || ''}</textarea>
+          </div>
+        `;
+        track.appendChild(item);
+      }
+      renderDots();
+      updateTrackPosition();
+    }
+
+    function renderDots() {
+      const dotsBox = document.getElementById('carousel-dots');
+      dotsBox.innerHTML = "";
+      for (let i = 0; i < totalSlides; i++) {
+        const d = document.createElement('div');
+        d.className = 'dot' + (i === currentSlideIdx ? ' active' : '');
+        dotsBox.appendChild(d);
+      }
+      document.getElementById('btn-prev-slide').disabled = (currentSlideIdx === 0);
+      document.getElementById('btn-next-slide').disabled = (currentSlideIdx === totalSlides - 1);
+    }
+
+    function moveSlide(dir) {
+      currentSlideIdx += dir;
+      if (currentSlideIdx < 0) currentSlideIdx = 0;
+      if (currentSlideIdx >= totalSlides) currentSlideIdx = totalSlides - 1;
+      updateTrackPosition();
+      renderDots();
+    }
+
+    function updateTrackPosition() {
+      const track = document.getElementById('slide-track');
+      track.style.transform = `translateX(-${currentSlideIdx * 100}%)`;
+    }
+
+    // Auto-fill lines based strictly on selected category
+    function suggestStoryLines() {
+      const catKey = (activeCat && categoryStoryVault[activeCat]) ? activeCat : 'Love & Proposal ❤️';
+      const lines = categoryStoryVault[catKey];
+      slidesData = [];
+      for (let i = 0; i < totalSlides; i++) {
+        slidesData.push(lines[i % lines.length]);
+      }
+      renderSlideInputs();
+    }
 
     function setAuthMode(mode) {
       authMode = mode;
@@ -469,15 +594,12 @@
     }
 
     function toggleCategory(el, cat) {
-      if (el.classList.contains('active')) {
-        el.classList.remove('active');
-        activeCat = '';
-      } else {
-        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-        el.classList.add('active');
-        activeCat = cat;
-      }
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+      activeCat = cat;
       document.getElementById('custom-cat-val').style.display = 'none';
+      // Automatically refresh auto-lines when category switches
+      suggestStoryLines();
     }
 
     function triggerCustomCat() {
@@ -516,21 +638,16 @@
       selectedBGM = bgmName;
     }
 
-    function suggestShayari() {
-      const list = shayariVault[activeCat] || shayariVault['Love & Proposal ❤️'];
-      const pick = list[Math.floor(Math.random() * list.length)];
-      document.getElementById('target-msg').value = pick;
-    }
-
     function startBuildProcess() {
       const name = document.getElementById('target-name').value.trim() || 'My Special One';
       const customCat = document.getElementById('custom-cat-val').value.trim();
       const finalCat = (activeCat === 'custom' && customCat) ? customCat : (activeCat || 'Special Surprise ❤️');
-      const msg = document.getElementById('target-msg').value.trim() || 'You mean the absolute world to me. Keep shining and smiling always!';
       const photo = document.getElementById('target-photo').value.trim();
       const pin = document.getElementById('target-pin').value.trim();
       const customEmojis = document.getElementById('custom-emojis').value.trim();
       const customAudio = document.getElementById('custom-audio-url').value.trim();
+
+      const finalSlides = slidesData.slice(0, totalSlides).map(s => s.trim() || 'You mean the absolute world to me. ✨');
 
       const modal = document.getElementById('loading-modal');
       modal.style.display = 'flex';
@@ -556,7 +673,7 @@
         const surpriseData = {
           name: name,
           category: finalCat,
-          message: msg,
+          slides: finalSlides,
           photo: photo,
           pin: pin,
           theme: activeTheme,
