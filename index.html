@@ -159,12 +159,12 @@
       </div>
 
       <div class="showcase-desc" id="sc-desc">
-        Create multi-page story surprises with custom slide counts, category-matched auto poetry, viral runaway 'No' buttons, 6-direction particle physics, and direct Instagram replies.
+        Create multi-page story surprises with custom slide counts, category-matched auto poetry, viral runaway No buttons, 6-direction particle physics, and YouTube background audio sync.
       </div>
 
       <div class="feature-tags">
         <div class="f-tag"><i class="fa-solid fa-layer-group"></i> Multi-Slide Story Mode</div>
-        <div class="f-tag"><i class="fa-solid fa-wand-magic-sparkles"></i> Topic-Matched Auto-Poetry</div>
+        <div class="f-tag"><i class="fa-brands fa-youtube" style="color:#ff0000;"></i> YouTube Audio Sync</div>
         <div class="f-tag"><i class="fa-solid fa-lock"></i> 4-Digit Passcode Lock</div>
         <div class="f-tag"><i class="fa-brands fa-instagram"></i> Instagram DM Sync</div>
       </div>
@@ -281,16 +281,23 @@
             <div class="theme-chip" onclick="toggleMotion(this, 'orbit')">🪐 Floating Orbit</div>
           </div>
 
-          <div class="section-title" style="margin-top: 12px;"><span>6. Background Audio Tune:</span></div>
+          <div class="section-title" style="margin-top: 12px;"><span>6. Background Audio Tune (or YouTube):</span></div>
           <div class="theme-scroll" id="bgm-row">
             <div class="theme-chip active" onclick="toggleBGM(this, 'piano')">🎹 Romantic Piano</div>
             <div class="theme-chip" onclick="toggleBGM(this, 'lofi')">🎧 Lo-Fi Chill</div>
             <div class="theme-chip" onclick="toggleBGM(this, 'synth')">⚡ Cyber Synth</div>
             <div class="theme-chip" onclick="toggleBGM(this, 'none')">🔇 Mute</div>
           </div>
-          <input type="text" id="custom-audio-url" class="input-box" placeholder="Custom MP3 audio URL (Optional)" style="margin-top: 10px;">
+          
+          <!-- Direct YouTube Song Link Input -->
+          <div style="margin-top: 10px;">
+            <input type="text" id="youtube-url" class="input-box" placeholder="Paste YouTube song link (e.g. https://youtu.be/... or watch?v=...)">
+            <p style="font-size: 11px; color: #ff85be; margin-top: -6px; margin-bottom: 12px;">
+              <i class="fa-brands fa-youtube"></i> YouTube video will be completely hidden, only its romantic song will play smoothly in background!
+            </p>
+          </div>
 
-          <button class="btn-submit" style="margin-top: 20px;" onclick="startBuildProcess()">
+          <button class="btn-submit" style="margin-top: 15px;" onclick="startBuildProcess()">
             <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Surprise Link
           </button>
 
@@ -344,7 +351,7 @@
         <i class="fa-solid fa-terminal"></i>
       </div>
       <div class="term-line" id="term-1">> [1/4] Packing story slides into Firebase Cloud...</div>
-      <div class="term-line" id="term-2">> [2/4] Compiling universe shaders & particle motion...</div>
+      <div class="term-line" id="term-2">> [2/4] Linking YouTube background audio player...</div>
       <div class="term-line" id="term-3">> [3/4] Locking security passcode & interactive triggers...</div>
       <div class="term-line" id="term-4">> [4/4] Finalizing clean URL & publishing live...</div>
     </div>
@@ -377,13 +384,13 @@
         indicator: 'हिन्दी',
         tag: 'Official Notice',
         title: 'Multi-Slide Storytelling & VIP Surprise Engine for Special Ones',
-        desc: 'Create multi-page story surprises with custom slide counts, category-matched auto poetry, viral runaway No buttons, 6-direction particle physics, and direct Instagram replies.'
+        desc: 'Create multi-page story surprises with custom slide counts, category-matched auto poetry, viral runaway No buttons, 6-direction particle physics, and YouTube background audio sync.'
       },
       hi: {
         indicator: 'English',
         tag: 'महत्वपूर्ण सूचना (About)',
         title: 'मल्टी-स्लाइड स्टोरीटेलिंग और वीआईपी सरप्राइज इंजन',
-        desc: 'अब अपनी पसंद के अनुसार 1 से 7 स्लाइड्स में दिल की बात लिखें! ऊपर चुनी गई कैटेगरी के अनुसार ऑटो-शायरी, 6-दिशाओं में उड़ते पार्टिकल्स, भागने वाला No बटन और सीधे इंस्टाग्राम रिप्लाई की सुविधा हमेशा एक्टिव रहेगी।'
+        desc: 'अब अपनी पसंद के अनुसार 1 से 7 स्लाइड्स में दिल की बात लिखें! ऊपर चुनी गई कैटेगरी के अनुसार ऑटो-शायरी, 6-दिशाओं में उड़ते पार्टिकल्स, भागने वाला No बटन और यूट्यूब बैकग्राउंड ऑडियो की सुविधा हमेशा एक्टिव रहेगी।'
       }
     };
 
@@ -404,12 +411,10 @@
     let selectedMotion = 'up';
     let selectedBGM = 'piano';
 
-    // Slide Engine State
     let totalSlides = 3;
     let currentSlideIdx = 0;
     let slidesData = [];
 
-    // Category-Specific Auto-Poetry Vault
     const categoryStoryVault = {
       'Make Up & Apology 🥺': [
         "Words fell short and I made a mistake, but my heart beats only for you. 🥺",
@@ -528,7 +533,6 @@
       track.style.transform = `translateX(-${currentSlideIdx * 100}%)`;
     }
 
-    // Auto-fill lines based strictly on selected category
     function suggestStoryLines() {
       const catKey = (activeCat && categoryStoryVault[activeCat]) ? activeCat : 'Love & Proposal ❤️';
       const lines = categoryStoryVault[catKey];
@@ -598,7 +602,6 @@
       el.classList.add('active');
       activeCat = cat;
       document.getElementById('custom-cat-val').style.display = 'none';
-      // Automatically refresh auto-lines when category switches
       suggestStoryLines();
     }
 
@@ -638,6 +641,14 @@
       selectedBGM = bgmName;
     }
 
+    // YouTube Video ID Extractor
+    function extractYouTubeID(url) {
+      if (!url) return null;
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = url.match(regExp);
+      return (match && match[2].length === 11) ? match[2] : null;
+    }
+
     function startBuildProcess() {
       const name = document.getElementById('target-name').value.trim() || 'My Special One';
       const customCat = document.getElementById('custom-cat-val').value.trim();
@@ -645,7 +656,8 @@
       const photo = document.getElementById('target-photo').value.trim();
       const pin = document.getElementById('target-pin').value.trim();
       const customEmojis = document.getElementById('custom-emojis').value.trim();
-      const customAudio = document.getElementById('custom-audio-url').value.trim();
+      const youtubeUrl = document.getElementById('youtube-url').value.trim();
+      const ytId = extractYouTubeID(youtubeUrl);
 
       const finalSlides = slidesData.slice(0, totalSlides).map(s => s.trim() || 'You mean the absolute world to me. ✨');
 
@@ -681,7 +693,7 @@
           customEmojis: customEmojis || null,
           motion: selectedMotion,
           bgm: selectedBGM,
-          customAudio: customAudio || null,
+          ytId: ytId || null,
           createdBy: currentUser,
           createdAt: Date.now()
         };

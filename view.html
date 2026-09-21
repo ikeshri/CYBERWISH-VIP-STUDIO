@@ -6,10 +6,11 @@
   <title>A Special Secret For You 🎁</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- Firebase SDK & Confetti -->
+  <!-- Firebase SDK, Confetti & YouTube API -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://www.youtube.com/iframe_api"></script>
 
   <style>
     * { 
@@ -38,6 +39,17 @@
     }
 
     #particles-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
+
+    /* Completely Invisible YouTube Player Container */
+    #yt-hidden-player {
+      position: fixed;
+      top: -9999px;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
 
     body.theme-love { background: radial-gradient(circle, #380211 0%, #0d0004 100%); }
     body.theme-galaxy { background: radial-gradient(circle, #1c053a 0%, #030008 100%); }
@@ -145,7 +157,9 @@
 <body class="theme-love">
 
   <canvas id="particles-canvas"></canvas>
-  <audio id="custom-audio-elem" preload="auto"></audio>
+  
+  <!-- Hidden YouTube Player -->
+  <div id="yt-hidden-player"></div>
 
   <div id="loader">
     <div class="spinner"></div>
@@ -234,6 +248,35 @@
     let currentStorySlide = 0;
     let yesScale = 1.0;
     let noDodgeCount = 0;
+    let ytPlayer = null;
+    let ytPlayerReady = false;
+
+    // YouTube IFrame API Ready Callback
+    function onYouTubeIframeAPIReady() {
+      if (fetchedData && fetchedData.ytId) {
+        initYouTubePlayer(fetchedData.ytId);
+      }
+    }
+
+    function initYouTubePlayer(videoId) {
+      ytPlayer = new YT.Player('yt-hidden-player', {
+        height: '1',
+        width: '1',
+        videoId: videoId,
+        playerVars: {
+          autoplay: 0,
+          controls: 0,
+          disablekb: 1,
+          fs: 0,
+          loop: 1,
+          playlist: videoId,
+          modestbranding: 1
+        },
+        events: {
+          onReady: () => { ytPlayerReady = true; }
+        }
+      });
+    }
 
     const canvas = document.getElementById('particles-canvas');
     const ctx = canvas.getContext('2d');
@@ -332,14 +375,12 @@
       requestAnimationFrame(renderParticles);
     }
 
-    function playSoundtrack(bgmType, customUrl) {
-      if (customUrl) {
-        try {
-          const audioElem = document.getElementById('custom-audio-elem');
-          audioElem.src = customUrl;
-          audioElem.play().catch(() => {});
+    function playSoundtrack(bgmType) {
+      if (fetchedData && fetchedData.ytId) {
+        if (ytPlayer && ytPlayer.playVideo) {
+          ytPlayer.playVideo();
           return;
-        } catch(e) {}
+        }
       }
 
       if (bgmType === 'none') return;
@@ -384,6 +425,11 @@
           document.body.className = 'theme-' + theme;
 
           initParticles(fetchedData.fxList, fetchedData.customEmojis, fetchedData.motion);
+
+          // If YouTube API already loaded, init player
+          if (window.YT && window.YT.Player && fetchedData.ytId) {
+            initYouTubePlayer(fetchedData.ytId);
+          }
 
           const iconBox = document.getElementById('box-icon');
           if (theme === 'love') iconBox.innerHTML = '<i class="fa-solid fa-heart"></i>';
@@ -431,7 +477,8 @@
     }
 
     function startStages() {
-      playSoundtrack(fetchedData ? fetchedData.bgm : 'piano', fetchedData ? fetchedData.customAudio : null);
+      // First user tap triggers audio / YouTube playback seamlessly
+      playSoundtrack(fetchedData ? fetchedData.bgm : 'piano');
       document.getElementById('stage-1-box').style.display = 'none';
       confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
       showCard('stage-welcome');
